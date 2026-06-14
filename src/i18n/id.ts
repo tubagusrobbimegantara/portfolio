@@ -6,7 +6,7 @@ export const id: Translations = {
     about: "Tentang",
     research: "Penelitian",
     publications: "Publikasi",
-    teaching: "Pengajaran",
+    projects: "Proyek",
     contact: "Kontak",
     getInTouch: "Hubungi Saya",
     brandSub: "Matematika · Penelitian",
@@ -262,5 +262,12 @@ export const id: Translations = {
     collabP: "Saya menyambut kolaborasi penelitian dalam optimisasi matematika, riset operasi, transportasi cerdas, dan machine learning untuk keberlanjutan. Baik Anda sesama peneliti, mitra industri, atau mahasiswa pascasarjana yang mencari pembimbing — jangan ragu untuk menghubungi.",
     collabTags: ["Pemodelan Matematika", "Optimisasi Fuzzy", "Sistem Transportasi", "ML & Keberlanjutan", "Riset Operasi"],
     collabBtn: "Kirim Email",
+  },
+  projects: {
+    meta: {
+      title: "Proyek · Tubagus Robbi Megantara",
+      description: "Proyek penelitian dan karya open-source oleh Tubagus Robbi Megantara.",
+    },
+    items: [] as { title: string; desc: string; tags: string[]; url?: string }[],
   },
 };

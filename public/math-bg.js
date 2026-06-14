@@ -27,7 +27,7 @@
       size: rand(15, 40),
       sym: SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)],
       color: colorBase,
-      alpha: rand(0.05, 0.22),
+      alpha: rand(0.12, 0.38),
       rot: rand(-0.4, 0.4),
       vr: rand(-0.0025, 0.0025),
       pulse: Math.random() * Math.PI * 2,
@@ -52,7 +52,7 @@
         const dx = a.x - b.x, dy = a.y - b.y;
         const d2 = dx * dx + dy * dy;
         if (d2 < 17000) {
-          const o = (1 - d2 / 17000) * 0.05;
+          const o = (1 - d2 / 17000) * 0.10;
           ctx.strokeStyle = 'rgba(56,189,248,' + o + ')';
           ctx.lineWidth = 1;
           ctx.beginPath();
@@ -74,7 +74,7 @@
       ctx.translate(p.x, p.y);
       ctx.rotate(p.rot);
       ctx.font = '500 ' + p.size + "px 'Newsreader', Georgia, serif";
-      ctx.fillStyle = p.color + Math.max(0.02, a) + ')';
+      ctx.fillStyle = p.color + Math.max(0.08, a) + ')';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(p.sym, 0, 0);

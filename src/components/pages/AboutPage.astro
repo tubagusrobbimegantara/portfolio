@@ -5,6 +5,12 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = getTranslations(lang);
 const a = t.about;
+const tc = t.teaching;
+
+const roleIcons = [
+  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
+  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>`,
+];
 ---
 
 <!-- BANNER -->
@@ -39,7 +45,7 @@ const a = t.about;
     <div class="split wide-left">
       <div class="rev">
         <span class="sub-label">{a.profileLabel}</span>
-        <p style="font-size:1.05rem;margin-bottom:16px">{a.bio1.replace('mathematical optimization', '<strong>mathematical optimization</strong>').replace('optimisasi matematika', '<strong>optimisasi matematika</strong>')}</p>
+        <p style="font-size:1.05rem;margin-bottom:16px" set:html={a.bio1.replace('mathematical optimization', '<strong>mathematical optimization</strong>').replace('optimisasi matematika', '<strong>optimisasi matematika</strong>')}></p>
         <p style="margin-bottom:16px" set:html={a.bio2.replace('doctoral degree', '<strong>doctoral degree</strong>').replace('program doktor', '<strong>program doktor</strong>')}></p>
         <p style="margin-bottom:16px" set:html={a.bio3.replace('Head of the Quality Assurance Unit', '<strong>Head of the Quality Assurance Unit</strong>').replace('Kepala Unit Penjaminan Mutu', '<strong>Kepala Unit Penjaminan Mutu</strong>')}></p>
         <span class="sub-label" style="margin-top:8px">{a.focusLabel}</span>
@@ -114,6 +120,32 @@ const a = t.about;
             <h3 class="tl-title">{entry.title}</h3>
             <div class="tl-place">{entry.place}</div>
             <div class="tl-desc">{entry.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CURRENT ROLES -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="eyebrow">{tc.rolesEyebrow}</span>
+      <h2 class="display md">{tc.rolesH2}</h2>
+    </div>
+    <div class="split">
+      {tc.roles.map((role, i) => (
+        <div class="card rev">
+          <div class="meta-row" style="margin-bottom:0">
+            <div class:list={['mi', role.iconClass]} set:html={roleIcons[i]}></div>
+            <div class="mt">
+              <span class="ml">{role.label}</span>
+              <span class="mv">{role.title}</span>
+              <span class="ms" set:html={role.sub.replace('\n', '<br>')}></span>
+            </div>
           </div>
         </div>
       ))}

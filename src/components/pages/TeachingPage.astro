@@ -6,10 +6,6 @@ const { lang } = Astro.props;
 const t = getTranslations(lang);
 const tc = t.teaching;
 
-const roleIcons = [
-  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
-  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>`,
-];
 ---
 
 <!-- BANNER -->
@@ -33,53 +29,6 @@ const roleIcons = [
         </div>
         <div class="dots" style="position:absolute;bottom:20px;right:14px"><i></i><i></i><i></i></div>
       </div>
-    </div>
-  </div>
-</section>
-
-<hr class="rule">
-
-<!-- ROLES -->
-<section>
-  <div class="wrap">
-    <div class="sec-head rev">
-      <span class="eyebrow">{tc.rolesEyebrow}</span>
-      <h2 class="display md">{tc.rolesH2}</h2>
-    </div>
-    <div class="split">
-      {tc.roles.map((role, i) => (
-        <div class="card rev">
-          <div class="meta-row" style="margin-bottom:0">
-            <div class:list={['mi', role.iconClass]} set:html={roleIcons[i]}></div>
-            <div class="mt">
-              <span class="ml">{role.label}</span>
-              <span class="mv">{role.title}</span>
-              <span class="ms" set:html={role.sub.replace('\n', '<br>')}></span>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-<hr class="rule">
-
-<!-- NEWS -->
-<section>
-  <div class="wrap">
-    <div class="sec-head rev">
-      <span class="eyebrow">{tc.newsEyebrow}</span>
-      <h2 class="display lg">{tc.newsH2} <em>{tc.newsH2em}</em></h2>
-    </div>
-    <div class="news-list">
-      {tc.news.map(item => (
-        <div class="ni rev">
-          <span class="ni-date">{item.date}</span>
-          <span class:list={['ni-dot', item.type]}></span>
-          <p class="ni-text" set:html={item.html}></p>
-        </div>
-      ))}
     </div>
   </div>
 </section>

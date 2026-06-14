@@ -4,7 +4,7 @@ export const en = {
     about: "About",
     research: "Research",
     publications: "Publications",
-    teaching: "Teaching",
+    projects: "Projects",
     contact: "Contact",
     getInTouch: "Get in Touch",
     brandSub: "Mathematics · Research",
@@ -260,6 +260,13 @@ export const en = {
     collabP: "I welcome research collaborations in mathematical optimization, operations research, intelligent transportation, and machine learning for sustainability. Whether you're a fellow researcher, industry partner, or graduate student seeking supervision — reach out.",
     collabTags: ["Mathematical Modeling", "Fuzzy Optimization", "Transportation Systems", "ML & Sustainability", "Operations Research"],
     collabBtn: "Send Email",
+  },
+  projects: {
+    meta: {
+      title: "Projects · Tubagus Robbi Megantara",
+      description: "Research projects and open-source work by Tubagus Robbi Megantara.",
+    },
+    items: [] as { title: string; desc: string; tags: string[]; url?: string }[],
   },
 };
 
