@@ -1,64 +1,88 @@
-# Astro Starter Kit: Blog
+# Tubagus Robbi Megantara — Academic Portfolio
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/astro-blog-starter-template)
+Personal academic portfolio for **Tubagus Robbi Megantara**, lecturer and researcher in applied mathematics at FMIPA. Built with Astro 5 and deployed on Cloudflare Workers.
 
-![Astro Template Preview](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+## Features
 
-<!-- dash-content-start -->
+- Bilingual (Indonesian / English) with Astro built-in i18n routing
+- Indonesian is the default locale (`/`, `/about`, etc.); English at `/en/`, `/en/about`, etc.
+- DRY page architecture — shared page components accept a `lang` prop, thin wrappers in `src/pages/` pass locale through
+- Light theme with deep navy accent (`#1e40af`), Google Fonts (Nunito, Inter, JetBrains Mono)
+- Floating math-symbol canvas background animation
+- Scroll-reveal via IntersectionObserver
+- Mobile-responsive with hamburger nav
+- Sitemap generation via `@astrojs/sitemap`
+- Deployed as a Cloudflare Worker (SSR via `@astrojs/cloudflare`)
 
-Create a blog with Astro and deploy it on Cloudflare Workers as a [static website](https://developers.cloudflare.com/workers/static-assets/).
+## Pages
 
-Features:
+| Route | Description |
+| :---- | :---------- |
+| `/` | Home — hero, stats strip, nav cards, recent updates |
+| `/about` | About — bio, info card, education timeline, current roles |
+| `/research` | Research — 4 research area cards, current focus section |
+| `/publications` | Publications — tabbed filter (Optimization / Fuzzy / ML), 8 papers |
+| `/contact` | Contact — links, collaboration card |
+| `/en/*` | English versions of all pages above |
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-- ✅ Built-in Observability logging
+> **Projects page** (`/projects`) is stubbed and hidden from navigation — content coming soon.
 
-<!-- dash-content-end -->
+## Project Structure
 
-## Getting Started
-
-Outside of this repo, you can start a new project with this template using [C3](https://developers.cloudflare.com/pages/get-started/c3/) (the `create-cloudflare` CLI):
-
-```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/astro-blog-starter-template
+```
+src/
+  components/
+    pages/          # Shared page components (accept lang prop)
+      HomePage.astro
+      AboutPage.astro
+      ResearchPage.astro
+      PublicationsPage.astro
+      ContactPage.astro
+      TeachingPage.astro  # stub for future Projects page
+    BaseHead.astro
+    Header.astro    # Nav with lang switcher (ID / EN)
+    Footer.astro
+  i18n/
+    en.ts           # English translations (type source: Translations)
+    id.ts           # Indonesian translations (typed against Translations)
+    index.ts        # getTranslations(lang) helper
+  layouts/
+    Layout.astro    # Master layout: canvas + Header + slot + Footer + scripts
+  pages/
+    index.astro     # Indonesian pages (thin wrappers)
+    about.astro
+    research.astro
+    publications.astro
+    contact.astro
+    en/             # English pages (thin wrappers)
+      index.astro
+      about.astro
+      ...
+  styles/
+    global.css
+public/
+  math-bg.js        # Floating math symbols canvas animation
+  site.js           # Mobile menu toggle + scroll reveal
+  favicon.svg
 ```
 
-A live public deployment of this template is available at [https://astro-blog-starter-template.templates.workers.dev](https://astro-blog-starter-template.templates.workers.dev)
+## i18n
 
-## 🚀 Project Structure
+Translations live in `src/i18n/en.ts` (the type source) and `src/i18n/id.ts`. All translation keys are nested TypeScript objects. To add or update text, edit the relevant key in both files.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+```ts
+// src/i18n/index.ts
+import { getTranslations } from './i18n';
+const t = getTranslations('id'); // or 'en'
+t.home.h1line1; // typed
+```
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Commands
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                           | Action                                           |
-| :-------------------------------- | :----------------------------------------------- |
-| `npm install`                     | Installs dependencies                            |
-| `npm run dev`                     | Starts local dev server at `localhost:4321`      |
-| `npm run build`                   | Build your production site to `./dist/`          |
-| `npm run preview`                 | Preview your build locally, before deploying     |
-| `npm run astro ...`               | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help`         | Get help using the Astro CLI                     |
-| `npm run build && npm run deploy` | Deploy your production site to Cloudflare        |
-| `npm wrangler tail`               | View real-time logs for all Workers              |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+| Command | Action |
+| :------ | :----- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Dev server at `localhost:4321` (or next available port) |
+| `npm run build` | Build to `./dist/` |
+| `npm run preview` | Preview build locally |
+| `npm run deploy` | Deploy to Cloudflare Workers |
