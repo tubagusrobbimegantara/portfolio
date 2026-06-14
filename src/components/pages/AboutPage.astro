@@ -1,0 +1,124 @@
+---
+import { getTranslations, type Lang } from '../../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const a = t.about;
+---
+
+<!-- BANNER -->
+<section class="banner">
+  <div class="wrap">
+    <div class="banner-grid">
+      <div class="banner-copy">
+        <span class="eyebrow">{a.eyebrow}</span>
+        <h1 class="display lg">{a.h1} <em>{a.h1em}</em></h1>
+        <p class="banner-lede">{a.lede}</p>
+      </div>
+      <div class="banner-art deco" style="display:flex;align-items:center;justify-content:center" aria-hidden="true">
+        <div class="deco-ring" style="width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+        <div class="av-wrap" style="z-index:2">
+          <div class="av-ring"></div>
+          <div class="av-mask"></div>
+          <div class="av">
+            <span class="av-init">TRM</span>
+            <span class="av-hint">add photo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- BIO + META -->
+<section>
+  <div class="wrap">
+    <div class="split wide-left">
+      <div class="rev">
+        <span class="sub-label">{a.profileLabel}</span>
+        <p style="font-size:1.05rem;margin-bottom:16px">{a.bio1.replace('mathematical optimization', '<strong>mathematical optimization</strong>').replace('optimisasi matematika', '<strong>optimisasi matematika</strong>')}</p>
+        <p style="margin-bottom:16px" set:html={a.bio2.replace('doctoral degree', '<strong>doctoral degree</strong>').replace('program doktor', '<strong>program doktor</strong>')}></p>
+        <p style="margin-bottom:16px" set:html={a.bio3.replace('Head of the Quality Assurance Unit', '<strong>Head of the Quality Assurance Unit</strong>').replace('Kepala Unit Penjaminan Mutu', '<strong>Kepala Unit Penjaminan Mutu</strong>')}></p>
+        <span class="sub-label" style="margin-top:8px">{a.focusLabel}</span>
+        <p set:html={a.focus.replace('Sustainability', '<em>Sustainability</em>').replace('Mathematics', '<em>Mathematics</em>')}></p>
+      </div>
+
+      <div class="card rev" style="display:flex;flex-direction:column;gap:20px">
+        <div class="meta-row">
+          <div class="mi">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="mt">
+            <span class="ml">{a.card.positionLabel}</span>
+            <span class="mv">{a.card.positionVal}</span>
+            <span class="ms">{a.card.positionSub}</span>
+          </div>
+        </div>
+        <div class="meta-row">
+          <div class="mi">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <div class="mt">
+            <span class="ml">{a.card.phdLabel}</span>
+            <span class="mv">{a.card.phdVal}</span>
+            <span class="ms">{a.card.phdSub}</span>
+          </div>
+        </div>
+        <div class="meta-row">
+          <div class="mi v">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
+          </div>
+          <div class="mt">
+            <span class="ml">{a.card.locationLabel}</span>
+            <span class="mv">{a.card.locationVal}</span>
+            <span class="ms">{a.card.locationSub}</span>
+          </div>
+        </div>
+        <div class="meta-row">
+          <div class="mi">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="mt">
+            <span class="ml">{a.card.emailLabel}</span>
+            <span class="mv"><a href="mailto:tubagusrobbimegantara@gmail.com">tubagusrobbimegantara@gmail.com</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- EDUCATION -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="eyebrow">{a.eduEyebrow}</span>
+      <h2 class="display lg"><em>{a.eduHeading}</em></h2>
+    </div>
+    <div class="timeline">
+      {a.edu.map(entry => (
+        <div class="tl rev">
+          <div class:list={['tl-dot', { now: entry.current }]}>
+            {entry.current
+              ? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              : <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg>
+            }
+          </div>
+          <div class="tl-body">
+            <div class="tl-yr">{entry.year}</div>
+            <h3 class="tl-title">{entry.title}</h3>
+            <div class="tl-place">{entry.place}</div>
+            <div class="tl-desc">{entry.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<hr class="rule">

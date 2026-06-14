@@ -1,0 +1,92 @@
+---
+import { getTranslations, type Lang } from '../../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const h = t.home;
+const prefix = lang === 'en' ? '/en' : '';
+
+const arrowSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
+---
+
+<!-- HERO -->
+<section class="banner" style="padding-top:120px">
+  <div class="wrap">
+    <div class="banner-grid">
+      <div class="banner-copy">
+        <div class="status-badge"><span class="dot-pulse"></span> {h.statusBadge}</div>
+        <span class="eyebrow">{h.eyebrow}</span>
+        <h1 class="display xl">{h.h1line1}<br><em>{h.h1line2}</em></h1>
+        <p class="banner-lede" set:html={h.lede.replace('optimization', '<strong>optimization</strong>').replace('fuzzy programming', '<strong>fuzzy programming</strong>').replace('optimisasi', '<strong>optimisasi</strong>').replace('pemrograman fuzzy', '<strong>pemrograman fuzzy</strong>')}></p>
+        <div class="tags">
+          {h.tags.map((tag, i) => (
+            <span class:list={['tag', i === 0 ? 'c' : i === 1 ? 'v' : '']}>{tag}</span>
+          ))}
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+          <a href={`${prefix}/publications`} class="btn btn-fill">
+            {h.btnPrimary}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href={`${prefix}/about`} class="btn btn-ghost">{h.btnSecondary}</a>
+        </div>
+      </div>
+
+      <div class="banner-art deco" aria-hidden="true">
+        <div class="deco-ring" style="width:230px;height:230px;top:60px;right:50px"></div>
+        <div class="stack" style="position:absolute;top:90px;right:90px;width:150px;height:150px">
+          <div class="stack-card" style="inset:0;opacity:0.22;transform:translate(34px,34px)"></div>
+          <div class="stack-card" style="inset:0;opacity:0.45;transform:translate(17px,17px)"></div>
+          <div class="stack-card" style="inset:0;display:flex;align-items:center;justify-content:center">
+            <span style="font-family:var(--serif);font-size:3.4rem;color:#05101e;font-style:italic">ƒ</span>
+          </div>
+        </div>
+        <div style="position:absolute;bottom:24px;left:0;background:var(--surface2);border:1px solid var(--border-a);border-radius:10px;padding:11px 15px;font-family:var(--mono);font-size:.72rem;color:var(--cyan);backdrop-filter:blur(8px)">
+          min&nbsp;Σ&nbsp;cᵢⱼxᵢⱼ&nbsp;<span style="color:var(--text3)">s.t. Ãx ≤ b̃</span>
+        </div>
+        <div class="dots" style="position:absolute;bottom:-6px;right:10px"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<section class="section-amber" style="padding:30px 0 50px">
+  <div class="wrap" style="display:flex;justify-content:center">
+    <div class="stats rev">
+      <div class="stat"><span class="stat-n">8</span><span class="stat-l">{h.stats.pubs}</span></div>
+      <div class="stat"><span class="stat-n">3</span><span class="stat-l">{h.stats.areas}</span></div>
+      <div class="stat"><span class="stat-n">2022</span><span class="stat-l">{h.stats.since}</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- EXPLORE / NAV CARDS -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="eyebrow">{h.explore.eyebrow}</span>
+      <h2 class="display lg">{h.explore.heading} <em>{h.explore.headingEm}</em></h2>
+      <p>{h.explore.sub}</p>
+    </div>
+    <div class="navcards">
+      {h.explore.cards.map((card, i) => {
+        const hrefs = [`${prefix}/about`, `${prefix}/research`, `${prefix}/publications`, `${prefix}/contact`];
+        return (
+          <a href={hrefs[i]} class="navcard rev">
+            <span class="navcard-num">{card.num}</span>
+            <h3>{card.title}</h3>
+            <p>{card.desc}</p>
+            <span class="navcard-arrow">
+              {card.cta}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>

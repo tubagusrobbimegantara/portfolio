@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ResearchPage from '../../components/pages/ResearchPage.astro';
+import { getTranslations, type Lang } from '../../i18n';
+
+const lang = (Astro.currentLocale ?? 'en') as Lang;
+const t = getTranslations(lang);
+---
+<Layout title={t.research.meta.title} description={t.research.meta.description} lang={lang} currentPath="/research">
+  <ResearchPage lang={lang} />
+</Layout>

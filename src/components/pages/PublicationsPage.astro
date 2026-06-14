@@ -1,0 +1,180 @@
+---
+import { getTranslations, type Lang } from '../../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const p = t.publications;
+
+const doiIcon = `<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg>`;
+---
+
+<!-- BANNER -->
+<section class="banner">
+  <div class="wrap">
+    <div class="banner-grid">
+      <div class="banner-copy">
+        <span class="eyebrow">{p.eyebrow}</span>
+        <h1 class="display lg">{p.h1} <em>{p.h1em}</em></h1>
+        <p class="banner-lede">
+          {p.lede}
+          <a href="https://scholar.google.com/citations?user=Tf4cRjcAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener"> {p.scholarLink}</a>
+        </p>
+      </div>
+      <div class="banner-art deco" aria-hidden="true">
+        <div class="stack" style="position:absolute;top:70px;right:80px;width:140px;height:140px">
+          <div class="stack-card" style="inset:0;opacity:0.25;transform:translate(30px,30px)"></div>
+          <div class="stack-card" style="inset:0;opacity:0.5;transform:translate(15px,15px)"></div>
+          <div class="stack-card" style="inset:0;display:flex;align-items:center;justify-content:center">
+            <span style="font-family:var(--serif);font-size:2.6rem;color:#05101e;font-weight:600">8</span>
+          </div>
+        </div>
+        <div class="dots" style="position:absolute;bottom:20px;right:14px"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- PUBLICATIONS -->
+<section>
+  <div class="wrap">
+    <div class="pub-bar rev">
+      <button class="ptab on" data-tab="opt">{p.tabs.opt}</button>
+      <button class="ptab" data-tab="fuz">{p.tabs.fuz}</button>
+      <button class="ptab" data-tab="ml">{p.tabs.ml}</button>
+    </div>
+
+    <!-- GROUP A: Ride-Hailing Optimization -->
+    <div class="pg on" id="pg-opt">
+      <div class="pg-label">{p.groupLabels.opt}</div>
+
+      <div class="pc">
+        <div class="pc-year">2024</div>
+        <div class="pc-main">
+          <div class="pc-top">
+            <div class="pc-title"><a href="https://doi.org/10.37934/araset.42.2.133144" target="_blank" rel="noopener">Mathematical Modeling on Integrated Vehicle Assignment and Rebalancing in Ride-hailing System with Uncertainty Using Fuzzy Linear Programming</a></div>
+            <div class="pc-badges"><span class="badge oa">Open Access</span><span class="badge ct">8 cited</span></div>
+          </div>
+          <div class="pc-meta"><em>Journal of Advanced Research in Applied Sciences and Engineering Technology</em><span class="pc-sep">·</span>Vol. 42(2), pp. 133–144</div>
+          <div class="pc-auth"><strong>Megantara T.R.</strong>, Supian S., Chaerani D.</div>
+          <a class="pc-doi" href="https://doi.org/10.37934/araset.42.2.133144" target="_blank" rel="noopener" set:html={doiIcon + '10.37934/araset.42.2.133144'}></a>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-year">2022</div>
+        <div class="pc-main">
+          <div class="pc-top">
+            <div class="pc-title"><a href="https://doi.org/10.3390/su141710648" target="_blank" rel="noopener">Strategies to Reduce Ride-Hailing Fuel Consumption Caused by Pick-Up Trips: A Mathematical Model under Uncertainty</a></div>
+            <div class="pc-badges"><span class="badge oa">Open Access</span><span class="badge ct">6 cited</span></div>
+          </div>
+          <div class="pc-meta"><em>Sustainability</em><span class="pc-sep">·</span>14(17), art. no. 10648</div>
+          <div class="pc-auth"><strong>Megantara T.R.</strong>, Supian S., Chaerani D.</div>
+          <a class="pc-doi" href="https://doi.org/10.3390/su141710648" target="_blank" rel="noopener" set:html={doiIcon + '10.3390/su141710648'}></a>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-year">2024</div>
+        <div class="pc-main">
+          <div class="pc-top">
+            <div class="pc-title"><a href="https://doi.org/10.3390/math12142290" target="_blank" rel="noopener">The Application of the Piecewise Linear Method for Non-Linear Programming Problems in Ride-Hailing Assignment Based on Service Level, Driver Workload, and Fuel Consumption</a></div>
+            <div class="pc-badges"><span class="badge oa">Open Access</span><span class="badge ct">2 cited</span></div>
+          </div>
+          <div class="pc-meta"><em>Mathematics</em><span class="pc-sep">·</span>12(14), art. no. 2290</div>
+          <div class="pc-auth"><strong>Megantara T.R.</strong>, Supian S., Chaerani D., Bon A.T.</div>
+          <a class="pc-doi" href="https://doi.org/10.3390/math12142290" target="_blank" rel="noopener" set:html={doiIcon + '10.3390/math12142290'}></a>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-year">2024</div>
+        <div class="pc-main">
+          <div class="pc-top">
+            <div class="pc-title"><a href="https://doi.org/10.1063/5.0211564" target="_blank" rel="noopener">Mathematical Modeling for Vehicle Assignment Problem in Online Transportation</a></div>
+            <div class="pc-badges"><span class="badge cf">Conference</span><span class="badge ct">1 cited</span></div>
+          </div>
+          <div class="pc-meta"><em>AIP Conference Proceedings</em><span class="pc-sep">·</span>3132(1), art. no. 020021 · ICON-SMART 2022</div>
+          <div class="pc-auth">Supian S., <strong>Megantara T.R.</strong></div>
+          <a class="pc-doi" href="https://doi.org/10.1063/5.0211564" target="_blank" rel="noopener" set:html={doiIcon + '10.1063/5.0211564'}></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP B: Fuzzy Programming -->
+    <div class="pg" id="pg-fuz">
+      <div class="pg-label">{p.groupLabels.fuz}</div>
+
+      <div class="pc">
+        <div class="pc-year">2024</div>
+        <div class="pc-main">
+          <div class="pc-top">
+            <div class="pc-title"><a href="https://doi.org/10.3390/math12091355" target="_blank" rel="noopener">Ride-Hailing Matching with Uncertain Travel Time: A Novel Interval-Valued Fuzzy Multi-Objective Linear Programming Approach</a></div>
+            <div class="pc-badges"><span class="badge oa">Open Access</span><span class="badge ct">4 cited</span></div>
+          </div>
+          <div class="pc-meta"><em>Mathematics</em><span class="pc-sep">·</span>12(9), art. no. 1355</div>
+          <div class="pc-auth">Supian S., Subiyanto, <strong>Megantara T.R.</strong>, Bon A.T.</div>
+          <a class="pc-doi" href="https://doi.org/10.3390/math12091355" target="_blank" rel="noopener" set:html={doiIcon + '10.3390/math12091355'}></a>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-year">2025</div>
+        <div class="pc-main">
+          <div class="pc-top">
+            <div class="pc-title"><a href="https://doi.org/10.3390/math13030371" target="_blank" rel="noopener">Mathematical Modeling of Ride-Hailing Matching Considering Uncertain User and Driver Preferences: Interval-Valued Fuzzy Approach</a></div>
+            <div class="pc-badges"><span class="badge oa">Open Access</span></div>
+          </div>
+          <div class="pc-meta"><em>Mathematics</em><span class="pc-sep">·</span>13(3), art. no. 371</div>
+          <div class="pc-auth">Supian S., Subiyanto S., Sylviani S., <strong>Megantara T.R.</strong>, Bon A.T., Preda V.</div>
+          <a class="pc-doi" href="https://doi.org/10.3390/math13030371" target="_blank" rel="noopener" set:html={doiIcon + '10.3390/math13030371'}></a>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-year">2023</div>
+        <div class="pc-main">
+          <div class="pc-top">
+            <div class="pc-title">Ride-Hailing Assignment Problem under Waiting Time Uncertainty using Interval-Valued Fuzzy Quadratic</div>
+            <div class="pc-badges"></div>
+          </div>
+          <div class="pc-meta"><em>International Journal of Global Optimization and Its Applications</em><span class="pc-sep">·</span>Vol. 2, pp. 209–220</div>
+          <div class="pc-auth">Supian S., Subiyanto S., <strong>Megantara T.R.</strong>, Bon A.T.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP C: ML & Sustainability -->
+    <div class="pg" id="pg-ml">
+      <div class="pg-label">{p.groupLabels.ml}</div>
+
+      <div class="pc">
+        <div class="pc-year">2026</div>
+        <div class="pc-main">
+          <div class="pc-top">
+            <div class="pc-title"><a href="https://doi.org/10.3390/su18105076" target="_blank" rel="noopener">Machine Learning-Based Forecasting of Waste Generation Proxies Under Data-Limited Conditions for Supporting Adaptive and Sustainable Citarum River Management</a></div>
+            <div class="pc-badges"><span class="badge oa">Open Access</span></div>
+          </div>
+          <div class="pc-meta"><em>Sustainability</em><span class="pc-sep">·</span>18(10), art. no. 5076</div>
+          <div class="pc-auth">Supian S., Sukono, Riaman, Juahir H., <strong>Megantara T.R.</strong>, Indra, Azahra A.S., Pirdaus D.I., Saputra M.P.A.</div>
+          <a class="pc-doi" href="https://doi.org/10.3390/su18105076" target="_blank" rel="noopener" set:html={doiIcon + '10.3390/su18105076'}></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<script>
+document.querySelectorAll('.ptab').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    document.querySelectorAll('.ptab').forEach(function (b) { b.classList.remove('on'); });
+    document.querySelectorAll('.pg').forEach(function (g) { g.classList.remove('on'); });
+    btn.classList.add('on');
+    document.getElementById('pg-' + (btn as HTMLElement).dataset.tab)?.classList.add('on');
+  });
+});
+</script>

@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TeachingPage from '../components/pages/TeachingPage.astro';
+import { getTranslations, type Lang } from '../i18n';
+
+const lang = (Astro.currentLocale ?? 'id') as Lang;
+const t = getTranslations(lang);
+---
+<Layout title={t.teaching.meta.title} description={t.teaching.meta.description} lang={lang} currentPath="/teaching">
+  <TeachingPage lang={lang} />
+</Layout>

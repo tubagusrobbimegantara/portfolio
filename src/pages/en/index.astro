@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import HomePage from '../../components/pages/HomePage.astro';
+import { getTranslations, type Lang } from '../../i18n';
+
+const lang = (Astro.currentLocale ?? 'en') as Lang;
+const t = getTranslations(lang);
+---
+<Layout title={t.home.meta.title} description={t.home.meta.description} lang={lang} currentPath="/">
+  <HomePage lang={lang} />
+</Layout>

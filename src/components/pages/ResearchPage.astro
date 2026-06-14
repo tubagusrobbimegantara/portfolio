@@ -1,0 +1,91 @@
+---
+import { getTranslations, type Lang } from '../../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const r = t.research;
+const prefix = lang === 'en' ? '/en' : '';
+
+const icons = [
+  `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
+  `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="2"><path d="M3 12h3l3-9 4 18 3-9h5"/></svg>`,
+  `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>`,
+  `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>`,
+];
+---
+
+<!-- BANNER -->
+<section class="banner">
+  <div class="wrap">
+    <div class="banner-grid">
+      <div class="banner-copy">
+        <span class="eyebrow">{r.eyebrow}</span>
+        <h1 class="display lg">{r.h1} <em>{r.h1em}</em></h1>
+        <p class="banner-lede">{r.lede}</p>
+      </div>
+      <div class="banner-art deco" aria-hidden="true">
+        <div class="stack" style="position:absolute;top:80px;right:80px;width:140px;height:140px">
+          <div class="stack-card" style="inset:0;opacity:0.25;transform:translate(30px,30px)"></div>
+          <div class="stack-card" style="inset:0;opacity:0.5;transform:translate(15px,15px)"></div>
+          <div class="stack-card" style="inset:0;display:flex;align-items:center;justify-content:center">
+            <span style="font-family:var(--serif);font-size:3rem;color:#05101e;font-style:italic">∑</span>
+          </div>
+        </div>
+        <div class="dots" style="position:absolute;bottom:20px;right:14px"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- RESEARCH CARDS -->
+<section>
+  <div class="wrap">
+    <div class="research-grid">
+      {r.cards.map((card, i) => (
+        <div class="rc rev">
+          <span class="rc-num">{card.num}</span>
+          <div class:list={['rc-icon', card.iconClass]} set:html={icons[i]}></div>
+          <h3>{card.title}</h3>
+          <p>{card.desc}</p>
+          <div class="chips">
+            {card.chips.map(chip => <span class="chip">{chip}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CURRENT FOCUS -->
+<section>
+  <div class="wrap">
+    <div class="split wide-right">
+      <div class="banner-art deco rev" style="height:300px" aria-hidden="true">
+        <div class="deco-ring" style="width:180px;height:180px;top:60px;left:60px"></div>
+        <div style="position:absolute;top:90px;left:90px;background:var(--surface2);border:1px solid var(--border-a);border-radius:12px;padding:16px 20px;font-family:var(--mono);font-size:.78rem;color:var(--cyan);backdrop-filter:blur(8px);line-height:1.9">
+          min Σ cᵢⱼ x̃ᵢⱼ<br>
+          <span style="color:var(--text3)">s.t.&nbsp; Ãx ≤ b̃</span><br>
+          <span style="color:var(--violet)">x ∈ [x⁻, x⁺]</span>
+        </div>
+      </div>
+      <div class="rev">
+        <span class="sub-label">{r.focusLabel}</span>
+        <h2 class="display md" style="margin-bottom:16px">{r.focusH2} <em>{r.focusH2em}</em></h2>
+        <p style="margin-bottom:14px" set:html={r.focusP1.replace('uncertain', '<strong>uncertain</strong>').replace('tidak pasti', '<strong>tidak pasti</strong>')}></p>
+        <p style="margin-bottom:14px" set:html={r.focusP2.replace('fuzzy and interval-valued numbers', '<strong>fuzzy and interval-valued numbers</strong>').replace('bilangan fuzzy dan interval-valued', '<strong>bilangan fuzzy dan interval-valued</strong>')}></p>
+        <p>{r.focusP3}</p>
+        <a href={`${prefix}/publications`} class="btn btn-ghost" style="margin-top:20px">
+          {r.focusBtn}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">

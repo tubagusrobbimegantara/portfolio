@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ContactPage from '../../components/pages/ContactPage.astro';
+import { getTranslations, type Lang } from '../../i18n';
+
+const lang = (Astro.currentLocale ?? 'en') as Lang;
+const t = getTranslations(lang);
+---
+<Layout title={t.contact.meta.title} description={t.contact.meta.description} lang={lang} currentPath="/contact">
+  <ContactPage lang={lang} />
+</Layout>

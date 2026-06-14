@@ -1,0 +1,32 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import type { Lang } from '../i18n';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang: Lang;
+  currentPath: string;
+}
+
+const { title, description = "Lecturer and researcher in applied mathematics — optimization, fuzzy programming, and intelligent transportation systems.", lang, currentPath } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <canvas id="mathCanvas"></canvas>
+    <Header lang={lang} currentPath={currentPath} />
+    <div class="page">
+      <slot />
+    </div>
+    <Footer lang={lang} />
+    <script src="/math-bg.js" is:inline></script>
+    <script src="/site.js" is:inline></script>
+  </body>
+</html>
