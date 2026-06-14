@@ -66,7 +66,7 @@ h1,h2,h3,h4 { color: var(--head); line-height: 1.12; font-weight: 600; }
 .display.xl { font-size: clamp(2.6rem, 7vw, 5.2rem); }
 .display.lg { font-size: clamp(2.1rem, 5vw, 3.6rem); }
 .display.md { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
-p  { color: var(--text); line-height: 1.75; }
+p  { color: var(--text2); line-height: 1.75; }
 a  { color: var(--cyan); text-decoration: none; transition: opacity .2s, color .2s; }
 a:hover { opacity: .78; }
 strong { color: var(--head); font-weight: 600; }
@@ -304,7 +304,7 @@ section { padding: 84px 0; position: relative; }
 .ni-date { font-family: var(--mono); font-size: .68rem; color: var(--text3); min-width: 60px; padding-top: 3px; letter-spacing: .04em; }
 .ni-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
 .ni-dot.p { background: var(--cyan); } .ni-dot.r { background: var(--violet); } .ni-dot.a { background: var(--green); }
-.ni-text { font-size: .86rem; color: var(--text); }
+.ni-text { font-size: .86rem; color: var(--text2); }
 .ni-text em { color: var(--text2); font-style: italic; }
 
 /* ── Contact ── */
