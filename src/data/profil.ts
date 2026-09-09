@@ -46,7 +46,7 @@ export const pendidikan = [
 		berjalan: true,
 	},
 	{
-		tahun: "2020 — 2022",
+		tahun: "2021 — 2022",
 		gelar: "Magister Matematika (M.Mat.)",
 		tempat: "Departemen Matematika · FMIPA · Universitas Padjadjaran",
 		catatan:
