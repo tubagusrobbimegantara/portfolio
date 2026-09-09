@@ -1,6 +1,6 @@
 {
 	"_catatan": "Berkas ini dibangkitkan otomatis oleh scripts/perbarui-publikasi.mjs. Jangan disunting tangan — pakai src/data/publikasi-manual.ts untuk koreksi.",
-	"diperbarui": "2026-09-09T11:36:55.815Z",
+	"diperbarui": "2026-09-09T11:41:46.908Z",
 	"orcid": "0000-0002-8888-5565",
 	"sumber": "OpenAlex (api.openalex.org), diperiksa silang dengan ORCID",
 	"ringkasan": {
@@ -183,7 +183,7 @@
 			"sitasi": 0,
 			"aksesTerbuka": true,
 			"jenis": "article",
-			"tema": "lainnya",
+			"tema": "pendidikan",
 			"label": [
 				"Akses Terbuka"
 			]
