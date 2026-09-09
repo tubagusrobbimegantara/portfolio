@@ -1650,3 +1650,45 @@ footer {
 		gap: 18px;
 	}
 }
+
+/* ── Gambar penjelas di dalam materi ──────────── */
+
+.prose .gambar {
+	margin: 1.9em 0;
+	padding: 18px 16px 12px;
+	background: var(--surface);
+	border: 1px solid var(--line-soft);
+	border-radius: var(--r);
+}
+.prose .gambar img {
+	width: 100%;
+	height: auto;
+	display: block;
+	border-radius: 0;
+}
+.prose .gambar figcaption {
+	margin-top: 10px;
+	font-size: 0.82rem;
+	line-height: 1.55;
+	color: var(--ink-3);
+	text-align: center;
+}
+.prose .gambar figcaption b {
+	color: var(--maroon);
+	font-weight: 600;
+}
+
+/* Kotak langkah bernomor */
+.prose .langkah {
+	margin: 1.6em 0;
+	padding: 18px 22px;
+	background: var(--bg-2);
+	border-left: 3px solid var(--maroon);
+	border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+.prose .langkah > *:first-child {
+	margin-top: 0;
+}
+.prose .langkah > * + * {
+	margin-top: 0.8em;
+}

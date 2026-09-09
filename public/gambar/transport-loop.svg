@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 330" role="img" aria-label="Lintasan tertutup pada tabel transportasi dengan tanda tambah dan kurang">
+<title>Lintasan tertutup untuk menggeser muatan</title>
+<text x="150.0" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#5d2021">Toko 1</text>
+<text x="258.0" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#5d2021">Toko 2</text>
+<text x="366.0" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#5d2021">Toko 3</text>
+<text x="474.0" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#5d2021">Toko 4</text>
+<text x="82" y="91.0" text-anchor="end" font-size="12" font-weight="600" fill="#5d2021">Gudang 1</text>
+<text x="82" y="153.0" text-anchor="end" font-size="12" font-weight="600" fill="#5d2021">Gudang 2</text>
+<text x="82" y="215.0" text-anchor="end" font-size="12" font-weight="600" fill="#5d2021">Gudang 3</text>
+<rect x="96" y="56" width="108" height="62" fill="#fffdf9" stroke="rgba(93,32,33,0.18)"/>
+<text x="150.0" y="93.0" text-anchor="middle" font-size="15" font-weight="600" fill="#5d2021">20</text>
+<rect x="204" y="56" width="108" height="62" fill="#fffdf9" stroke="rgba(93,32,33,0.18)"/>
+<text x="258.0" y="93.0" text-anchor="middle" font-size="15" font-weight="600" fill="#5d2021">10</text>
+<rect x="312" y="56" width="108" height="62" fill="#fffdf9" stroke="rgba(93,32,33,0.18)"/>
+<rect x="420" y="56" width="108" height="62" fill="#fffdf9" stroke="rgba(93,32,33,0.18)"/>
+<rect x="96" y="118" width="108" height="62" fill="#fffdf9" stroke="rgba(93,32,33,0.18)"/>
+<rect x="204" y="118" width="108" height="62" fill="#f7f1e6" stroke="rgba(93,32,33,0.18)"/>
+<text x="258.0" y="155.0" text-anchor="middle" font-size="15" font-weight="600" fill="#5d2021">20</text>
+<circle cx="292" cy="137" r="12" fill="#a88454"/>
+<text x="292" y="142" text-anchor="middle" font-size="15" font-weight="700" fill="#fffdf9">−</text>
+<rect x="312" y="118" width="108" height="62" fill="#f7f1e6" stroke="rgba(93,32,33,0.18)"/>
+<text x="366.0" y="155.0" text-anchor="middle" font-size="15" font-weight="600" fill="#5d2021">20</text>
+<circle cx="400" cy="137" r="12" fill="#a88454"/>
+<text x="400" y="142" text-anchor="middle" font-size="15" font-weight="700" fill="#fffdf9">+</text>
+<rect x="420" y="118" width="108" height="62" fill="#fffdf9" stroke="rgba(93,32,33,0.18)"/>
+<rect x="96" y="180" width="108" height="62" fill="#fffdf9" stroke="rgba(93,32,33,0.18)"/>
+<rect x="204" y="180" width="108" height="62" fill="#f7f1e6" stroke="rgba(93,32,33,0.18)"/>
+<circle cx="292" cy="199" r="12" fill="#a88454"/>
+<text x="292" y="204" text-anchor="middle" font-size="15" font-weight="700" fill="#fffdf9">+</text>
+<rect x="312" y="180" width="108" height="62" fill="#f7f1e6" stroke="rgba(93,32,33,0.18)"/>
+<text x="366.0" y="217.0" text-anchor="middle" font-size="15" font-weight="600" fill="#5d2021">5</text>
+<circle cx="400" cy="199" r="12" fill="#a88454"/>
+<text x="400" y="204" text-anchor="middle" font-size="15" font-weight="700" fill="#fffdf9">−</text>
+<rect x="420" y="180" width="108" height="62" fill="#fffdf9" stroke="rgba(93,32,33,0.18)"/>
+<text x="474.0" y="217.0" text-anchor="middle" font-size="15" font-weight="600" fill="#5d2021">25</text>
+<path d="M 258 211 L 366 211 L 366 149 L 258 149 L 258 211" fill="none" stroke="#5d2021" stroke-width="2.4" stroke-dasharray="7 5" opacity="0.85"/>
+<text x="300" y="312" text-anchor="middle" font-size="11.5" fill="#6a5f57">Kotak (3,2) masuk dengan tanda +; muatan digeser sebanyak θ mengelilingi lintasan</text>
+</svg>

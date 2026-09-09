@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" role="img" aria-label="Dua perjalanan pulang-pergi digabung menjadi satu rute">
+<title>Gagasan penghematan Clarke-Wright</title>
+<line x1="70" y1="190" x2="60" y2="70" stroke="#a88454" stroke-width="2.4" stroke-dasharray="6 4"/>
+<line x1="70" y1="190" x2="190" y2="110" stroke="#a88454" stroke-width="2.4" stroke-dasharray="6 4"/>
+<rect x="58" y="178" width="24" height="24" rx="5" fill="#5d2021"/>
+<text x="70" y="194.5" text-anchor="middle" font-size="12" font-weight="700" fill="#fdfaf3">0</text>
+<circle cx="60" cy="70" r="11" fill="#fffdf9" stroke="#5d2021" stroke-width="1.8"/>
+<text x="60" y="74" text-anchor="middle" font-size="12" font-style="italic" font-weight="700" fill="#5d2021">i</text>
+<circle cx="190" cy="110" r="11" fill="#fffdf9" stroke="#5d2021" stroke-width="1.8"/>
+<text x="190" y="114" text-anchor="middle" font-size="12" font-style="italic" font-weight="700" fill="#5d2021">j</text>
+<text x="130" y="34" text-anchor="middle" font-size="12.5" font-weight="600" fill="#5d2021">Sebelum: dua perjalanan terpisah</text>
+<text x="130" y="232" text-anchor="middle" font-size="11.5" fill="#6a5f57">2c(0,i) + 2c(0,j)</text>
+<line x1="290" y1="60" x2="290" y2="215" stroke="rgba(93,32,33,0.14)"/>
+<path d="M 370 190 L 360 70 L 490 110 Z" fill="none" stroke="#5d2021" stroke-width="2.6" stroke-linejoin="round"/>
+<rect x="358" y="178" width="24" height="24" rx="5" fill="#5d2021"/>
+<text x="370" y="194.5" text-anchor="middle" font-size="12" font-weight="700" fill="#fdfaf3">0</text>
+<circle cx="360" cy="70" r="11" fill="#fffdf9" stroke="#5d2021" stroke-width="1.8"/>
+<text x="360" y="74" text-anchor="middle" font-size="12" font-style="italic" font-weight="700" fill="#5d2021">i</text>
+<circle cx="490" cy="110" r="11" fill="#fffdf9" stroke="#5d2021" stroke-width="1.8"/>
+<text x="490" y="114" text-anchor="middle" font-size="12" font-style="italic" font-weight="700" fill="#5d2021">j</text>
+<text x="430" y="34" text-anchor="middle" font-size="12.5" font-weight="600" fill="#5d2021">Sesudah: satu rute gabungan</text>
+<text x="430" y="232" text-anchor="middle" font-size="11.5" fill="#6a5f57">c(0,i) + c(i,j) + c(j,0)</text>
+<text x="300" y="252" text-anchor="middle" font-size="12" font-weight="600" fill="#8a6a3e">Penghematan: s(i,j) = c(0,i) + c(0,j) − c(i,j)</text>
+</svg>

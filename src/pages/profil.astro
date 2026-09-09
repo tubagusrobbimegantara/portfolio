@@ -15,13 +15,13 @@ const scholar = tautan.find((t) => t.nama === "Google Scholar")?.url ?? "#";
 ---
 
 <Layout
-	title="Profil Megantara, T. R. — Mathantara"
+	title="Profil Tubagus Robbi Megantara — Mathantara"
 	description="Rekam jejak akademik Tubagus Robbi Megantara: pendidikan, bidang penelitian, publikasi terindeks Scopus, serta tautan LinkedIn dan media sosial."
 >
 	<section class="banner">
 		<div class="wrap">
 			<span class="eyebrow">03 — Profil</span>
-			<h1 class="display lg">Megantara, <em>T. R.</em></h1>
+			<h1 class="display lg">Tubagus Robbi <em>Megantara</em></h1>
 			<p class="lede">{identitas.ringkas}</p>
 		</div>
 	</section>
@@ -50,7 +50,7 @@ const scholar = tautan.find((t) => t.nama === "Google Scholar")?.url ?? "#";
 					<img class="avatar" src="/brand/avatar.png" alt="Mathantara" width="92" height="92" loading="lazy" />
 					<div class="kv">
 						<div class="k">Nama</div>
-						<div class="v">{identitas.nama}</div>
+						<div class="v">{identitas.nama}, {identitas.gelar}</div>
 						<div class="s">{identitas.peranSingkat}</div>
 					</div>
 					{
@@ -91,7 +91,7 @@ const scholar = tautan.find((t) => t.nama === "Google Scholar")?.url ?? "#";
 				{
 					pendidikan.map((e) => (
 						<div class:list={["tl-item", "rev", { now: e.berjalan }]}>
-							<div class="tl-year">{e.tahun}</div>
+							{e.tahun && <div class="tl-year">{e.tahun}</div>}
 							<h3>{e.gelar}</h3>
 							<div class="tl-place">{e.tempat}</div>
 							<p class="tl-note">{e.catatan}</p>

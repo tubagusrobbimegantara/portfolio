@@ -103,7 +103,36 @@ Semua isi halaman `/profil` ada di satu berkas: `src/data/profil.ts` —
 biodata, pendidikan, peran, bidang penelitian, daftar publikasi, dan tautan
 media sosial.
 
-### 4. Mengisi akun media sosial
+### 4. Menambah ilustrasi ke materi
+
+Simpan gambarnya di `public/gambar/` (SVG paling bagus karena tajam di layar
+mana pun; PNG/JPG juga bisa), lalu sisipkan di berkas materi:
+
+```html
+<figure class="gambar">
+	<img src="/gambar/namafile.svg" alt="Keterangan gambar untuk pembaca layar" width="600" height="350" loading="lazy" />
+	<figcaption><b>Gambar 1.</b> Penjelasan singkat isi gambarnya.</figcaption>
+</figure>
+```
+
+Dua hal yang perlu diingat:
+
+- Berkas SVG **wajib** memuat `xmlns="http://www.w3.org/2000/svg"` pada tag
+  `<svg>`, kalau tidak gambarnya tidak akan tampil.
+- Di dalam `<figcaption>`, rumus `$...$` **tidak** dirender. Pakai HTML biasa
+  seperti `<i>Q</i>/2` untuk lambang di dalam keterangan gambar.
+
+Ada juga kotak langkah bernomor untuk prosedur:
+
+```html
+<div class="langkah">
+
+**Langkah 1.** Isi langkahnya.
+
+</div>
+```
+
+### 5. Mengisi akun media sosial
 
 Buka `src/consts.ts`, isi bagian `KANAL`:
 
@@ -127,7 +156,7 @@ Yang kosong otomatis disembunyikan dari kaki halaman dan halaman Video.
 | `/video` | Video Animasi — kartu berisi thumbnail, tautan platform, caption, dan tautan materi |
 | `/materi` | Materi Matematika — daftar materi, bisa disaring per kategori |
 | `/materi/<slug>` | Isi materi lengkap dengan LaTeX, daftar isi, dan tautan videonya |
-| `/profil` | Profil Megantara, T.R. — pendidikan, penelitian, publikasi, tautan |
+| `/profil` | Profil Tubagus Robbi Megantara — pendidikan, penelitian, publikasi, tautan |
 
 ## Struktur berkas
 
@@ -143,6 +172,7 @@ src/
   styles/global.css
 public/
   brand/           logo, lambang, avatar, gambar pratinjau
+  gambar/          ilustrasi SVG untuk materi
   thumbnail/       gambar thumbnail video
   math-bg.js       animasi lambang matematika di latar
   site.js          menu layar kecil, animasi muncul, daftar isi

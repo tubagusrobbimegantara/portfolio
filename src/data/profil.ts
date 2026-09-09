@@ -3,7 +3,7 @@
 
 export const identitas = {
 	nama: "Tubagus Robbi Megantara",
-	sapaan: "Megantara, T. R.",
+	gelar: "S.Mat., M.Mat.",
 	peranSingkat: "Dosen · Peneliti · Kandidat Doktor Matematika",
 	lokasi: "Bandung — Sumedang, Jawa Barat",
 	email: "tubagusrobbimegantara@gmail.com",
@@ -27,17 +27,27 @@ export const pendidikan = [
 	{
 		tahun: "2022 — sekarang",
 		gelar: "Program Doktor (Ph.D.) Matematika",
-		tempat: "Universitas Padjadjaran · FMIPA · Sumedang",
+		tempat: "Departemen Matematika · FMIPA · Universitas Padjadjaran",
 		catatan:
 			"Penelitian doktoral tentang model optimisasi fuzzy untuk penugasan dan penyeimbangan kendaraan ride-hailing dalam kondisi ketidakpastian. Didanai Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi (hibah no. 3018/UN6.3.1/PT.00/2023).",
 		berjalan: true,
 	},
 	{
 		tahun: "2020 — 2022",
-		gelar: "Magister Sains (M.Si.) Matematika",
-		tempat: "Universitas Padjadjaran · FMIPA · Sumedang",
+		gelar: "Magister Matematika (M.Mat.)",
+		tempat: "Departemen Matematika · FMIPA · Universitas Padjadjaran",
 		catatan:
 			"Tesis magister tentang pemrograman linear fuzzy untuk penugasan dan penyeimbangan ride-hailing dalam kondisi ketidakpastian. Didanai Program Penelitian Tesis Magister, DRPM UNPAD (hibah no. 1318/UN6.3.1/PT.00/2022).",
+		berjalan: false,
+	},
+	{
+		// TODO: isi rentang tahunnya, mis. "2016 — 2020".
+		// Selama dikosongkan, baris tahun tidak ditampilkan di halaman.
+		tahun: "",
+		gelar: "Sarjana Matematika (S.Mat.)",
+		tempat: "Departemen Matematika · FMIPA · Universitas Padjadjaran",
+		catatan:
+			"Pendidikan sarjana pada Program Studi Matematika, Fakultas Matematika dan Ilmu Pengetahuan Alam, Universitas Padjadjaran.",
 		berjalan: false,
 	},
 ];
