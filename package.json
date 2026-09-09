@@ -24,7 +24,8 @@
 		"check": "astro build && tsc --noEmit && wrangler deploy --dry-run",
 		"deploy": "wrangler deploy",
 		"dev": "astro dev",
-		"preview": "astro build && wrangler dev"
+		"preview": "astro build && wrangler dev",
+		"publikasi": "node scripts/perbarui-publikasi.mjs"
 	},
 	"type": "module"
 }

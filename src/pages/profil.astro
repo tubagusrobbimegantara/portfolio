@@ -7,11 +7,18 @@ import {
 	peran,
 	bidangPenelitian,
 	publikasi,
-	temaPublikasi,
+	temaTerpakai,
+	publikasiDiperbarui,
 	tautan,
 } from "../data/profil";
 
 const scholar = tautan.find((t) => t.nama === "Google Scholar")?.url ?? "#";
+
+const tglPerbarui = new Date(publikasiDiperbarui).toLocaleDateString("id-ID", {
+	day: "numeric",
+	month: "long",
+	year: "numeric",
+});
 ---
 
 <Layout
@@ -140,11 +147,12 @@ const scholar = tautan.find((t) => t.nama === "Google Scholar")?.url ?? "#";
 				<div>
 					<span class="eyebrow">Publikasi</span>
 					<h2 class="display lg" style="margin-top:12px">
-						{publikasi.length} makalah terindeks <em>Scopus</em>
+						{publikasi.length} <em>karya terpublikasi</em>
 					</h2>
 					<p>
 						Diterbitkan di jurnal internasional dan prosiding konferensi, disusun
-						menurut tema penelitian.
+						menurut tema penelitian. Daftar ini ditarik otomatis dari OpenAlex dan
+						ORCID; terakhir diperbarui {tglPerbarui}.
 					</p>
 				</div>
 				<a class="btn btn-ghost btn-sm" href={scholar} target="_blank" rel="noopener">
@@ -155,7 +163,7 @@ const scholar = tautan.find((t) => t.nama === "Google Scholar")?.url ?? "#";
 			<div class="filter-bar" id="filterPub">
 				<button class="chip on" data-filter="semua">Semua ({publikasi.length})</button>
 				{
-					temaPublikasi.map((t) => (
+					temaTerpakai.map((t) => (
 						<button class="chip" data-filter={t.id}>
 							{t.nama}
 						</button>
@@ -179,9 +187,17 @@ const scholar = tautan.find((t) => t.nama === "Google Scholar")?.url ?? "#";
 									)}
 								</h3>
 								<div class="pub-jurnal">
-									<em>{p.jurnal}</em> · {p.detail}
+									<em>{p.jurnal}</em>
+									{p.detail && <span> · {p.detail}</span>}
 								</div>
-								<div class="pub-penulis" set:html={p.penulis.replace("Megantara T.R.", "<b>Megantara T.R.</b>")} />
+								<div class="pub-penulis">
+									{p.penulis.map((nama, i) => (
+										<Fragment>
+											{i > 0 && ", "}
+											{nama.includes("Megantara") ? <b>{nama}</b> : nama}
+										</Fragment>
+									))}
+								</div>
 								<div class="pub-row">
 									{p.label?.map((l) => <span class="pub-badge">{l}</span>)}
 									{p.doi && (

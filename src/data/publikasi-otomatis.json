@@ -1,0 +1,399 @@
+{
+	"_catatan": "Berkas ini dibangkitkan otomatis oleh scripts/perbarui-publikasi.mjs. Jangan disunting tangan — pakai src/data/publikasi-manual.ts untuk koreksi.",
+	"diperbarui": "2026-09-09T11:36:55.815Z",
+	"orcid": "0000-0002-8888-5565",
+	"sumber": "OpenAlex (api.openalex.org), diperiksa silang dengan ORCID",
+	"ringkasan": {
+		"jumlahKarya": 18,
+		"totalSitasi": 26,
+		"tahunTerawal": "2022",
+		"hanyaAdaDiOrcid": []
+	},
+	"karya": [
+		{
+			"doi": "10.46336/ijrcs.v7i1.1165",
+			"judul": "Application of Mathematical Concepts in the Health Sector through Data Analysis Learning Using Microsoft Excel for Senior High School Students at SMA Pasundan Majalaya",
+			"jurnal": "International Journal of Research in Community Service",
+			"detail": "Vol. 7, No. 1, hlm. 25–30",
+			"tahun": "2026",
+			"penulis": [
+				"Abdul Gazir Syarifudin",
+				"Rizki Apriva Hidayana",
+				"Rika Amelia",
+				"Tubagus Robbi Megantara",
+				"Nenden Siti Nur Kholipah",
+				"Athaya Zahrani Irmansyah",
+				"Indah Mauludina Hasanah",
+				"Wulan Anggraeni",
+				"Ida Widiawati",
+				"Wiwin Widayani",
+				"Desi Hidayati",
+				"Anita Megawati Fajrin"
+			],
+			"sitasi": 0,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "pendidikan",
+			"label": [
+				"Akses Terbuka"
+			]
+		},
+		{
+			"doi": "10.46336/ijrcs.v7i1.1187",
+			"judul": "Evaluating the Effectiveness of Spreadsheet-Based Instruction on High School Students’ Data Literacy: A Pre-test–Post-test Study",
+			"jurnal": "International Journal of Research in Community Service",
+			"detail": "Vol. 7, No. 1, hlm. 35–41",
+			"tahun": "2026",
+			"penulis": [
+				"Tubagus Robbi Megantara",
+				"Rizki Apriva Hidayana",
+				"Nenden Siti Nurkholipah",
+				"Rika Amelia",
+				"Abdul Gazir Syarifudin"
+			],
+			"sitasi": 0,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "pendidikan",
+			"label": [
+				"Akses Terbuka"
+			]
+		},
+		{
+			"doi": "10.46336/ijbesd.v7i1.1086",
+			"judul": "Analyzing Public Perception on Integrating Ride-Hailing with Emergency Health Services",
+			"jurnal": "International Journal of Business Economics and Social Development",
+			"detail": "Vol. 7, No. 1, hlm. 174–184",
+			"tahun": "2026",
+			"penulis": [
+				"Tubagus Robbi Megantara",
+				"Rizki Apriva Hidayana",
+				"Indah Mauludina Hasanah"
+			],
+			"sitasi": 0,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "optimisasi",
+			"label": [
+				"Akses Terbuka"
+			]
+		},
+		{
+			"doi": "10.3390/su18105076",
+			"judul": "Machine Learning-Based Forecasting of Waste Generation Proxies Under Data-Limited Conditions for Supporting Adaptive and Sustainable Citarum River Management",
+			"jurnal": "Sustainability",
+			"detail": "Vol. 18, No. 10, art. no. 5076",
+			"tahun": "2026",
+			"penulis": [
+				"Sudradjat Supian",
+				"Sukono",
+				"Riaman",
+				"Hafizan Juahir",
+				"Tubagus Robbi Megantara",
+				"Indra",
+				"Astrid Sulistya Azahra",
+				"Dede Irman Pirdaus",
+				"Moch Panji Agung Saputra"
+			],
+			"sitasi": 0,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "ml",
+			"label": [
+				"Akses Terbuka"
+			]
+		},
+		{
+			"doi": "10.3390/math13030371",
+			"judul": "Mathematical Modeling of Ride-Hailing Matching Considering Uncertain User and Driver Preferences: Interval-Valued Fuzzy Approach",
+			"jurnal": "Mathematics",
+			"detail": "Vol. 13, No. 3, art. no. 371",
+			"tahun": "2025",
+			"penulis": [
+				"Sudradjat Supian",
+				"Subiyanto Subiyanto",
+				"Sisilia Sylviani",
+				"Tubagus Robbi Megantara",
+				"Abdul Talib Bon",
+				"Vasile Preda"
+			],
+			"sitasi": 1,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "fuzzy",
+			"label": [
+				"Akses Terbuka",
+				"1 sitasi"
+			]
+		},
+		{
+			"doi": "10.46336/ijmsc.v3i2.202",
+			"judul": "Matching Riders to Drivers Under Uncertain Wait Times in Ride-Hailing Systems: A Robust Optimization Approach with Box Uncertainty",
+			"jurnal": "International Journal of Mathematics Statistics and Computing",
+			"detail": "Vol. 3, No. 2, hlm. 67–74",
+			"tahun": "2025",
+			"penulis": [
+				"Tubagus Robbi Megantara",
+				"Rizki Apriva Hidayana"
+			],
+			"sitasi": 0,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "fuzzy",
+			"label": [
+				"Akses Terbuka"
+			]
+		},
+		{
+			"doi": "10.46336/ijrcs.v6i1.813",
+			"judul": "Senior High School Students' Knowledge of The Role of Mathematics in The Development of Science and Technology",
+			"jurnal": "International Journal of Research in Community Service",
+			"detail": "Vol. 6, No. 1",
+			"tahun": "2025",
+			"penulis": [
+				"Rika Amelia",
+				"Rizki Apriva Hidayana",
+				"Abdul Gazir Syarifudin",
+				"Tubagus Robbi Megantara",
+				"Nenden Siti Nur Kholipah",
+				"Nadine Zahra Chairunnisa",
+				"Angellyca Leoni Manuela"
+			],
+			"sitasi": 0,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "pendidikan",
+			"label": [
+				"Akses Terbuka"
+			]
+		},
+		{
+			"doi": "10.46336/ijrcs.v6i2.931",
+			"judul": "Technology-Based Interactive Mathematics Learning: A Case Study of Community Service Activities at SMA PGRI Cicalengka",
+			"jurnal": "International Journal of Research in Community Service",
+			"detail": "Vol. 6, No. 2, hlm. 97–101",
+			"tahun": "2025",
+			"penulis": [
+				"Abdul Gazir Syarifudin",
+				"Rika Amelia",
+				"Rizki Apriva Hidayana",
+				"Tubagus Robbi Megantara",
+				"Nenden Siti Nur Kholipah"
+			],
+			"sitasi": 0,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "lainnya",
+			"label": [
+				"Akses Terbuka"
+			]
+		},
+		{
+			"doi": "10.46336/ijrcs.v6i4.1069",
+			"judul": "Empowering High School Students with Software-Based Mathematical Skills for College and Career Readiness",
+			"jurnal": "International Journal of Research in Community Service",
+			"detail": "Vol. 6, No. 4, hlm. 189–196",
+			"tahun": "2025",
+			"penulis": [
+				"Tubagus Robbi Megantara",
+				"Rizki Apriva Hidayana",
+				"Nenden Siti Nurkholipah",
+				"Rika Amelia",
+				"Abdul Gazir Syarifudin",
+				"Lukman Widoyo Mulyo",
+				"Muhammad Fardeen Khan",
+				"Nemia Agustin"
+			],
+			"sitasi": 0,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "pendidikan",
+			"label": [
+				"Akses Terbuka"
+			]
+		},
+		{
+			"doi": "10.37934/araset.42.2.133144",
+			"judul": "Mathematical Modeling on Integrated Vehicle Assignment and Rebalancing in Ride-hailing System with Uncertainty Using Fuzzy Linear Programming",
+			"jurnal": "Journal of Advanced Research in Applied Sciences and Engineering Technology",
+			"detail": "Vol. 42, No. 2, hlm. 133–144",
+			"tahun": "2024",
+			"penulis": [
+				"Tubagus Robbi Megantara",
+				"Sudradjat Supian",
+				"Diah Chaerani"
+			],
+			"sitasi": 7,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "fuzzy",
+			"label": [
+				"Akses Terbuka",
+				"7 sitasi"
+			]
+		},
+		{
+			"doi": "10.3390/math12091355",
+			"judul": "Ride-Hailing Matching with Uncertain Travel Time: A Novel Interval-Valued Fuzzy Multi-Objective Linear Programming Approach",
+			"jurnal": "Mathematics",
+			"detail": "Vol. 12, No. 9, art. no. 1355",
+			"tahun": "2024",
+			"penulis": [
+				"Sudradjat Supian",
+				"Subiyanto Subiyanto",
+				"Tubagus Robbi Megantara",
+				"Abdul Talib Bon"
+			],
+			"sitasi": 4,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "fuzzy",
+			"label": [
+				"Akses Terbuka",
+				"4 sitasi"
+			]
+		},
+		{
+			"doi": "10.3390/math12142290",
+			"judul": "The Application of the Piecewise Linear Method for Non-Linear Programming Problems in Ride-Hailing Assignment Based on Service Level, Driver Workload, and Fuel Consumption",
+			"jurnal": "Mathematics",
+			"detail": "Vol. 12, No. 14, art. no. 2290",
+			"tahun": "2024",
+			"penulis": [
+				"Tubagus Robbi Megantara",
+				"Sudradjat Supian",
+				"Diah Chaerani",
+				"Abdul Talib Bon"
+			],
+			"sitasi": 2,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "optimisasi",
+			"label": [
+				"Akses Terbuka",
+				"2 sitasi"
+			]
+		},
+		{
+			"doi": "10.1063/5.0211564",
+			"judul": "Mathematical modeling for vehicle assignment problem in online transportation",
+			"jurnal": "AIP conference proceedings",
+			"detail": "Vol. 3132, art. no. 020021",
+			"tahun": "2024",
+			"penulis": [
+				"Sudradjat Supian",
+				"Tubagus Robbi Megantara"
+			],
+			"sitasi": 1,
+			"aksesTerbuka": false,
+			"jenis": "conference-paper",
+			"tema": "optimisasi",
+			"label": [
+				"Prosiding",
+				"1 sitasi"
+			]
+		},
+		{
+			"doi": "10.47194/ijgor.v5i4.342",
+			"judul": "Modeling of COVID-19 Growth Cases in Bandung Regency and Bandung City Using Vector Autoregression",
+			"jurnal": "International Journal of Global Operations Research",
+			"detail": "Vol. 5, No. 4, hlm. 288–294",
+			"tahun": "2024",
+			"penulis": [
+				"Tubagus Robbi Megantara",
+				"Rizki Apriva Hidayana",
+				"Abdul Gazir Syarifudin",
+				"Rika Amelia",
+				"Nenden Siti Nurkholipah"
+			],
+			"sitasi": 0,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "ml",
+			"label": [
+				"Akses Terbuka"
+			]
+		},
+		{
+			"doi": "10.56225/ijgoia.v2i4.262",
+			"judul": "Ride-Hailing Assignment Problem under Waiting Time Uncertainty using Interval-Valued Fuzzy Quadratic",
+			"jurnal": "International Journal of Global Optimization and Its Application",
+			"detail": "Vol. 2, No. 4, hlm. 209–220",
+			"tahun": "2023",
+			"penulis": [
+				"Sudradjat Supian",
+				"Subiyanto Subiyanto",
+				"Tubagus Robbi Megantara",
+				"Abdul Talib Bon"
+			],
+			"sitasi": 2,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "fuzzy",
+			"label": [
+				"Akses Terbuka",
+				"2 sitasi"
+			]
+		},
+		{
+			"doi": "10.3390/su141710648",
+			"judul": "Strategies to Reduce Ride-Hailing Fuel Consumption Caused by Pick-Up Trips: A Mathematical Model under Uncertainty",
+			"jurnal": "Sustainability",
+			"detail": "Vol. 14, No. 17, art. no. 10648",
+			"tahun": "2022",
+			"penulis": [
+				"Tubagus Robbi Megantara",
+				"Sudradjat Supian",
+				"Diah Chaerani"
+			],
+			"sitasi": 8,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "fuzzy",
+			"label": [
+				"Akses Terbuka",
+				"8 sitasi"
+			]
+		},
+		{
+			"doi": "10.47194/ijgor.v3i1.117",
+			"judul": "Estimation of Distribution Function Parameters for Cases of Risk of Mortality Rate due to Malnutrition and Unhealthy Sanitation in Indonesia",
+			"jurnal": "International Journal of Global Operations Research",
+			"detail": "Vol. 3, No. 1, hlm. 1–8",
+			"tahun": "2022",
+			"penulis": [
+				"Moch Panji Agung Saputra",
+				"Tubagus Robbi Megantara",
+				"Sulidar Fitri"
+			],
+			"sitasi": 1,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "ml",
+			"label": [
+				"Akses Terbuka",
+				"1 sitasi"
+			]
+		},
+		{
+			"doi": "10.30598/pattimurasci.2021.knmxx.363-370",
+			"judul": "Penerapan distribusi stasioner rantai markov pada data banyaknya orang terkonfirmasi positif covid-19 di jawa barat",
+			"jurnal": "Pattimura Proceeding Conference of Science and Technology",
+			"detail": "hlm. 363–370",
+			"tahun": "2022",
+			"penulis": [
+				"Tubagus Robbi Megantara",
+				"Ayun Sri Rahmani",
+				"Budi Nurani Ruchjana"
+			],
+			"sitasi": 0,
+			"aksesTerbuka": true,
+			"jenis": "conference-paper",
+			"tema": "ml",
+			"label": [
+				"Akses Terbuka",
+				"Prosiding"
+			]
+		}
+	]
+}

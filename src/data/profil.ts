@@ -1,5 +1,18 @@
 /*  Data halaman Profil.
-    Semua isi halaman /profil diambil dari berkas ini — ubah di sini saja.  */
+    Biodata, pendidikan, peran, dan tautan diubah langsung di berkas ini.
+    Daftar publikasinya ditarik otomatis — lihat bagian "Publikasi" di bawah.  */
+
+import otomatis from "./publikasi-otomatis.json";
+import {
+	temaPublikasi,
+	temaPerDoi,
+	sembunyikan,
+	tambahan,
+	type Tema,
+} from "./publikasi-manual";
+
+export { temaPublikasi };
+export type { Tema };
 
 export const identitas = {
 	nama: "Tubagus Robbi Megantara",
@@ -18,8 +31,8 @@ export const identitas = {
 };
 
 export const statistik = [
-	{ angka: "8", label: "Publikasi terindeks Scopus" },
-	{ angka: "21+", label: "Sitasi Scopus sejak 2022" },
+	{ angka: String(otomatis.ringkasan.jumlahKarya), label: "Karya terpublikasi" },
+	{ angka: String(otomatis.ringkasan.totalSitasi), label: "Sitasi terindeks OpenAlex" },
 	{ angka: "4", label: "Bidang penelitian" },
 ];
 
@@ -41,9 +54,7 @@ export const pendidikan = [
 		berjalan: false,
 	},
 	{
-		// TODO: isi rentang tahunnya, mis. "2016 — 2020".
-		// Selama dikosongkan, baris tahun tidak ditampilkan di halaman.
-		tahun: "",
+		tahun: "2017 — 2021",
 		gelar: "Sarjana Matematika (S.Mat.)",
 		tempat: "Departemen Matematika · FMIPA · Universitas Padjadjaran",
 		catatan:
@@ -98,112 +109,44 @@ export const bidangPenelitian = [
 ];
 
 export type Publikasi = {
-	tahun: string;
+	doi: string | null;
 	judul: string;
 	jurnal: string;
 	detail: string;
-	penulis: string;
-	doi?: string;
-	tema: "optimisasi" | "fuzzy" | "ml";
-	label?: string[];
+	tahun: string;
+	penulis: string[];
+	sitasi: number;
+	aksesTerbuka: boolean;
+	jenis: string;
+	tema: Tema;
+	label: string[];
 };
 
-export const temaPublikasi = [
-	{ id: "optimisasi", nama: "Optimisasi Ride-Hailing" },
-	{ id: "fuzzy", nama: "Pemrograman Fuzzy" },
-	{ id: "ml", nama: "ML & Keberlanjutan" },
-] as const;
+/*  Daftar publikasi digabung dari dua sumber:
+      - publikasi-otomatis.json  ditarik harian dari OpenAlex + ORCID
+      - publikasi-manual.ts      koreksi tema, entri tersembunyi, tambahan
+    Lihat scripts/perbarui-publikasi.mjs.  */
 
-export const publikasi: Publikasi[] = [
-	{
-		tahun: "2026",
-		judul:
-			"Machine Learning-Based Forecasting of Waste Generation Proxies Under Data-Limited Conditions for Supporting Adaptive and Sustainable Citarum River Management",
-		jurnal: "Sustainability",
-		detail: "18(10), art. no. 5076",
-		penulis:
-			"Supian S., Sukono, Riaman, Juahir H., Megantara T.R., Indra, Azahra A.S., Pirdaus D.I., Saputra M.P.A.",
-		doi: "10.3390/su18105076",
-		tema: "ml",
-		label: ["Akses Terbuka"],
-	},
-	{
-		tahun: "2025",
-		judul:
-			"Mathematical Modeling of Ride-Hailing Matching Considering Uncertain User and Driver Preferences: Interval-Valued Fuzzy Approach",
-		jurnal: "Mathematics",
-		detail: "13(3), art. no. 371",
-		penulis:
-			"Supian S., Subiyanto S., Sylviani S., Megantara T.R., Bon A.T., Preda V.",
-		doi: "10.3390/math13030371",
-		tema: "fuzzy",
-		label: ["Akses Terbuka"],
-	},
-	{
-		tahun: "2024",
-		judul:
-			"The Application of the Piecewise Linear Method for Non-Linear Programming Problems in Ride-Hailing Assignment Based on Service Level, Driver Workload, and Fuel Consumption",
-		jurnal: "Mathematics",
-		detail: "12(14), art. no. 2290",
-		penulis: "Megantara T.R., Supian S., Chaerani D., Bon A.T.",
-		doi: "10.3390/math12142290",
-		tema: "optimisasi",
-		label: ["Akses Terbuka", "2 sitasi"],
-	},
-	{
-		tahun: "2024",
-		judul:
-			"Ride-Hailing Matching with Uncertain Travel Time: A Novel Interval-Valued Fuzzy Multi-Objective Linear Programming Approach",
-		jurnal: "Mathematics",
-		detail: "12(9), art. no. 1355",
-		penulis: "Supian S., Subiyanto, Megantara T.R., Bon A.T.",
-		doi: "10.3390/math12091355",
-		tema: "fuzzy",
-		label: ["Akses Terbuka", "4 sitasi"],
-	},
-	{
-		tahun: "2024",
-		judul:
-			"Mathematical Modeling on Integrated Vehicle Assignment and Rebalancing in Ride-hailing System with Uncertainty Using Fuzzy Linear Programming",
-		jurnal:
-			"Journal of Advanced Research in Applied Sciences and Engineering Technology",
-		detail: "42(2), hlm. 133–144",
-		penulis: "Megantara T.R., Supian S., Chaerani D.",
-		doi: "10.37934/araset.42.2.133144",
-		tema: "optimisasi",
-		label: ["Akses Terbuka", "8 sitasi"],
-	},
-	{
-		tahun: "2024",
-		judul: "Mathematical Modeling for Vehicle Assignment Problem in Online Transportation",
-		jurnal: "AIP Conference Proceedings",
-		detail: "3132(1), art. no. 020021 · ICON-SMART 2022",
-		penulis: "Supian S., Megantara T.R.",
-		doi: "10.1063/5.0211564",
-		tema: "optimisasi",
-		label: ["Prosiding", "1 sitasi"],
-	},
-	{
-		tahun: "2023",
-		judul:
-			"Ride-Hailing Assignment Problem under Waiting Time Uncertainty using Interval-Valued Fuzzy Quadratic",
-		jurnal: "International Journal of Global Optimization and Its Applications",
-		detail: "Vol. 2, hlm. 209–220",
-		penulis: "Supian S., Subiyanto S., Megantara T.R., Bon A.T.",
-		tema: "fuzzy",
-	},
-	{
-		tahun: "2022",
-		judul:
-			"Strategies to Reduce Ride-Hailing Fuel Consumption Caused by Pick-Up Trips: A Mathematical Model under Uncertainty",
-		jurnal: "Sustainability",
-		detail: "14(17), art. no. 10648",
-		penulis: "Megantara T.R., Supian S., Chaerani D.",
-		doi: "10.3390/su141710648",
-		tema: "optimisasi",
-		label: ["Akses Terbuka", "6 sitasi"],
-	},
-];
+const disembunyikan = new Set(sembunyikan.map((d) => d.toLowerCase()));
+
+const dariOtomatis = (otomatis.karya as Publikasi[])
+	.filter((k) => !(k.doi && disembunyikan.has(k.doi)))
+	.map((k) => ({
+		...k,
+		tema: (k.doi && temaPerDoi[k.doi]) || k.tema,
+	}));
+
+export const publikasi: Publikasi[] = [...dariOtomatis, ...(tambahan as Publikasi[])].sort(
+	(a, b) => Number(b.tahun) - Number(a.tahun) || b.sitasi - a.sitasi,
+);
+
+/** Tema yang benar-benar terpakai, untuk tombol penyaring di halaman profil. */
+export const temaTerpakai = temaPublikasi.filter((t) =>
+	publikasi.some((p) => p.tema === t.id),
+);
+
+export const publikasiDiperbarui = otomatis.diperbarui;
+export const sumberPublikasi = otomatis.sumber;
 
 /*  Tautan akademik dan media sosial pribadi.
     Tambahkan atau hapus baris sesuai kebutuhan.  */

@@ -99,9 +99,42 @@ matematis → langkah pengerjaan → contoh soal terselesaikan → latihan →
 
 ### 3. Mengubah profil
 
-Semua isi halaman `/profil` ada di satu berkas: `src/data/profil.ts` —
-biodata, pendidikan, peran, bidang penelitian, daftar publikasi, dan tautan
-media sosial.
+Biodata, pendidikan, peran, bidang penelitian, dan tautan media sosial ada di
+`src/data/profil.ts`.
+
+**Daftar publikasinya ditarik otomatis setiap hari**, jadi tidak perlu
+diketik manual:
+
+| Berkas | Sifat |
+| :-- | :-- |
+| `src/data/publikasi-otomatis.json` | dibangkitkan mesin — **jangan disunting** |
+| `src/data/publikasi-manual.ts` | koreksi tangan — tidak pernah ditimpa |
+| `scripts/perbarui-publikasi.mjs` | skrip penariknya |
+| `.github/workflows/perbarui-publikasi.yml` | penjadwal harian, 04.17 WIB |
+
+Sumber datanya **OpenAlex** (daftar karya, metadata, jumlah sitasi) dan
+**ORCID** (pemeriksa silang). Keduanya gratis dan tidak memerlukan kunci API.
+Setiap hari skrip berjalan; kalau ada karya atau sitasi baru, hasilnya
+di-commit sendiri dan Cloudflare membangun ulang situsnya.
+
+Untuk menjalankannya sendiri kapan saja:
+
+```bash
+node scripts/perbarui-publikasi.mjs
+```
+
+Kalau perlu mengoreksi hasilnya, buka `src/data/publikasi-manual.ts`:
+
+- **`temaPerDoi`** — membetulkan pengelompokan tema, kuncinya DOI;
+- **`sembunyikan`** — daftar DOI yang tidak ingin ditampilkan;
+- **`tambahan`** — karya yang tidak terindeks di OpenAlex maupun ORCID.
+
+> **Soal Scopus dan Google Scholar.** Scopus punya API resmi, tetapi
+> memerlukan kunci Elsevier berikut entitlement langganan institusi — bisa
+> ditambahkan kalau kuncinya tersedia. Google Scholar tidak menyediakan API
+> resmi dan melarang pengambilan otomatis, sehingga angka sitasi versi
+> Scholar tetap harus dicatat manual. Jumlah sitasi yang tampil di situs
+> karena itu diberi label **OpenAlex**, bukan Scopus.
 
 ### 4. Menambah ilustrasi ke materi
 
@@ -161,11 +194,13 @@ Yang kosong otomatis disembunyikan dari kaki halaman dan halaman Video.
 ## Struktur berkas
 
 ```
+scripts/
+  perbarui-publikasi.mjs   penarik data publikasi harian
 src/
   components/      BaseHead, Header, Footer, VideoCard, MateriCard
   content/         video/ dan materi/  ← tempat menulis konten
   content.config.ts  aturan kolom untuk kedua koleksi
-  data/profil.ts   isi halaman Profil
+  data/            profil.ts, publikasi-manual.ts, publikasi-otomatis.json
   layouts/         Layout.astro
   lib/video.ts     pembantu thumbnail & tautan platform
   pages/           index, video/, materi/, profil, 404
@@ -197,6 +232,7 @@ public/
 | `npm run build` | Bangun ke `./dist/` |
 | `npm run preview` | Bangun lalu jalankan seperti di Cloudflare |
 | `npm run deploy` | Terbitkan ke Cloudflare Workers |
+| `npm run publikasi` | Tarik ulang daftar publikasi dari OpenAlex + ORCID |
 
 ## Catatan penerapan
 
