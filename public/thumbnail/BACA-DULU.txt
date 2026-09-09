@@ -1,0 +1,9 @@
+Taruh gambar thumbnail di folder ini.
+
+Cara pakai:
+1. Simpan gambarnya di sini, misalnya "eoq.jpg" (rasio 16:9, lebar 1280 px sudah cukup).
+2. Buka berkas video yang bersangkutan di src/content/video/<slug>.md
+3. Isi barisnya: thumbnail: "/thumbnail/eoq.jpg"
+
+Kalau video punya tautan YouTube, kolom thumbnail boleh dibiarkan kosong —
+gambarnya diambil otomatis dari YouTube.

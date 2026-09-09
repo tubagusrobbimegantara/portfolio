@@ -1,0 +1,263 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {
+	identitas,
+	statistik,
+	pendidikan,
+	peran,
+	bidangPenelitian,
+	publikasi,
+	temaPublikasi,
+	tautan,
+} from "../data/profil";
+
+const scholar = tautan.find((t) => t.nama === "Google Scholar")?.url ?? "#";
+---
+
+<Layout
+	title="Profil Megantara, T. R. — Mathantara"
+	description="Rekam jejak akademik Tubagus Robbi Megantara: pendidikan, bidang penelitian, publikasi terindeks Scopus, serta tautan LinkedIn dan media sosial."
+>
+	<section class="banner">
+		<div class="wrap">
+			<span class="eyebrow">03 — Profil</span>
+			<h1 class="display lg">Megantara, <em>T. R.</em></h1>
+			<p class="lede">{identitas.ringkas}</p>
+		</div>
+	</section>
+
+	<hr class="rule" />
+
+	<section class="tight">
+		<div class="wrap">
+			<div class="profil-grid">
+				<div class="rev">
+					{identitas.bio.map((p) => <p style="margin-bottom:1.1em">{p}</p>)}
+
+					<div class="stats" style="margin-top:30px">
+						{
+							statistik.map((s) => (
+								<div class="stat">
+									<b>{s.angka}</b>
+									<span>{s.label}</span>
+								</div>
+							))
+						}
+					</div>
+				</div>
+
+				<aside class="profil-card rev">
+					<img class="avatar" src="/brand/avatar.png" alt="Mathantara" width="92" height="92" loading="lazy" />
+					<div class="kv">
+						<div class="k">Nama</div>
+						<div class="v">{identitas.nama}</div>
+						<div class="s">{identitas.peranSingkat}</div>
+					</div>
+					{
+						peran.map((r) => (
+							<div class="kv">
+								<div class="k">{r.label}</div>
+								<div class="v">{r.judul}</div>
+								<div class="s">{r.tempat}</div>
+							</div>
+						))
+					}
+					<div class="kv">
+						<div class="k">Lokasi</div>
+						<div class="v">{identitas.lokasi}</div>
+					</div>
+					<div class="kv">
+						<div class="k">Surel</div>
+						<div class="v">
+							<a href={`mailto:${identitas.email}`}>{identitas.email}</a>
+						</div>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</section>
+
+	<hr class="rule" />
+
+	<section>
+		<div class="wrap">
+			<div class="sec-head rev">
+				<div>
+					<span class="eyebrow">Perjalanan akademik</span>
+					<h2 class="display lg" style="margin-top:12px">Pendidikan</h2>
+				</div>
+			</div>
+			<div class="timeline">
+				{
+					pendidikan.map((e) => (
+						<div class:list={["tl-item", "rev", { now: e.berjalan }]}>
+							<div class="tl-year">{e.tahun}</div>
+							<h3>{e.gelar}</h3>
+							<div class="tl-place">{e.tempat}</div>
+							<p class="tl-note">{e.catatan}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<hr class="rule" />
+
+	<section>
+		<div class="wrap">
+			<div class="sec-head rev">
+				<div>
+					<span class="eyebrow">Penelitian</span>
+					<h2 class="display lg" style="margin-top:12px">Bidang yang digeluti</h2>
+					<p>Empat tema yang saling bertaut, semuanya berpangkal pada optimisasi.</p>
+				</div>
+			</div>
+			<div class="area-grid">
+				{
+					bidangPenelitian.map((b) => (
+						<div class="area rev">
+							<div class="num">{b.nomor}</div>
+							<h3>{b.judul}</h3>
+							<p>{b.isi}</p>
+							<div class="tagrow">
+								{b.tag.map((t) => (
+									<span>{t}</span>
+								))}
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<hr class="rule" />
+
+	<section>
+		<div class="wrap">
+			<div class="sec-head rev">
+				<div>
+					<span class="eyebrow">Publikasi</span>
+					<h2 class="display lg" style="margin-top:12px">
+						{publikasi.length} makalah terindeks <em>Scopus</em>
+					</h2>
+					<p>
+						Diterbitkan di jurnal internasional dan prosiding konferensi, disusun
+						menurut tema penelitian.
+					</p>
+				</div>
+				<a class="btn btn-ghost btn-sm" href={scholar} target="_blank" rel="noopener">
+					Google Scholar
+				</a>
+			</div>
+
+			<div class="filter-bar" id="filterPub">
+				<button class="chip on" data-filter="semua">Semua ({publikasi.length})</button>
+				{
+					temaPublikasi.map((t) => (
+						<button class="chip" data-filter={t.id}>
+							{t.nama}
+						</button>
+					))
+				}
+			</div>
+
+			<div id="daftarPub">
+				{
+					publikasi.map((p) => (
+						<article class="pub rev" data-tema={p.tema}>
+							<div class="pub-year">{p.tahun}</div>
+							<div>
+								<h3>
+									{p.doi ? (
+										<a href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener">
+											{p.judul}
+										</a>
+									) : (
+										p.judul
+									)}
+								</h3>
+								<div class="pub-jurnal">
+									<em>{p.jurnal}</em> · {p.detail}
+								</div>
+								<div class="pub-penulis" set:html={p.penulis.replace("Megantara T.R.", "<b>Megantara T.R.</b>")} />
+								<div class="pub-row">
+									{p.label?.map((l) => <span class="pub-badge">{l}</span>)}
+									{p.doi && (
+										<a class="pub-doi" href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener">
+											<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+												<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+												<path d="M15 3h6v6M10 14 21 3" />
+											</svg>
+											{p.doi}
+										</a>
+									)}
+								</div>
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<hr class="rule" />
+
+	<section>
+		<div class="wrap">
+			<div class="sec-head rev">
+				<div>
+					<span class="eyebrow">Tautan</span>
+					<h2 class="display lg" style="margin-top:12px">Terhubung</h2>
+					<p>Terbuka untuk kolaborasi penelitian, pembimbingan, dan kerja sama pendidikan.</p>
+				</div>
+			</div>
+			<div class="link-list rev">
+				{
+					tautan.map((t) => (
+						<a class="link-row" href={t.url} target={t.url.startsWith("mailto:") ? undefined : "_blank"} rel="noopener">
+							<span class="n">{t.nama}</span>
+							<span class="v">{t.nilai}</span>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="tight">
+		<div class="wrap">
+			<div class="cta rev">
+				<h2>Mari <em>berkolaborasi</em></h2>
+				<p>
+					Punya persoalan nyata yang terasa perlu dimodelkan, atau ingin mengusulkan
+					topik untuk video Mathantara berikutnya? Silakan berkirim surel.
+				</p>
+				<div class="hero-cta">
+					<a class="btn btn-solid" href={`mailto:${identitas.email}`}>Kirim surel</a>
+					<a class="btn btn-ghost" href="/materi">Lihat materi</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<script is:inline>
+	(function () {
+		var bar = document.getElementById("filterPub");
+		if (!bar) return;
+		bar.addEventListener("click", function (e) {
+			var btn = e.target.closest(".chip");
+			if (!btn) return;
+			var pilih = btn.dataset.filter;
+			bar.querySelectorAll(".chip").forEach(function (c) {
+				c.classList.toggle("on", c === btn);
+			});
+			document.querySelectorAll("#daftarPub .pub").forEach(function (kartu) {
+				var cocok = pilih === "semua" || kartu.dataset.tema === pilih;
+				kartu.classList.toggle("hide", !cocok);
+			});
+		});
+	})();
+</script>

@@ -200,3 +200,7 @@ dist
 
 ### Astro ###
 .astro/
+
+### Mathantara ###
+# Berkas sumber logo beresolusi penuh (aset siap pakai ada di public/brand/)
+/mathantara/

@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	materi: CollectionEntry<"materi">;
+	adaVideo?: boolean;
+}
+
+const { materi, adaVideo = false } = Astro.props;
+const d = materi.data;
+---
+
+<article class="mcard rev" data-kategori={d.kategori}>
+	<div class="mmeta">
+		<span class="tagpill">{d.kategori}</span>
+		<span class="tagpill gold">{d.jenjang}</span>
+	</div>
+	<h3><a href={`/materi/${materi.id}`}>{d.judul}</a></h3>
+	<p>{d.deskripsi}</p>
+	<div class="mfoot">
+		<a class="go" href={`/materi/${materi.id}`}>
+			Baca materi
+			<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+				<path d="M5 12h14M13 6l6 6-6 6" />
+			</svg>
+		</a>
+		{
+			adaVideo && (
+				<span class="vlink">
+					<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+						<path d="M8 5v14l11-7z" />
+					</svg>
+					ada videonya
+				</span>
+			)
+		}
+	</div>
+</article>

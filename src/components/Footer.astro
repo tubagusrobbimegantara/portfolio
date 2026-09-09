@@ -1,22 +1,57 @@
 ---
-import { getTranslations, type Lang } from '../i18n';
+import { KANAL } from "../consts";
+import { tautan } from "../data/profil";
 
-interface Props {
-  lang: Lang;
-}
+const tahun = new Date().getFullYear();
+const sosial = [
+	{ nama: "YouTube", url: KANAL.youtube },
+	{ nama: "TikTok", url: KANAL.tiktok },
+	{ nama: "Instagram", url: KANAL.instagram },
+].filter((s) => s.url);
 
-const { lang } = Astro.props;
-const t = getTranslations(lang);
+const akademik = tautan.filter((t) => t.jenis === "akademik" || t.nama === "LinkedIn");
 ---
 
 <footer>
-  <div class="wrap foot-grid">
-    <div class="copy">{t.footer.copyright}</div>
-    <div class="foot-links">
-      <a href="https://scholar.google.com/citations?user=Tf4cRjcAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">{t.footer.scholar}</a>
-      <a href="https://www.scopus.com/authid/detail.uri?authorId=57888526400" target="_blank" rel="noopener">{t.footer.scopus}</a>
-      <a href="https://orcid.org/0000-0002-8888-5565" target="_blank" rel="noopener">{t.footer.orcid}</a>
-      <a href="https://www.linkedin.com/in/tubagusrobbimegantara/" target="_blank" rel="noopener">{t.footer.linkedin}</a>
-    </div>
-  </div>
+	<div class="wrap">
+		<div class="foot-grid">
+			<div class="foot-brand">
+				<img src="/brand/wordmark.png" alt="Mathantara" width="150" height="59" loading="lazy" />
+				<p>
+					Video animasi matematika dan materi lengkap dengan notasi LaTeX — dari
+					masalah nyata menuju wawasan.
+				</p>
+			</div>
+
+			<div class="foot-col">
+				<h4>Jelajahi</h4>
+				<a href="/video">Video Animasi</a>
+				<a href="/materi">Materi Matematika</a>
+				<a href="/profil">Profil Megantara, T.R.</a>
+			</div>
+
+			<div class="foot-col">
+				<h4>{sosial.length ? "Ikuti & Tautan" : "Tautan"}</h4>
+				{
+					sosial.map((s) => (
+						<a href={s.url} target="_blank" rel="noopener">
+							{s.nama}
+						</a>
+					))
+				}
+				{
+					akademik.map((t) => (
+						<a href={t.url} target="_blank" rel="noopener">
+							{t.nama}
+						</a>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="foot-bar">
+			<span>© {tahun} Mathantara · Tubagus Robbi Megantara</span>
+			<span>Dari masalah menuju wawasan</span>
+		</div>
+	</div>
 </footer>

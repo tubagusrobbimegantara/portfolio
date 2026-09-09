@@ -1,78 +1,47 @@
 ---
-import { getTranslations, type Lang } from '../i18n';
-
-interface Props {
-  lang: Lang;
-  currentPath: string;
-}
-
-const { lang, currentPath } = Astro.props;
-const t = getTranslations(lang);
-
-const prefix = lang === 'en' ? '/en' : '';
-
-const navLinks = [
-  { href: `${prefix}/`, label: t.nav.home },
-  { href: `${prefix}/about`, label: t.nav.about },
-  { href: `${prefix}/research`, label: t.nav.research },
-  { href: `${prefix}/publications`, label: t.nav.publications },
-  // { href: `${prefix}/projects`, label: t.nav.projects }, // coming soon
-  { href: `${prefix}/contact`, label: t.nav.contact },
+const menu = [
+	{ href: "/", label: "Beranda" },
+	{ href: "/video", label: "Video Animasi" },
+	{ href: "/materi", label: "Materi Matematika" },
+	{ href: "/profil", label: "Profil Megantara, T.R." },
 ];
 
-const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
-
-function isActive(href: string) {
-  const normalized = href.replace(/\/$/, '') || '/';
-  return pathname === normalized;
-}
-
-const switchToId = lang === 'en'
-  ? currentPath.replace(/^\/en/, '') || '/'
-  : currentPath;
-const switchToEn = lang === 'id'
-  ? '/en' + (currentPath === '/' ? '' : currentPath)
-  : currentPath;
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const aktif = (href: string) =>
+	href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
 ---
 
 <nav id="nav">
-  <div class="nav-in">
-    <a href={`${prefix}/`} class="brand">
-      <span class="brand-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#14120c" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M17 5H7l5 7-5 7h10"/>
-        </svg>
-      </span>
-      <span class="brand-text">
-        <span class="brand-name">T. R. Megantara</span>
-        <span class="brand-sub">{t.nav.brandSub}</span>
-      </span>
-    </a>
+	<div class="nav-in">
+		<a href="/" class="brand" aria-label="Mathantara — beranda">
+			<img src="/brand/mark.png" alt="" width="34" height="34" />
+			<span class="brand-text">
+				<span class="brand-name">MATHANTARA</span>
+				<span class="brand-sub">Dari Masalah Menuju Wawasan</span>
+			</span>
+		</a>
 
-    <ul class="nav-links" id="navLinks">
-      {navLinks.map(link => (
-        <li>
-          <a href={link.href} class:list={[{ active: isActive(link.href) }]}>
-            {link.label}
-          </a>
-        </li>
-      ))}
-    </ul>
+		<ul class="nav-links" id="navLinks">
+			{
+				menu.map((m) => (
+					<li>
+						<a href={m.href} class:list={[{ active: aktif(m.href) }]}>
+							{m.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
 
-    <div class="nav-r">
-      <div class="lang-switch">
-        <a href={switchToId} class:list={[{ active: lang === 'id' }]}>ID</a>
-        <span>|</span>
-        <a href={switchToEn} class:list={[{ active: lang === 'en' }]}>EN</a>
-      </div>
-      <a href={`${prefix}/contact`} class="btn btn-ghost btn-sm">{t.nav.getInTouch}</a>
-      <button class="hamburger" id="hbg" aria-label="Menu">
-        <svg width="22" height="22" viewBox="0 0 20 20" fill="currentColor">
-          <rect y="4" width="20" height="2" rx="1"/>
-          <rect y="9" width="20" height="2" rx="1"/>
-          <rect y="14" width="20" height="2" rx="1"/>
-        </svg>
-      </button>
-    </div>
-  </div>
+		<div class="nav-r">
+			<a href="/materi" class="btn btn-ghost btn-sm">Mulai belajar</a>
+			<button class="hamburger" id="hbg" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
+				<svg width="22" height="22" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+					<rect y="4" width="20" height="1.8" rx="0.9"></rect>
+					<rect y="9.1" width="20" height="1.8" rx="0.9"></rect>
+					<rect y="14.2" width="20" height="1.8" rx="0.9"></rect>
+				</svg>
+			</button>
+		</div>
+	</div>
 </nav>

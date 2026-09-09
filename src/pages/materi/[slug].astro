@@ -1,0 +1,137 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { platformVideo, tautanUtama } from "../../lib/video";
+import "katex/dist/katex.min.css";
+
+export async function getStaticPaths() {
+	const materi = await getCollection("materi");
+	const urut = materi.sort(
+		(a, b) => a.data.urutan - b.data.urutan || b.data.tanggal.valueOf() - a.data.tanggal.valueOf(),
+	);
+	return urut.map((entri, i) => ({
+		params: { slug: entri.id },
+		props: {
+			entri,
+			sebelum: i > 0 ? urut[i - 1] : undefined,
+			sesudah: i < urut.length - 1 ? urut[i + 1] : undefined,
+		},
+	}));
+}
+
+interface Props {
+	entri: CollectionEntry<"materi">;
+	sebelum?: CollectionEntry<"materi">;
+	sesudah?: CollectionEntry<"materi">;
+}
+
+const { entri, sebelum, sesudah } = Astro.props;
+const d = entri.data;
+const { Content, headings } = await render(entri);
+
+const daftarIsi = headings.filter((h) => h.depth === 2);
+const video = d.video ? await getEntry("video", d.video) : undefined;
+const tautanVideo = video ? tautanUtama(video.data) : "";
+const platform = video ? platformVideo(video.data) : [];
+
+const tanggal = d.tanggal.toLocaleDateString("id-ID", {
+	day: "numeric",
+	month: "long",
+	year: "numeric",
+});
+---
+
+<Layout title={`${d.judul} — Mathantara`} description={d.deskripsi} tipe="article">
+	<section class="materi-head">
+		<div class="wrap">
+			<div class="crumbs">
+				<a href="/materi">Materi Matematika</a>
+				<span>/</span>
+				<span>{d.kategori}</span>
+			</div>
+			<h1>{d.judul}</h1>
+			<p class="lede">{d.deskripsi}</p>
+			<div class="mmeta" style="margin-top:18px">
+				<span class="tagpill">{d.kategori}</span>
+				<span class="tagpill gold">{d.jenjang}</span>
+				{d.tag.map((t) => <span class="tagpill" style="background:var(--bg-2);color:var(--ink-2)">{t}</span>)}
+			</div>
+		</div>
+	</section>
+
+	<hr class="rule" />
+
+	<section class="tight">
+		<div class="wrap">
+			<div class="materi-layout">
+				<div>
+					<article class="prose">
+						<Content />
+					</article>
+
+					{
+						video && (
+							<div class="video-ref">
+								<span class="vr-icon">
+									<svg viewBox="0 0 24 24" aria-hidden="true">
+										<path d="M8 5v14l11-7z" />
+									</svg>
+								</span>
+								<span class="vr-text">
+									<b>{video.data.judul}</b>
+									<span>
+										{tautanVideo
+											? "Video animasi untuk materi ini"
+											: "Video animasi untuk materi ini — segera hadir"}
+									</span>
+								</span>
+								{tautanVideo ? (
+									<a class="btn btn-solid btn-sm" href={tautanVideo} target="_blank" rel="noopener">
+										Tonton di {platform[0].nama}
+									</a>
+								) : (
+									<a class="btn btn-ghost btn-sm" href="/video">
+										Lihat daftar video
+									</a>
+								)}
+							</div>
+						)
+					}
+
+					<nav class="next-prev">
+						{
+							sebelum ? (
+								<a href={`/materi/${sebelum.id}`}>← {sebelum.data.judul}</a>
+							) : (
+								<span></span>
+							)
+						}
+						{
+							sesudah ? (
+								<a href={`/materi/${sesudah.id}`}>{sesudah.data.judul} →</a>
+							) : (
+								<span></span>
+							)
+						}
+					</nav>
+				</div>
+
+				<aside class="toc">
+					<div class="toc-title">Isi halaman</div>
+					<ol>
+						{
+							daftarIsi.map((h) => (
+								<li>
+									<a href={`#${h.slug}`}>{h.text}</a>
+								</li>
+							))
+						}
+					</ol>
+					<div class="toc-title" style="margin-top:26px">Diperbarui</div>
+					<p style="font-size:0.8rem;color:var(--ink-3)">{tanggal}</p>
+				</aside>
+			</div>
+		</div>
+	</section>
+</Layout>

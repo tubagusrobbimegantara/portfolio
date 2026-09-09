@@ -1,32 +1,31 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import type { Lang } from '../i18n';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
-  title: string;
-  description?: string;
-  lang: Lang;
-  currentPath: string;
+	title: string;
+	description?: string;
+	image?: string;
+	tipe?: "website" | "article";
 }
 
-const { title, description = "Lecturer and researcher in applied mathematics — optimization, fuzzy programming, and intelligent transportation systems.", lang, currentPath } = Astro.props;
+const { title, description, image, tipe } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={lang}>
-  <head>
-    <BaseHead title={title} description={description} />
-  </head>
-  <body>
-    <canvas id="mathCanvas"></canvas>
-    <Header lang={lang} currentPath={currentPath} />
-    <div class="page">
-      <slot />
-    </div>
-    <Footer lang={lang} />
-    <script src="/math-bg.js" is:inline></script>
-    <script src="/site.js" is:inline></script>
-  </body>
+<html lang="id">
+	<head>
+		<BaseHead title={title} description={description} image={image} tipe={tipe} />
+	</head>
+	<body>
+		<canvas id="mathCanvas" aria-hidden="true"></canvas>
+		<Header />
+		<main class="page">
+			<slot />
+		</main>
+		<Footer />
+		<script src="/math-bg.js" is:inline></script>
+		<script src="/site.js" is:inline></script>
+	</body>
 </html>

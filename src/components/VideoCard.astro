@@ -1,0 +1,105 @@
+---
+import { getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { thumbnailVideo, platformVideo, tautanUtama } from "../lib/video";
+
+interface Props {
+	video: CollectionEntry<"video">;
+}
+
+const { video } = Astro.props;
+const d = video.data;
+
+const thumb = thumbnailVideo(d);
+const platform = platformVideo(d);
+const utama = tautanUtama(d);
+const adaTautan = platform.length > 0;
+
+const materi = d.materi ? await getEntry("materi", d.materi) : undefined;
+
+const ikon = {
+	yt: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>`,
+	tt: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8a4.8 4.8 0 0 1-1.1-3.1h-3.3v13.2a2.9 2.9 0 1 1-2-2.8V9.7a6.2 6.2 0 1 0 5.3 6.1V9.1a8.1 8.1 0 0 0 4.7 1.5V7.3a4.8 4.8 0 0 1-3.6-1.5Z"/></svg>`,
+	ig: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.8" cy="6.2" r="1.2" fill="currentColor" stroke="none"/></svg>`,
+};
+
+const tanggal = d.tanggal.toLocaleDateString("id-ID", {
+	year: "numeric",
+	month: "short",
+});
+---
+
+<article
+	class="vcard rev"
+	data-platform={platform.map((p) => p.kode).join(" ")}
+	data-topik={d.topik}
+	data-status={adaTautan ? "terbit" : "segera"}
+>
+	{
+		adaTautan ? (
+			<a class="vthumb" href={utama} target="_blank" rel="noopener" aria-label={`Tonton: ${d.judul}`}>
+				{thumb ? (
+					<img src={thumb} alt="" loading="lazy" width="480" height="270" />
+				) : (
+					<span class="vthumb-fallback">
+						<img src="/brand/mark-terang.png" alt="" width="54" height="50" loading="lazy" />
+						<span>Mathantara</span>
+					</span>
+				)}
+				<span class="vbadge">{platform[0].nama}</span>
+				{d.durasi && <span class="vdur">{d.durasi}</span>}
+				<span class="vplay">
+					<i>
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+					</i>
+				</span>
+			</a>
+		) : (
+			<div class="vthumb">
+				{thumb ? (
+					<img src={thumb} alt="" loading="lazy" width="480" height="270" />
+				) : (
+					<span class="vthumb-fallback">
+						<img src="/brand/mark-terang.png" alt="" width="54" height="50" loading="lazy" />
+						<span>Mathantara</span>
+					</span>
+				)}
+				<span class="vbadge soon">Segera hadir</span>
+				{d.durasi && <span class="vdur">{d.durasi}</span>}
+			</div>
+		)
+	}
+
+	<div class="vbody">
+		{d.topik && <div class="vtopik">{d.topik} · {tanggal}</div>}
+		<h3>{d.judul}</h3>
+		<p class="vcap">{d.caption}</p>
+
+		{
+			adaTautan ? (
+				<div class="vlinks">
+					{platform.map((p) => (
+						<a class={`plat ${p.kode}`} href={p.url} target="_blank" rel="noopener">
+							<Fragment set:html={ikon[p.kode]} />
+							{p.nama}
+						</a>
+					))}
+				</div>
+			) : (
+				<p class="vsoon-note">Tautan video akan dipasang begitu tayang.</p>
+			)
+		}
+
+		{
+			materi && (
+				<a class="vmateri" href={`/materi/${materi.id}`}>
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+						<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+						<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+					</svg>
+					<span>Materi: {materi.data.judul}</span>
+				</a>
+			)
+		}
+	</div>
+</article>

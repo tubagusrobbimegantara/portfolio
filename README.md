@@ -1,88 +1,181 @@
-# Tubagus Robbi Megantara — Academic Portfolio
+# Mathantara — Dari Masalah Menuju Wawasan
 
-Personal academic portfolio for **Tubagus Robbi Megantara**, lecturer and researcher in applied mathematics at FMIPA. Built with Astro 5 and deployed on Cloudflare Workers.
+Situs Mathantara: video animasi matematika, materi bernotasi LaTeX, dan profil
+Tubagus Robbi Megantara. Dibangun dengan Astro 5 dan dijalankan di Cloudflare
+Workers.
 
-## Features
+Bahasa situs: **Indonesia**.
 
-- Bilingual (Indonesian / English) with Astro built-in i18n routing
-- Indonesian is the default locale (`/`, `/about`, etc.); English at `/en/`, `/en/about`, etc.
-- DRY page architecture — shared page components accept a `lang` prop, thin wrappers in `src/pages/` pass locale through
-- Light theme with deep navy accent (`#1e40af`), Google Fonts (Nunito, Inter, JetBrains Mono)
-- Floating math-symbol canvas background animation
-- Scroll-reveal via IntersectionObserver
-- Mobile-responsive with hamburger nav
-- Sitemap generation via `@astrojs/sitemap`
-- Deployed as a Cloudflare Worker (SSR via `@astrojs/cloudflare`)
+---
 
-## Pages
+## Menambah konten
 
-| Route | Description |
-| :---- | :---------- |
-| `/` | Home — hero, stats strip, nav cards, recent updates |
-| `/about` | About — bio, info card, education timeline, current roles |
-| `/research` | Research — 4 research area cards, current focus section |
-| `/publications` | Publications — tabbed filter (Optimization / Fuzzy / ML), 8 papers |
-| `/contact` | Contact — links, collaboration card |
-| `/en/*` | English versions of all pages above |
+Seluruh isi situs berupa berkas. Tambah konten = tambah satu berkas Markdown,
+lalu simpan. Tidak perlu menyentuh kode.
 
-> **Projects page** (`/projects`) is stubbed and hidden from navigation — content coming soon.
+```
+src/content/
+  video/      ← satu berkas .md = satu video animasi
+  materi/     ← satu berkas .md = satu materi matematika
+public/
+  thumbnail/  ← gambar thumbnail buatan sendiri (opsional)
+```
 
-## Project Structure
+Berkas yang namanya diawali garis bawah (`_template.md`) **tidak** ikut
+dipublikasikan, jadi aman dipakai sebagai contoh isian.
+
+### 1. Menambah video animasi
+
+Salin `src/content/video/_template.md`, ganti namanya menjadi
+`<nama-slug>.md`, lalu isi:
+
+```yaml
+---
+judul: "Judul video"
+caption: "Satu-dua kalimat yang tampil di bawah thumbnail."
+tanggal: 2026-10-15
+
+youtube: "https://youtu.be/XXXXXXXXXXX"
+tiktok: ""
+instagram: ""
+
+thumbnail: ""                    # kosongkan bila ada tautan YouTube
+materi: "economic-order-quantity" # slug materi terkait
+durasi: "1:47"
+topik: "Manajemen Persediaan"     # dipakai sebagai filter di halaman Video
+unggulan: false
+---
+
+Paragraf keterangan tambahan (opsional).
+```
+
+Catatan:
+
+- **Selama `youtube`, `tiktok`, dan `instagram` kosong**, kartunya otomatis
+  bertanda "Segera hadir". Begitu salah satunya diisi, kartunya langsung aktif.
+- **Thumbnail otomatis.** Kalau ada tautan YouTube, gambarnya diambil sendiri
+  dari YouTube. Untuk TikTok/Instagram, simpan gambar di `public/thumbnail/`
+  lalu tulis `thumbnail: "/thumbnail/namafile.jpg"`.
+- Kolom `materi` diisi **nama berkas materi tanpa `.md`**. Tautan
+  "Materi: …" muncul otomatis di kartunya, dua arah.
+
+### 2. Menambah materi matematika
+
+Salin `src/content/materi/_template.md`, ganti namanya menjadi
+`<nama-slug>.md`. Nama berkas menjadi alamat halamannya
+(`/materi/<nama-slug>`).
+
+```yaml
+---
+judul: "Judul materi"
+deskripsi: "Ringkasan satu kalimat untuk kartu dan hasil pencarian."
+tanggal: 2026-10-15
+kategori: "Riset Operasi"   # dipakai sebagai filter di halaman Materi
+jenjang: "SMA — Kuliah"
+tag: ["kata kunci", "kata kunci"]
+video: "slug-video-terkait"
+urutan: 4                   # angka kecil tampil lebih dulu
+---
+```
+
+Isi badannya ditulis dengan Markdown biasa:
+
+| Ingin menulis | Cara menulis |
+| :-- | :-- |
+| Rumus dalam kalimat | `$a^2 + b^2 = c^2$` |
+| Rumus satu baris penuh | `$$ \int_0^1 x^2\,dx = \tfrac13 $$` |
+| Sistem persamaan | `$$\begin{aligned} 2x + y &\le 80 \\ x + 2y &\le 70 \end{aligned}$$` |
+| Bab | `## Judul bab` (otomatis masuk daftar isi) |
+| Sub-bab | `### Judul sub-bab` |
+| Kotak catatan/definisi | `> **Definisi.** …` |
+| Tabel | tabel Markdown biasa (otomatis bisa digeser di layar kecil) |
+
+Rumus dirender dengan **KaTeX saat build**, jadi halamannya tetap ringan dan
+tidak memerlukan JavaScript tambahan di sisi pembaca.
+
+Susunan yang dipakai ketiga materi yang ada: pengantar cerita → model
+matematis → langkah pengerjaan → contoh soal terselesaikan → latihan →
+**referensi**.
+
+### 3. Mengubah profil
+
+Semua isi halaman `/profil` ada di satu berkas: `src/data/profil.ts` —
+biodata, pendidikan, peran, bidang penelitian, daftar publikasi, dan tautan
+media sosial.
+
+### 4. Mengisi akun media sosial
+
+Buka `src/consts.ts`, isi bagian `KANAL`:
+
+```ts
+export const KANAL = {
+	youtube: "https://www.youtube.com/@mathantara",
+	tiktok: "",
+	instagram: "",
+};
+```
+
+Yang kosong otomatis disembunyikan dari kaki halaman dan halaman Video.
+
+---
+
+## Halaman
+
+| Alamat | Isi |
+| :-- | :-- |
+| `/` | Beranda — sorotan, tiga pintu masuk, video & materi terbaru, filosofi logo |
+| `/video` | Video Animasi — kartu berisi thumbnail, tautan platform, caption, dan tautan materi |
+| `/materi` | Materi Matematika — daftar materi, bisa disaring per kategori |
+| `/materi/<slug>` | Isi materi lengkap dengan LaTeX, daftar isi, dan tautan videonya |
+| `/profil` | Profil Megantara, T.R. — pendidikan, penelitian, publikasi, tautan |
+
+## Struktur berkas
 
 ```
 src/
-  components/
-    pages/          # Shared page components (accept lang prop)
-      HomePage.astro
-      AboutPage.astro
-      ResearchPage.astro
-      PublicationsPage.astro
-      ContactPage.astro
-      TeachingPage.astro  # stub for future Projects page
-    BaseHead.astro
-    Header.astro    # Nav with lang switcher (ID / EN)
-    Footer.astro
-  i18n/
-    en.ts           # English translations (type source: Translations)
-    id.ts           # Indonesian translations (typed against Translations)
-    index.ts        # getTranslations(lang) helper
-  layouts/
-    Layout.astro    # Master layout: canvas + Header + slot + Footer + scripts
-  pages/
-    index.astro     # Indonesian pages (thin wrappers)
-    about.astro
-    research.astro
-    publications.astro
-    contact.astro
-    en/             # English pages (thin wrappers)
-      index.astro
-      about.astro
-      ...
-  styles/
-    global.css
+  components/      BaseHead, Header, Footer, VideoCard, MateriCard
+  content/         video/ dan materi/  ← tempat menulis konten
+  content.config.ts  aturan kolom untuk kedua koleksi
+  data/profil.ts   isi halaman Profil
+  layouts/         Layout.astro
+  lib/video.ts     pembantu thumbnail & tautan platform
+  pages/           index, video/, materi/, profil, 404
+  styles/global.css
 public/
-  math-bg.js        # Floating math symbols canvas animation
-  site.js           # Mobile menu toggle + scroll reveal
-  favicon.svg
+  brand/           logo, lambang, avatar, gambar pratinjau
+  thumbnail/       gambar thumbnail video
+  math-bg.js       animasi lambang matematika di latar
+  site.js          menu layar kecil, animasi muncul, daftar isi
 ```
 
-## i18n
+## Warna dan huruf
 
-Translations live in `src/i18n/en.ts` (the type source) and `src/i18n/id.ts`. All translation keys are nested TypeScript objects. To add or update text, edit the relevant key in both files.
+| Peran | Nilai |
+| :-- | :-- |
+| Maroon | `#5D2021` |
+| Emas | `#A88454` |
+| Krem | `#FDFAF3` |
+| Judul | Playfair Display |
+| Teks | Inter |
 
-```ts
-// src/i18n/index.ts
-import { getTranslations } from './i18n';
-const t = getTranslations('id'); // or 'en'
-t.home.h1line1; // typed
-```
+## Perintah
 
-## Commands
+| Perintah | Kegunaan |
+| :-- | :-- |
+| `npm install` | Pasang dependensi |
+| `npm run dev` | Jalankan di `localhost:4321` untuk melihat hasilnya |
+| `npm run build` | Bangun ke `./dist/` |
+| `npm run preview` | Bangun lalu jalankan seperti di Cloudflare |
+| `npm run deploy` | Terbitkan ke Cloudflare Workers |
 
-| Command | Action |
-| :------ | :----- |
-| `npm install` | Install dependencies |
-| `npm run dev` | Dev server at `localhost:4321` (or next available port) |
-| `npm run build` | Build to `./dist/` |
-| `npm run preview` | Preview build locally |
-| `npm run deploy` | Deploy to Cloudflare Workers |
+## Catatan penerapan
+
+- Nama Worker pada `wrangler.json` masih `portfolio`, sehingga alamat lama
+  `portfolio.tubagusrobbimegantara.workers.dev` langsung menayangkan situs
+  baru ini.
+- Untuk memakai **mathantara.com**, tambahkan *custom domain* pada Worker
+  tersebut lewat dasbor Cloudflare (Workers → portfolio → Settings → Domains
+  & Routes). Alamat kanonis di `astro.config.mjs` sudah disetel ke
+  `https://mathantara.com`.
+- Berkas logo beresolusi penuh disimpan di luar repositori (folder
+  `mathantara/`); versi siap pakainya ada di `public/brand/`.

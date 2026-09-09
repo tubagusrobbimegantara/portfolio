@@ -1,90 +1,68 @@
-/* ════════════════════════════════════════
-   Floating math-symbol background animation
-   Drifting glyphs + faint connection lines.
-   Honors prefers-reduced-motion.
-   ════════════════════════════════════════ */
+/* Lambang matematika yang melayang pelan di latar belakang. */
 (function () {
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+	var kanvas = document.getElementById("mathCanvas");
+	if (!kanvas) return;
+	if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const canvas = document.getElementById('mathCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
+	var ctx = kanvas.getContext("2d");
+	var lambang = ["∑", "∫", "∂", "√", "π", "∞", "≤", "≥", "Δ", "λ", "μ", "θ", "×", "÷", "≈", "∈"];
+	var warna = ["rgba(93,32,33,0.10)", "rgba(168,132,84,0.13)"];
+	var butir = [];
+	var lebar = 0;
+	var tinggi = 0;
 
-  const SYMBOLS = ['∑','∫','∂','∇','π','λ','μ','∞','≈','∈','⊆','∀','∃','ƒ','θ','α','β','δ','≤','≥','√','∏','∮','Δ','σ','γ','φ','x̃','⊗','≅','∝','∩'];
-  const COLORS = ['rgba(56,189,248,', 'rgba(129,140,248,', 'rgba(74,222,128,'];
+	function ukur() {
+		lebar = kanvas.width = window.innerWidth;
+		tinggi = kanvas.height = window.innerHeight;
+	}
 
-  let W, H, particles = [], DENSITY = 0.00009;
+	function isi() {
+		var jumlah = Math.min(26, Math.round(window.innerWidth / 62));
+		butir = [];
+		for (var i = 0; i < jumlah; i++) {
+			butir.push({
+				x: Math.random() * lebar,
+				y: Math.random() * tinggi,
+				t: lambang[(Math.random() * lambang.length) | 0],
+				u: 14 + Math.random() * 26,
+				c: warna[(Math.random() * warna.length) | 0],
+				dx: (Math.random() - 0.5) * 0.16,
+				dy: -0.08 - Math.random() * 0.16,
+				r: Math.random() * Math.PI * 2,
+				dr: (Math.random() - 0.5) * 0.0016,
+			});
+		}
+	}
 
-  function rand(a, b) { return a + Math.random() * (b - a); }
+	function gambar() {
+		ctx.clearRect(0, 0, lebar, tinggi);
+		for (var i = 0; i < butir.length; i++) {
+			var b = butir[i];
+			b.x += b.dx;
+			b.y += b.dy;
+			b.r += b.dr;
+			if (b.y < -60) { b.y = tinggi + 40; b.x = Math.random() * lebar; }
+			if (b.x < -60) b.x = lebar + 40;
+			if (b.x > lebar + 60) b.x = -40;
+			ctx.save();
+			ctx.translate(b.x, b.y);
+			ctx.rotate(b.r);
+			ctx.font = b.u + 'px "Playfair Display", Georgia, serif';
+			ctx.fillStyle = b.c;
+			ctx.textAlign = "center";
+			ctx.fillText(b.t, 0, 0);
+			ctx.restore();
+		}
+		requestAnimationFrame(gambar);
+	}
 
-  function makeParticle() {
-    const colorBase = COLORS[Math.floor(Math.random() * COLORS.length)];
-    return {
-      x: Math.random() * W,
-      y: Math.random() * H,
-      vx: rand(-0.18, 0.18),
-      vy: rand(-0.22, -0.05),
-      size: rand(15, 40),
-      sym: SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)],
-      color: colorBase,
-      alpha: rand(0.12, 0.38),
-      rot: rand(-0.4, 0.4),
-      vr: rand(-0.0025, 0.0025),
-      pulse: Math.random() * Math.PI * 2,
-      vp: rand(0.005, 0.015)
-    };
-  }
+	ukur();
+	isi();
+	gambar();
 
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-    const target = Math.min(80, Math.max(26, Math.floor(W * H * DENSITY)));
-    particles = [];
-    for (let i = 0; i < target; i++) particles.push(makeParticle());
-  }
-
-  function step() {
-    ctx.clearRect(0, 0, W, H);
-
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const a = particles[i], b = particles[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const d2 = dx * dx + dy * dy;
-        if (d2 < 17000) {
-          const o = (1 - d2 / 17000) * 0.10;
-          ctx.strokeStyle = 'rgba(56,189,248,' + o + ')';
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    for (const p of particles) {
-      p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.pulse += p.vp;
-      if (p.y < -50) { p.y = H + 40; p.x = Math.random() * W; }
-      if (p.x < -50) p.x = W + 40;
-      if (p.x > W + 50) p.x = -40;
-
-      const a = p.alpha + Math.sin(p.pulse) * 0.05;
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rot);
-      ctx.font = '500 ' + p.size + "px 'Newsreader', Georgia, serif";
-      ctx.fillStyle = p.color + Math.max(0.08, a) + ')';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(p.sym, 0, 0);
-      ctx.restore();
-    }
-
-    requestAnimationFrame(step);
-  }
-
-  window.addEventListener('resize', resize, { passive: true });
-  resize();
-  step();
+	var jeda;
+	window.addEventListener("resize", function () {
+		clearTimeout(jeda);
+		jeda = setTimeout(function () { ukur(); isi(); }, 180);
+	});
 })();

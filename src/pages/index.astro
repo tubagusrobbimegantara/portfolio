@@ -1,11 +1,255 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import HomePage from '../components/pages/HomePage.astro';
-import { getTranslations, type Lang } from '../i18n';
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import VideoCard from "../components/VideoCard.astro";
+import MateriCard from "../components/MateriCard.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
-const lang = (Astro.currentLocale ?? 'id') as Lang;
-const t = getTranslations(lang);
+const semuaVideo = (await getCollection("video")).sort(
+	(a, b) => b.data.tanggal.valueOf() - a.data.tanggal.valueOf(),
+);
+const semuaMateri = (await getCollection("materi")).sort(
+	(a, b) => a.data.urutan - b.data.urutan || b.data.tanggal.valueOf() - a.data.tanggal.valueOf(),
+);
+
+const slugBervideo = new Set(semuaVideo.map((v) => v.data.materi).filter(Boolean));
+
+const videoTampil = semuaVideo.slice(0, 3);
+const materiTampil = semuaMateri.slice(0, 3);
+
+const menu = [
+	{
+		num: "01",
+		judul: "Video Animasi",
+		isi: "Cerita pendek beranimasi yang membedah satu persoalan nyata sampai ketahuan matematika di baliknya. Tersedia di YouTube, TikTok, dan Instagram.",
+		href: "/video",
+		cta: "Tonton",
+	},
+	{
+		num: "02",
+		judul: "Materi Matematika",
+		isi: "Uraian lengkap dengan notasi LaTeX: definisi, model, langkah pengerjaan, contoh soal terselesaikan, sampai latihan. Setiap materi terhubung ke videonya.",
+		href: "/materi",
+		cta: "Baca",
+	},
+	{
+		num: "03",
+		judul: "Profil Megantara, T.R.",
+		isi: "Rekam jejak akademik penyusunnya — pendidikan, bidang penelitian, publikasi terindeks Scopus, serta tautan LinkedIn dan media sosial.",
+		href: "/profil",
+		cta: "Kenali",
+	},
+];
 ---
-<Layout title={t.home.meta.title} description={t.home.meta.description} lang={lang} currentPath="/">
-  <HomePage lang={lang} />
+
+<Layout title={`${SITE_TITLE} — Dari Masalah Menuju Wawasan`} description={SITE_DESCRIPTION}>
+	<section class="hero">
+		<div class="wrap">
+			<div class="hero-grid">
+				<div>
+					<span class="hero-tag"><i></i> Matematika yang dimulai dari masalah</span>
+					<h1 class="display xl">Dari <em>masalah</em><br />menuju wawasan.</h1>
+					<div class="hero-motto">Dari masalah menuju wawasan</div>
+					<p class="lede">
+						Mathantara membedah persoalan nyata — distribusi bantuan bencana,
+						keterbatasan bahan baku, rute yang tiba-tiba tertutup — menjadi model
+						matematika yang bisa dihitung. Videonya menjelaskan gagasannya,
+						materinya menuntaskan perhitungannya.
+					</p>
+					<div class="hero-cta">
+						<a class="btn btn-solid" href="/video">
+							Tonton video animasi
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+								><path d="M8 5v14l11-7z"></path></svg
+							>
+						</a>
+						<a class="btn btn-ghost" href="/materi">Baca materi</a>
+					</div>
+				</div>
+				<div class="hero-art">
+					<img src="/brand/logo-transparan.png" alt="Logo Mathantara" width="715" height="467" />
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="tight">
+		<div class="wrap">
+			<div class="stats rev">
+				<div class="stat">
+					<b>{semuaVideo.length}</b>
+					<span>Video animasi</span>
+				</div>
+				<div class="stat">
+					<b>{semuaMateri.length}</b>
+					<span>Materi bernotasi LaTeX</span>
+				</div>
+				<div class="stat">
+					<b>3</b>
+					<span>Platform: YouTube · TikTok · Instagram</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<hr class="rule" />
+
+	<section>
+		<div class="wrap">
+			<div class="sec-head rev">
+				<div>
+					<span class="eyebrow">Jelajahi</span>
+					<h2 class="display lg" style="margin-top:12px">Tiga pintu masuk</h2>
+				</div>
+			</div>
+			<div class="menu-grid">
+				{
+					menu.map((m) => (
+						<a class="menu-card rev" href={m.href}>
+							<div class="num">{m.num}</div>
+							<h3>{m.judul}</h3>
+							<p>{m.isi}</p>
+							<span class="go">
+								{m.cta}
+								<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+									<path d="M5 12h14M13 6l6 6-6 6" />
+								</svg>
+							</span>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<hr class="rule" />
+
+	<section>
+		<div class="wrap">
+			<div class="sec-head rev">
+				<div>
+					<span class="eyebrow">Video Animasi</span>
+					<h2 class="display lg" style="margin-top:12px">Terbaru</h2>
+					<p>Setiap video berpasangan dengan satu materi tertulis.</p>
+				</div>
+				<a class="btn btn-ghost btn-sm" href="/video">Semua video</a>
+			</div>
+
+			{
+				videoTampil.length ? (
+					<div class="video-grid">
+						{videoTampil.map((v) => (
+							<VideoCard video={v} />
+						))}
+					</div>
+				) : (
+					<div class="kosong">
+						<b>Belum ada video</b>
+						Tambahkan berkas baru di <code>src/content/video/</code>.
+					</div>
+				)
+			}
+		</div>
+	</section>
+
+	<hr class="rule" />
+
+	<section>
+		<div class="wrap">
+			<div class="sec-head rev">
+				<div>
+					<span class="eyebrow">Materi Matematika</span>
+					<h2 class="display lg" style="margin-top:12px">Bacaan terkait</h2>
+					<p>Rumus ditulis dengan LaTeX, contoh soalnya diselesaikan langkah demi langkah.</p>
+				</div>
+				<a class="btn btn-ghost btn-sm" href="/materi">Semua materi</a>
+			</div>
+
+			{
+				materiTampil.length ? (
+					<div class="materi-grid">
+						{materiTampil.map((m) => (
+							<MateriCard materi={m} adaVideo={slugBervideo.has(m.id)} />
+						))}
+					</div>
+				) : (
+					<div class="kosong">
+						<b>Belum ada materi</b>
+						Tambahkan berkas baru di <code>src/content/materi/</code>.
+					</div>
+				)
+			}
+		</div>
+	</section>
+
+	<hr class="rule" />
+
+	<section>
+		<div class="wrap">
+			<div class="filosofi rev">
+				<div class="filosofi-gbr">
+					<img
+						src="/brand/mark.png"
+						alt="Lambang Mathantara: huruf M dengan lengkungan transisi dan tiga piksel menaik"
+						width="347"
+						height="320"
+						loading="lazy"
+					/>
+				</div>
+				<div>
+					<span class="eyebrow">Identitas</span>
+					<h2 class="display md" style="margin:12px 0 14px">Makna di balik logonya</h2>
+					<dl class="filosofi-poin">
+						<div>
+							<dt>Bentuk M</dt>
+							<dd>
+								Dua pilar yang kokoh — keteguhan berpikir, ketelitian, dan komitmen
+								pada pemecahan masalah.
+							</dd>
+						</div>
+						<div>
+							<dt>Jalur transisi</dt>
+							<dd>
+								Lengkungan di tengah menggambarkan perjalanan dari masalah menuju
+								wawasan: sistematis, terbuka, terus bergerak maju.
+							</dd>
+						</div>
+						<div>
+							<dt>Piksel bertahap</dt>
+							<dd>
+								Tiga piksel yang menaik mewakili pembelajaran bertahap. Setiap langkah
+								kecil membawa lebih dekat pada wawasan yang lebih besar.
+							</dd>
+						</div>
+						<div>
+							<dt>Warna</dt>
+							<dd>
+								Maroon melambangkan kedalaman dan keseriusan berpikir; emas yang
+								lembut mewakili wawasan, pencapaian, dan harapan untuk terus
+								berkembang.
+							</dd>
+						</div>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="tight">
+		<div class="wrap">
+			<div class="cta rev">
+				<h2>Disusun oleh <em>Megantara, T. R.</em></h2>
+				<p>
+					Dosen dan kandidat doktor matematika di Universitas Padjadjaran, dengan
+					penelitian di bidang optimisasi, pemrograman fuzzy, dan sistem
+					transportasi cerdas. Kebiasaan yang sama dipakai di sini: ambil
+					masalahnya, susun modelnya, jelaskan sampai masuk akal.
+				</p>
+				<div class="hero-cta">
+					<a class="btn btn-solid" href="/profil">Lihat profil lengkap</a>
+					<a class="btn btn-ghost" href="/materi">Mulai dari materi</a>
+				</div>
+			</div>
+		</div>
+	</section>
 </Layout>
