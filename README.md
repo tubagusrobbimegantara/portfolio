@@ -197,7 +197,7 @@ Yang kosong otomatis disembunyikan dari kaki halaman dan halaman Video.
 scripts/
   perbarui-publikasi.mjs   penarik data publikasi harian
 src/
-  components/      BaseHead, Header, Footer, VideoCard, MateriCard, PixelIcon, PixelWorld
+  components/      BaseHead, BrandLogo, Header, Footer, VideoCard, MateriCard, PixelIcon, PixelWorld
   content/         video/ dan materi/  ← tempat menulis konten
   content.config.ts  aturan kolom untuk kedua koleksi
   data/            profil.ts, publikasi-manual.ts, publikasi-otomatis.json
@@ -210,7 +210,7 @@ public/
   brand/           logo, lambang, avatar, gambar pratinjau
   gambar/          ilustrasi SVG untuk materi
   thumbnail/       gambar thumbnail video
-  favicon.svg      identitas pixel art
+  favicon-*.png    ikon asli Mathantara
   site.js          menu layar kecil, pencarian & filter, daftar isi
 ```
 
@@ -225,7 +225,9 @@ public/
 | Teks | DM Sans |
 | Aksen pixel | Pixelify Sans |
 
-Ilustrasi pixel art dan ikon dibuat sebagai SVG di komponen Astro. Teks panjang
+Logo asli di `public/brand/wordmark.png` digunakan bersama oleh header dan footer
+melalui `BrandLogo.astro`; warna, bentuk, dan proporsinya dipertahankan.
+Ilustrasi pixel art dan ikon antarmuka dibuat sebagai SVG di komponen Astro. Teks panjang
 dan rumus tetap menggunakan tipografi baca, dengan tabel dan rumus lebar yang
 bisa digeser. Animasi menghormati `prefers-reduced-motion`. Seluruh konten tetap
 terlihat tanpa JavaScript; pencarian dan filter bekerja lokal tanpa layanan eksternal.

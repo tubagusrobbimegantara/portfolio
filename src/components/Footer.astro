@@ -1,6 +1,7 @@
 ---
 import { KANAL } from "../consts";
 import { tautan } from "../data/profil";
+import BrandLogo from './BrandLogo.astro';
 
 const tahun = new Date().getFullYear();
 const sosial = [
@@ -16,7 +17,7 @@ const akademik = tautan.filter((t) => t.jenis === "akademik" || t.nama === "Link
 	<div class="wrap">
 		<div class="foot-grid">
 			<div class="foot-brand">
-				<a href="/" class="brand-name">mathantara<span>.</span></a>
+				<BrandLogo />
 				<p>
 					Tempat rasa ingin tahu bertemu matematika. Dari masalah, menuju wawasan.
 				</p>

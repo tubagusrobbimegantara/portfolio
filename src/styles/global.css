@@ -1,4 +1,4 @@
-﻿@import './reading.css';
+@import './reading.css';
 
 /* Mathantara — a quiet pixel world, with readable learning at its center. */
 :root {
@@ -56,10 +56,8 @@ section.tight { padding: 46px 0; }
 .skip-link:focus { top: 10px; }
 #nav { position: fixed; inset: 0 0 auto; z-index: 200; background: #f7f6edf5; backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
 .nav-in { max-width: 1200px; margin: auto; padding: 0 36px; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.brand { display: inline-flex; gap: 11px; align-items: center; flex-shrink: 0; }
-.brand-mark { width: 39px; height: 39px; display: grid; place-items: center; background: var(--green); color: #f6f2d9; box-shadow: 3px 3px 0 #bac4a1; }
-.brand-name { font: 600 1.5rem/1 var(--serif); letter-spacing: -.07em; color: var(--green); }
-.brand-name > span { color: var(--orange); }
+.brand { display: inline-flex; align-items: center; flex-shrink: 0; }
+.brand-logo { display: block; width: 220px; height: auto; }
 .nav-links { display: flex; list-style: none; gap: 34px; align-items: center; }
 .nav-links a { display: block; font-size: .83rem; padding: 10px 0; color: var(--ink-2); }
 .nav-links a.active { color: var(--green); font-weight: 700; }
@@ -217,7 +215,7 @@ footer { padding: 50px 0 24px; border-top: 1px solid var(--line); background: #f
   .material-body,.vbody { padding: 18px; }.sec-head { flex-wrap: wrap; }.sec-head > p { text-align: left; }.materi-layout { gap: 30px; grid-template-columns: minmax(0,1fr) 220px; }.profil-grid { gap: 30px; grid-template-columns: minmax(0,1fr) 290px; }
 }
 @media(max-width:800px) {
-  :root { --nav-h: 72px; }.wrap,.nav-in { padding-inline: 24px; }.nav-links { gap: 18px; }.nav-links a { font-size: .75rem; }.brand-name { font-size: 1.3rem; }.nav-r .btn { display: none; }
+  :root { --nav-h: 72px; }.wrap,.nav-in { padding-inline: 24px; }.nav-links { gap: 18px; }.nav-links a { font-size: .75rem; }.brand-logo { width: 190px; }.nav-r .btn { display: none; }
   .hero { padding-top: 42px; }.hero-grid { grid-template-columns: 1fr 1fr; gap: 25px; }.hero h1 { font-size: 2.6rem; }.hero-tag { font-size: .51rem; }.hero-note { align-items: flex-start; }.hero .lede { font-size: .84rem; }.hero-cta { gap: 10px; }.hero .btn { width: 100%; }.world-panel { padding: 12px; }.world-top { font-size: .43rem; }.world-bottom { font-size: .4rem; }.world-label { font-size: .5rem; padding: 6px; }.label-goal { top: 55px; }.label-start { bottom: 42px; }.world-hearts { display: none; }
   .feature-strip .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 13px 25px; }.feature-strip .wrap > span { font-size: .69rem; }
   .menu-grid { gap: 14px; }.menu-card { padding: 17px; }.menu-card-top { margin-bottom: 22px; }.menu-card h3 { font-size: 1.15rem; }.menu-card p { font-size: .76rem; }.menu-card .num { font-size: .5rem; }.icon-tile { width: 40px; height: 40px; }.icon-tile svg { width: 22px; }
@@ -226,7 +224,7 @@ footer { padding: 50px 0 24px; border-top: 1px solid var(--line); background: #f
   .profil-grid { grid-template-columns: 1fr; }.profil-card { max-width: 100%; }.foot-grid { gap: 28px; }.foot-col a { font-size: .73rem; }
 }
 @media(max-width:600px) {
-  .wrap,.nav-in { padding-inline: 22px; }.nav-links { display: none; position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 22px 18px; box-shadow: 0 8px 0 #25423212; }.nav-links.open { display: flex; flex-direction: column; gap: 0; align-items: stretch; }.nav-links a { padding: 14px 10px; font-size: .95rem; }.nav-links li + li { border-top: 1px solid var(--line-soft); }.hamburger { display: flex; }.brand-name { font-size: 1.4rem; }
+  .wrap,.nav-in { padding-inline: 22px; }.nav-links { display: none; position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 22px 18px; box-shadow: 0 8px 0 #25423212; }.nav-links.open { display: flex; flex-direction: column; gap: 0; align-items: stretch; }.nav-links a { padding: 14px 10px; font-size: .95rem; }.nav-links li + li { border-top: 1px solid var(--line-soft); }.hamburger { display: flex; }
   section { padding: 48px 0; }section.tight { padding: 34px 0; }.hero-grid { grid-template-columns: 1fr; gap: 35px; }.hero h1 { font-size: clamp(2.8rem,10.7vw,3.8rem); }.hero-tag { font-size: .58rem; margin-bottom: 21px; }.hero .lede { font-size: .9rem; }.hero .btn { width: auto; flex: 1; white-space: nowrap; padding-inline: 12px; min-height: 48px; }.hero-note { font-size: .63rem; }.hero-bottom { margin-top: 34px; padding-bottom: 18px; }.hero-bottom > span { font-size: .45rem; max-width: 22ch; }.hero-bottom a { font-size: .57rem; }
   .world-panel { max-width: 430px; width: calc(100% - 12px); margin-inline: auto; padding: 13px; }.world-top { font-size: .52rem; }.world-bottom { font-size: .45rem; }.world-label { font-size: .57rem; padding: 7px 9px; }.label-start { left: -13px; bottom: 47px; }.label-goal { right: -11px; top: 65px; }.world-hearts { display: inline; }.feature-strip .wrap { gap: 12px 15px; padding-block: 17px; }.feature-strip .wrap > span { font-size: .59rem; gap: 8px; }.feature-strip svg { width: 13px; }
   .sec-head { gap: 13px; margin-bottom: 25px; }.sec-head p { font-size: .81rem; }.sec-head > p { margin-top: 0; }.eyebrow { font-size: .58rem; }.menu-grid,.materi-grid,.video-grid { grid-template-columns: 1fr; gap: 20px; }.menu-card { padding: 25px; }.menu-card h3 { font-size: 1.4rem; }.menu-card p { font-size: .86rem; }.menu-card-top { margin-bottom: 23px; }.menu-card .num { font-size: .6rem; }.icon-tile { width: 49px; height: 45px; }.icon-tile svg { width: 26px; }.menu-card .go { font-size: .81rem; }.card-kicker { font-size: .6rem; }
