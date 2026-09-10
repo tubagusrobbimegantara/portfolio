@@ -1,9 +1,10 @@
 ---
+import PixelIcon from './PixelIcon.astro';
 const menu = [
 	{ href: "/", label: "Beranda" },
-	{ href: "/video", label: "Video Animasi" },
-	{ href: "/materi", label: "Materi Matematika" },
-	{ href: "/profil", label: "Profil Tubagus Robbi Megantara" },
+	{ href: "/video", label: "Video" },
+	{ href: "/materi", label: "Materi" },
+	{ href: "/profil", label: "Tentang" },
 ];
 
 const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
@@ -11,13 +12,12 @@ const aktif = (href: string) =>
 	href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
 ---
 
-<nav id="nav">
+<nav id="nav" aria-label="Navigasi utama">
 	<div class="nav-in">
 		<a href="/" class="brand" aria-label="Mathantara — beranda">
-			<img src="/brand/mark.png" alt="" width="34" height="34" />
+			<span class="brand-mark" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges"><path d="M1 3h3v2h2v2h1v2h2V7h1V5h2V3h3v12h-3V8h-2v3H6V8H4v7H1z"/><path d="M11 0h2v2h-2zM14 0h2v2h-2z"/></svg></span>
 			<span class="brand-text">
-				<span class="brand-name">MATHANTARA</span>
-				<span class="brand-sub">Dari Masalah Menuju Wawasan</span>
+				<span class="brand-name">mathantara<span>.</span></span>
 			</span>
 		</a>
 
@@ -25,7 +25,7 @@ const aktif = (href: string) =>
 			{
 				menu.map((m) => (
 					<li>
-						<a href={m.href} class:list={[{ active: aktif(m.href) }]}>
+						<a href={m.href} aria-current={aktif(m.href) ? 'page' : undefined} class:list={[{ active: aktif(m.href) }]}>
 							{m.label}
 						</a>
 					</li>
@@ -34,7 +34,7 @@ const aktif = (href: string) =>
 		</ul>
 
 		<div class="nav-r">
-			<a href="/materi" class="btn btn-ghost btn-sm">Mulai belajar</a>
+			<a href="/materi" class="btn btn-solid btn-sm">Mulai belajar <PixelIcon name="arrow" size={13}/></a>
 			<button class="hamburger" id="hbg" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
 				<svg width="22" height="22" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 					<rect y="4" width="20" height="1.8" rx="0.9"></rect>

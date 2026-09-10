@@ -1,102 +1,20 @@
+﻿---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import VideoCard from '../../components/VideoCard.astro';
+import PixelIcon from '../../components/PixelIcon.astro';
+import { KANAL } from '../../consts';
+const video = (await getCollection('video')).sort((a,b)=>b.data.tanggal.valueOf()-a.data.tanggal.valueOf());
+const topik = [...new Set(video.map(v=>v.data.topik).filter(Boolean))].sort();
+const kanal = [{ nama:'YouTube', url:KANAL.youtube },{ nama:'TikTok',url:KANAL.tiktok },{ nama:'Instagram',url:KANAL.instagram }].filter(k=>k.url);
 ---
-import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import VideoCard from "../../components/VideoCard.astro";
-import { KANAL } from "../../consts";
-
-const video = (await getCollection("video")).sort(
-	(a, b) => b.data.tanggal.valueOf() - a.data.tanggal.valueOf(),
-);
-
-const topik = [...new Set(video.map((v) => v.data.topik).filter(Boolean))].sort();
-
-const kanal = [
-	{ nama: "YouTube", url: KANAL.youtube },
-	{ nama: "TikTok", url: KANAL.tiktok },
-	{ nama: "Instagram", url: KANAL.instagram },
-].filter((k) => k.url);
----
-
-<Layout
-	title="Video Animasi — Mathantara"
-	description="Kumpulan video animasi matematika Mathantara di YouTube, TikTok, dan Instagram, lengkap dengan tautan ke materi tertulisnya."
->
-	<section class="banner">
-		<div class="wrap">
-			<span class="eyebrow">01 — Video Animasi</span>
-			<h1 class="display lg">Satu masalah, <em>satu video</em></h1>
-			<p class="lede">
-				Setiap video berangkat dari kejadian yang bisa dibayangkan, lalu
-				menelusuri matematika yang menyelesaikannya. Di bawah tiap kartu ada
-				tautan ke materi tertulisnya — tempat perhitungan lengkapnya dibedah.
-			</p>
-			{
-				kanal.length > 0 && (
-					<div class="hero-cta">
-						{kanal.map((k) => (
-							<a class="btn btn-ghost btn-sm" href={k.url} target="_blank" rel="noopener">
-								{k.nama}
-							</a>
-						))}
-					</div>
-				)
-			}
-		</div>
-	</section>
-
-	<hr class="rule" />
-
-	<section>
-		<div class="wrap">
-			{
-				topik.length > 1 && (
-					<div class="filter-bar" id="filterVideo">
-						<button class="chip on" data-filter="semua">
-							Semua ({video.length})
-						</button>
-						{topik.map((t) => (
-							<button class="chip" data-filter={t}>
-								{t}
-							</button>
-						))}
-					</div>
-				)
-			}
-
-			{
-				video.length ? (
-					<div class="video-grid" id="daftarVideo">
-						{video.map((v) => (
-							<VideoCard video={v} />
-						))}
-					</div>
-				) : (
-					<div class="kosong">
-						<b>Belum ada video</b>
-						Tambahkan berkas baru di <code>src/content/video/</code>, satu berkas
-						untuk satu video.
-					</div>
-				)
-			}
-		</div>
-	</section>
+<Layout title="Video Animasi — Mathantara" description="Jelajahi video animasi matematika: dari persoalan nyata ke pola dan wawasan, dengan materi tertulis untuk belajar lebih dalam.">
+  <section class="banner"><div class="wrap"><span class="eyebrow">01 — MATEMATIKA DALAM GERAK</span><h1 class="display lg">Lihat ceritanya.<br/><em>Temukan polanya.</em></h1><p class="lede">Satu persoalan nyata, satu perjalanan visual. Jelajahi cerita matematika, lalu lanjutkan ke materi tertulis untuk memahami perhitungannya.</p>{kanal.length > 0 && <div class="hero-cta">{kanal.map(k=><a class="btn btn-ghost btn-sm" href={k.url} target="_blank" rel="noopener">{k.nama} ↗</a>)}</div>}</div></section>
+  <section><div class="wrap" data-library="video">
+    <div class="search-tools"><label class="search-field"><PixelIcon name="search" size={18}/><input type="search" placeholder="Cari video atau topik yang menarik…" aria-label="Cari video" autocomplete="off"/></label><p class="result-count" data-count role="status" aria-live="polite">{video.length} video</p></div>
+    {topik.length > 1 && <div class="filter-bar" aria-label="Filter topik"><button class="chip on" data-filter="semua" aria-pressed="true">Semua video</button>{topik.map(t=><button class="chip" data-filter={t} aria-pressed="false">{t}</button>)}</div>}
+    <div class="video-grid" id="daftarVideo">{video.map(v=><VideoCard video={v}/>)}</div>
+    <div class="kosong" data-empty hidden><b>Belum ada video yang cocok.</b><p>Coba kata kunci lain atau jelajahi semua topik.</p><button type="button" class="btn btn-ghost btn-sm" data-reset style="margin-top:20px">Tampilkan semua video</button></div>
+    {!video.length && <noscript><div class="kosong">Video baru sedang disiapkan. Nantikan cerita pertama kami.</div></noscript>}
+  </div></section>
 </Layout>
-
-<script is:inline>
-	(function () {
-		var bar = document.getElementById("filterVideo");
-		if (!bar) return;
-		bar.addEventListener("click", function (e) {
-			var btn = e.target.closest(".chip");
-			if (!btn) return;
-			var pilih = btn.dataset.filter;
-			bar.querySelectorAll(".chip").forEach(function (c) {
-				c.classList.toggle("on", c === btn);
-			});
-			document.querySelectorAll("#daftarVideo .vcard").forEach(function (kartu) {
-				var cocok = pilih === "semua" || kartu.dataset.topik === pilih;
-				kartu.classList.toggle("hide", !cocok);
-			});
-		});
-	})();
-</script>

@@ -19,13 +19,12 @@ const { title, description, image, tipe } = Astro.props;
 		<BaseHead title={title} description={description} image={image} tipe={tipe} />
 	</head>
 	<body>
-		<canvas id="mathCanvas" aria-hidden="true"></canvas>
+		<a class="skip-link" href="#konten">Langsung ke konten</a>
 		<Header />
-		<main class="page">
+		<main class="page" id="konten" tabindex="-1">
 			<slot />
 		</main>
 		<Footer />
-		<script src="/math-bg.js" is:inline></script>
 		<script src="/site.js" is:inline></script>
 	</body>
 </html>

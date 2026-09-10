@@ -1,87 +1,21 @@
+﻿---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import MateriCard from '../../components/MateriCard.astro';
+import PixelIcon from '../../components/PixelIcon.astro';
+import { tautanUtama } from '../../lib/video';
+const materi = (await getCollection('materi')).sort((a,b)=>a.data.urutan-b.data.urutan || b.data.tanggal.valueOf()-a.data.tanggal.valueOf());
+const video = await getCollection('video');
+const slugBervideo = new Set(video.filter(v=>tautanUtama(v.data)).map(v=>v.data.materi));
+const kategori = [...new Set(materi.map(m=>m.data.kategori))].sort();
 ---
-import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import MateriCard from "../../components/MateriCard.astro";
-
-const materi = (await getCollection("materi")).sort(
-	(a, b) => a.data.urutan - b.data.urutan || b.data.tanggal.valueOf() - a.data.tanggal.valueOf(),
-);
-const video = await getCollection("video");
-const slugBervideo = new Set(video.map((v) => v.data.materi).filter(Boolean));
-
-const kategori = [...new Set(materi.map((m) => m.data.kategori))].sort();
----
-
-<Layout
-	title="Materi Matematika — Mathantara"
-	description="Materi matematika bernotasi LaTeX: definisi, model, langkah pengerjaan, contoh soal terselesaikan, dan latihan — terhubung dengan video animasinya."
->
-	<section class="banner">
-		<div class="wrap">
-			<span class="eyebrow">02 — Materi Matematika</span>
-			<h1 class="display lg">Perhitungan <em>selengkapnya</em></h1>
-			<p class="lede">
-				Video menjelaskan gagasannya dalam dua menit; halaman-halaman ini
-				menuntaskan perhitungannya. Semua rumus ditulis dengan LaTeX dan setiap
-				contoh soal diselesaikan langkah demi langkah, lengkap dengan latihan di
-				bagian akhir.
-			</p>
-		</div>
-	</section>
-
-	<hr class="rule" />
-
-	<section>
-		<div class="wrap">
-			{
-				kategori.length > 1 && (
-					<div class="filter-bar" id="filterMateri">
-						<button class="chip on" data-filter="semua">
-							Semua ({materi.length})
-						</button>
-						{kategori.map((k) => (
-							<button class="chip" data-filter={k}>
-								{k}
-							</button>
-						))}
-					</div>
-				)
-			}
-
-			{
-				materi.length ? (
-					<div class="materi-grid" id="daftarMateri">
-						{materi.map((m) => (
-							<MateriCard materi={m} adaVideo={slugBervideo.has(m.id)} />
-						))}
-					</div>
-				) : (
-					<div class="kosong">
-						<b>Belum ada materi</b>
-						Tambahkan berkas baru di <code>src/content/materi/</code>, satu berkas
-						untuk satu materi.
-					</div>
-				)
-			}
-		</div>
-	</section>
+<Layout title="Materi Matematika — Mathantara" description="Jelajahi materi matematika, contoh soal, rumus, dan latihan. Cari topik yang ingin kamu pahami, lalu pelajari langkah demi langkah.">
+  <section class="banner"><div class="wrap"><span class="eyebrow">02 — BEKAL PENJELAJAHAN</span><h1 class="display lg">Ide besar.<br/><em>Mulai dari satu langkah.</em></h1><p class="lede">Pilih persoalan yang membuatmu penasaran. Kita mulai dari ceritanya, susun modelnya, lalu telusuri perhitungannya — lengkap dengan contoh dan latihan.</p></div></section>
+  <section><div class="wrap" data-library="materi">
+    <div class="search-tools"><label class="search-field"><PixelIcon name="search" size={18}/><input type="search" placeholder="Cari materi, topik, atau kata kunci…" aria-label="Cari materi" autocomplete="off" /></label><p class="result-count" data-count role="status" aria-live="polite">{materi.length} materi tersedia</p></div>
+    {kategori.length > 1 && <div class="filter-bar" aria-label="Filter kategori"><button class="chip on" data-filter="semua" aria-pressed="true">Semua materi</button>{kategori.map(k=><button class="chip" data-filter={k} aria-pressed="false">{k}</button>)}</div>}
+    <div class="materi-grid" id="daftarMateri">{materi.map(m=><MateriCard materi={m} adaVideo={slugBervideo.has(m.id)}/>)}</div>
+    <div class="kosong" data-empty hidden><b>Belum menemukan yang kamu cari.</b><p>Coba kata kunci yang lebih singkat atau pilih kategori lain.</p><button type="button" class="btn btn-ghost btn-sm" data-reset style="margin-top:20px">Tampilkan semua materi</button></div>
+    {!materi.length && <noscript><div class="kosong">Materi baru sedang disiapkan. Kembali lagi segera.</div></noscript>}
+  </div></section>
 </Layout>
-
-<script is:inline>
-	(function () {
-		var bar = document.getElementById("filterMateri");
-		if (!bar) return;
-		bar.addEventListener("click", function (e) {
-			var btn = e.target.closest(".chip");
-			if (!btn) return;
-			var pilih = btn.dataset.filter;
-			bar.querySelectorAll(".chip").forEach(function (c) {
-				c.classList.toggle("on", c === btn);
-			});
-			document.querySelectorAll("#daftarMateri .mcard").forEach(function (kartu) {
-				var cocok = pilih === "semua" || kartu.dataset.kategori === pilih;
-				kartu.classList.toggle("hide", !cocok);
-			});
-		});
-	})();
-</script>

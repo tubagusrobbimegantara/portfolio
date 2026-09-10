@@ -1,255 +1,59 @@
----
-import { getCollection } from "astro:content";
-import Layout from "../layouts/Layout.astro";
-import VideoCard from "../components/VideoCard.astro";
-import MateriCard from "../components/MateriCard.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-
-const semuaVideo = (await getCollection("video")).sort(
-	(a, b) => b.data.tanggal.valueOf() - a.data.tanggal.valueOf(),
-);
-const semuaMateri = (await getCollection("materi")).sort(
-	(a, b) => a.data.urutan - b.data.urutan || b.data.tanggal.valueOf() - a.data.tanggal.valueOf(),
-);
-
-const slugBervideo = new Set(semuaVideo.map((v) => v.data.materi).filter(Boolean));
-
-const videoTampil = semuaVideo.slice(0, 3);
-const materiTampil = semuaMateri.slice(0, 3);
-
+﻿---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import VideoCard from '../components/VideoCard.astro';
+import MateriCard from '../components/MateriCard.astro';
+import PixelIcon from '../components/PixelIcon.astro';
+import PixelWorld from '../components/PixelWorld.astro';
+import { SITE_DESCRIPTION } from '../consts';
+import { tautanUtama } from '../lib/video';
+const video = (await getCollection('video')).sort((a,b)=>b.data.tanggal.valueOf()-a.data.tanggal.valueOf());
+const materi = (await getCollection('materi')).sort((a,b)=>a.data.urutan-b.data.urutan);
+const slugBervideo = new Set(video.filter(v=>tautanUtama(v.data)).map(v=>v.data.materi));
 const menu = [
-	{
-		num: "01",
-		judul: "Video Animasi",
-		isi: "Cerita pendek beranimasi yang membedah satu persoalan nyata sampai ketahuan matematika di baliknya. Tersedia di YouTube, TikTok, dan Instagram.",
-		href: "/video",
-		cta: "Tonton",
-	},
-	{
-		num: "02",
-		judul: "Materi Matematika",
-		isi: "Uraian lengkap dengan notasi LaTeX: definisi, model, langkah pengerjaan, contoh soal terselesaikan, sampai latihan. Setiap materi terhubung ke videonya.",
-		href: "/materi",
-		cta: "Baca",
-	},
-	{
-		num: "03",
-		judul: "Profil Tubagus Robbi Megantara",
-		isi: "Rekam jejak akademik penyusunnya — pendidikan, bidang penelitian, publikasi terindeks Scopus, serta tautan LinkedIn dan media sosial.",
-		href: "/profil",
-		cta: "Kenali",
-	},
+  { num:'01', icon:'play', title:'Tonton & bayangkan', text:'Lihat bagaimana matematika bekerja lewat cerita dan animasi visual.', href:'/video', cta:'Jelajahi video', color:'peach', label:'VIDEO ANIMASI' },
+  { num:'02', icon:'book', title:'Baca & pahami', text:'Telusuri ide, rumus, dan contoh soal. Pelan-pelan, sampai masuk akal.', href:'/materi', cta:'Buka materi', color:'sage', label:'MATERI MATEMATIKA' },
+  { num:'03', icon:'person', title:'Kenali di balik layar', text:'Temui penyusunnya, jelajahi penelitian, dan buka ruang kolaborasi.', href:'/profil', cta:'Kenali penyusun', color:'lilac', label:'PROFIL & PENELITIAN' },
 ];
 ---
-
-<Layout title={`${SITE_TITLE} — Dari Masalah Menuju Wawasan`} description={SITE_DESCRIPTION}>
-	<section class="hero">
-		<div class="wrap">
-			<div class="hero-grid">
-				<div>
-					<span class="hero-tag"><i></i> Matematika yang dimulai dari masalah</span>
-					<h1 class="display xl">Dari <em>masalah</em><br />menuju wawasan.</h1>
-					<div class="hero-motto">Dari masalah menuju wawasan</div>
-					<p class="lede">
-						Mathantara membedah persoalan nyata — distribusi bantuan bencana,
-						keterbatasan bahan baku, rute yang tiba-tiba tertutup — menjadi model
-						matematika yang bisa dihitung. Videonya menjelaskan gagasannya,
-						materinya menuntaskan perhitungannya.
-					</p>
-					<div class="hero-cta">
-						<a class="btn btn-solid" href="/video">
-							Tonton video animasi
-							<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-								><path d="M8 5v14l11-7z"></path></svg
-							>
-						</a>
-						<a class="btn btn-ghost" href="/materi">Baca materi</a>
-					</div>
-				</div>
-				<div class="hero-art">
-					<img src="/brand/logo-transparan.png" alt="Logo Mathantara" width="715" height="467" />
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="tight">
-		<div class="wrap">
-			<div class="stats rev">
-				<div class="stat">
-					<b>{semuaVideo.length}</b>
-					<span>Video animasi</span>
-				</div>
-				<div class="stat">
-					<b>{semuaMateri.length}</b>
-					<span>Materi bernotasi LaTeX</span>
-				</div>
-				<div class="stat">
-					<b>3</b>
-					<span>Platform: YouTube · TikTok · Instagram</span>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<hr class="rule" />
-
-	<section>
-		<div class="wrap">
-			<div class="sec-head rev">
-				<div>
-					<span class="eyebrow">Jelajahi</span>
-					<h2 class="display lg" style="margin-top:12px">Tiga pintu masuk</h2>
-				</div>
-			</div>
-			<div class="menu-grid">
-				{
-					menu.map((m) => (
-						<a class="menu-card rev" href={m.href}>
-							<div class="num">{m.num}</div>
-							<h3>{m.judul}</h3>
-							<p>{m.isi}</p>
-							<span class="go">
-								{m.cta}
-								<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-									<path d="M5 12h14M13 6l6 6-6 6" />
-								</svg>
-							</span>
-						</a>
-					))
-				}
-			</div>
-		</div>
-	</section>
-
-	<hr class="rule" />
-
-	<section>
-		<div class="wrap">
-			<div class="sec-head rev">
-				<div>
-					<span class="eyebrow">Video Animasi</span>
-					<h2 class="display lg" style="margin-top:12px">Terbaru</h2>
-					<p>Setiap video berpasangan dengan satu materi tertulis.</p>
-				</div>
-				<a class="btn btn-ghost btn-sm" href="/video">Semua video</a>
-			</div>
-
-			{
-				videoTampil.length ? (
-					<div class="video-grid">
-						{videoTampil.map((v) => (
-							<VideoCard video={v} />
-						))}
-					</div>
-				) : (
-					<div class="kosong">
-						<b>Belum ada video</b>
-						Tambahkan berkas baru di <code>src/content/video/</code>.
-					</div>
-				)
-			}
-		</div>
-	</section>
-
-	<hr class="rule" />
-
-	<section>
-		<div class="wrap">
-			<div class="sec-head rev">
-				<div>
-					<span class="eyebrow">Materi Matematika</span>
-					<h2 class="display lg" style="margin-top:12px">Bacaan terkait</h2>
-					<p>Rumus ditulis dengan LaTeX, contoh soalnya diselesaikan langkah demi langkah.</p>
-				</div>
-				<a class="btn btn-ghost btn-sm" href="/materi">Semua materi</a>
-			</div>
-
-			{
-				materiTampil.length ? (
-					<div class="materi-grid">
-						{materiTampil.map((m) => (
-							<MateriCard materi={m} adaVideo={slugBervideo.has(m.id)} />
-						))}
-					</div>
-				) : (
-					<div class="kosong">
-						<b>Belum ada materi</b>
-						Tambahkan berkas baru di <code>src/content/materi/</code>.
-					</div>
-				)
-			}
-		</div>
-	</section>
-
-	<hr class="rule" />
-
-	<section>
-		<div class="wrap">
-			<div class="filosofi rev">
-				<div class="filosofi-gbr">
-					<img
-						src="/brand/mark.png"
-						alt="Lambang Mathantara: huruf M dengan lengkungan transisi dan tiga piksel menaik"
-						width="347"
-						height="320"
-						loading="lazy"
-					/>
-				</div>
-				<div>
-					<span class="eyebrow">Identitas</span>
-					<h2 class="display md" style="margin:12px 0 14px">Makna di balik logonya</h2>
-					<dl class="filosofi-poin">
-						<div>
-							<dt>Bentuk M</dt>
-							<dd>
-								Dua pilar yang kokoh — keteguhan berpikir, ketelitian, dan komitmen
-								pada pemecahan masalah.
-							</dd>
-						</div>
-						<div>
-							<dt>Jalur transisi</dt>
-							<dd>
-								Lengkungan di tengah menggambarkan perjalanan dari masalah menuju
-								wawasan: sistematis, terbuka, terus bergerak maju.
-							</dd>
-						</div>
-						<div>
-							<dt>Piksel bertahap</dt>
-							<dd>
-								Tiga piksel yang menaik mewakili pembelajaran bertahap. Setiap langkah
-								kecil membawa lebih dekat pada wawasan yang lebih besar.
-							</dd>
-						</div>
-						<div>
-							<dt>Warna</dt>
-							<dd>
-								Maroon melambangkan kedalaman dan keseriusan berpikir; emas yang
-								lembut mewakili wawasan, pencapaian, dan harapan untuk terus
-								berkembang.
-							</dd>
-						</div>
-					</dl>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="tight">
-		<div class="wrap">
-			<div class="cta rev">
-				<h2>Disusun oleh <em>Tubagus Robbi Megantara</em></h2>
-				<p>
-					Dosen dan kandidat doktor matematika di Universitas Padjadjaran, dengan
-					penelitian di bidang optimisasi, pemrograman fuzzy, dan sistem
-					transportasi cerdas. Kebiasaan yang sama dipakai di sini: ambil
-					masalahnya, susun modelnya, jelaskan sampai masuk akal.
-				</p>
-				<div class="hero-cta">
-					<a class="btn btn-solid" href="/profil">Lihat profil lengkap</a>
-					<a class="btn btn-ghost" href="/materi">Mulai dari materi</a>
-				</div>
-			</div>
-		</div>
-	</section>
+<Layout title="Mathantara — Dari Masalah Menuju Wawasan" description={SITE_DESCRIPTION}>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="hero-tag"><span class="status-pixel"></span> RUANG EKSPLORASI MATEMATIKA</span>
+        <h1>Dari masalah,<br/>menuju <span class="pixel-heading">wawasan<span class="pixel-period">.</span></span></h1>
+        <p class="lede">Matematika bukan sekadar rumus. Temukan cerita di baliknya, pahami polanya, dan pecahkan persoalan nyata. Satu langkah kecil setiap hari.</p>
+        <div class="hero-cta">
+          <a class="btn btn-solid" href="/materi">Mulai menjelajah <PixelIcon name="arrow" size={16}/></a>
+          <a class="btn btn-ghost" href="/video"><PixelIcon name="play" size={14}/> Tonton animasi</a>
+        </div>
+        <div class="hero-note"><span class="mini-pixels" aria-hidden="true"><i></i><i></i><i></i></span> Untuk rasa ingin tahu yang tidak pernah habis.</div>
+      </div>
+      <div class="world-panel">
+        <div class="world-top"><span><i></i> DUNIA MATHANTARA</span><span>01 / ∞</span></div>
+        <PixelWorld />
+        <div class="world-label label-start"><PixelIcon name="flag" size={13}/> Mulai dari rasa ingin tahu</div>
+        <div class="world-label label-goal"><PixelIcon name="spark" size={13}/> +1 wawasan baru</div>
+        <div class="world-bottom"><span>MASALAH <span aria-hidden="true">·····</span> IDE <span aria-hidden="true">·····</span> WAWASAN</span><span class="world-hearts" aria-hidden="true">♥ ♥ ♥</span></div>
+      </div>
+    </div>
+    <div class="wrap hero-bottom"><span>RASA INGIN TAHU ADALAH TITIK MULAI.</span><a href="#jelajahi">Gulir untuk menjelajah <span aria-hidden="true">↓</span></a></div>
+  </section>
+  <div class="feature-strip"><div class="wrap"><span><PixelIcon name="spark" size={16}/> Berangkat dari masalah nyata</span><span><PixelIcon name="play" size={14}/> Belajar secara visual</span><span><PixelIcon name="book" size={16}/> Rumus, contoh, dan latihan</span><span><PixelIcon name="heart" size={16}/> Terbuka untuk siapa saja</span></div></div>
+  <section id="jelajahi" class="explore-section">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="eyebrow">PILIH JALANMU</span><h2>Banyak cara untuk <em>mengerti.</em></h2></div><p>Mulai dari yang membuatmu penasaran.<br/>Tidak harus berurutan.</p></div>
+      <div class="menu-grid">{menu.map(m=><a class={`menu-card ${m.color}`} href={m.href}><div class="menu-card-top"><span class="icon-tile"><PixelIcon name={m.icon} size={28}/></span><span class="num">JALUR {m.num}</span></div><span class="card-kicker">{m.label}</span><h3>{m.title}</h3><p>{m.text}</p><span class="go">{m.cta}<PixelIcon name="arrow" size={16}/></span></a>)}</div>
+    </div>
+  </section>
+  <section class="material-section"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">BEKAL PENJELAJAHAN</span><h2>Ide besar, <em>langkah kecil.</em></h2><p>Dari persoalan sehari-hari ke model matematika yang bisa dipahami.</p></div><a class="text-link" href="/materi">Semua materi <PixelIcon name="arrow" size={15}/></a></div>
+    {materi.length ? <div class="materi-grid">{materi.slice(0,3).map(m=><MateriCard materi={m} adaVideo={slugBervideo.has(m.id)}/>)}</div> : <div class="kosong">Materi baru sedang disiapkan. Kembali lagi segera.</div>}
+  </div></section>
+  <section><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">MATEMATIKA DALAM GERAK</span><h2>Lihat ceritanya. <em>Temukan polanya.</em></h2><p>Animasi singkat untuk membuka sudut pandang baru.</p></div><a class="text-link" href="/video">Semua video <PixelIcon name="arrow" size={15}/></a></div>
+    {video.length ? <div class="video-grid">{video.slice(0,3).map(v=><VideoCard video={v}/>)}</div> : <div class="kosong">Petualangan visual sedang disiapkan. Nantikan video pertama kami.</div>}
+  </div></section>
+  <section class="about-section"><div class="wrap"><div class="about-box"><div class="about-symbol"><PixelIcon name="book" size={70}/><span>TERUS BERTANYA.<br/>TERUS BERTUMBUH.</span></div><div><span class="eyebrow">DI BALIK MATHANTARA</span><h2>Belajar adalah perjalanan.<br/>Mari berjalan bersama.</h2><p>Saya Tubagus Robbi Megantara. Di Mathantara, saya menghubungkan penelitian, persoalan nyata, dan pembelajaran matematika — agar ide yang rumit terasa lebih dekat.</p><a class="text-link" href="/profil">Kenali saya lebih jauh <PixelIcon name="arrow" size={15}/></a></div></div></div></section>
+  <section class="closing-section"><div class="wrap"><div class="cta"><div><span class="eyebrow">PETUALANGANMU DIMULAI DI SINI</span><h2>Satu pertanyaan bisa<br/>membuka dunia baru.</h2><p>Siapkan rasa ingin tahumu. Mari temukan wawasan berikutnya.</p><a class="btn btn-light" href="/materi">Pilih materi pertamamu <PixelIcon name="arrow" size={16}/></a></div><div class="cta-art" aria-hidden="true"><PixelIcon name="flag" size={100}/><div class="pixel-steps"><i></i><i></i><i></i></div><span>LET'S EXPLORE!</span></div></div></div></section>
 </Layout>

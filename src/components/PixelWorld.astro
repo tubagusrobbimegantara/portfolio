@@ -1,0 +1,44 @@
+---
+interface Props { compact?: boolean; variant?: string; }
+const { compact = false, variant = 'world' } = Astro.props;
+const trees = [[62,150,1],[101,146,.8],[139,157,.8],[291,140,1],[319,158,.7],[229,137,.7],[368,103,.65]];
+---
+<svg class:list={['pixel-world', { compact }]} viewBox="0 0 440 350" fill="none" shape-rendering="crispEdges" role="img" aria-label="Dunia pixel art matematika: pulau hijau, jembatan, buku, dan bendera tujuan">
+  <defs>
+    <pattern id={`grid-${variant}`} width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" stroke="#355d43" stroke-opacity=".06" /></pattern>
+    <g id={`tree-${variant}`}><path d="M-3 0h6v17H-3z" fill="#76583b"/><path d="M-10-29h20v6h7v18h-6v8h-22v-8h-6v-18h7z" fill="#28533b"/><path d="M-10-29h20v6h-9v7h-12v11h-6v-18h7z" fill="#5c8850"/><path d="M3-11h14v6h-6v8H-3V-4h6z" fill="#1b3f32"/></g>
+    <g id={`cloud-${variant}`}><path d="M0 10h10V3h12V0h17v6h12v8h9v10H0z" fill="#fffef7"/><path d="M0 24h60v3H0z" fill="#dddcc9"/></g>
+  </defs>
+  <path fill={`url(#grid-${variant})`} d="M0 0h440v350H0z" />
+  <g class="world-cloud"><use href={`#cloud-${variant}`} x="30" y="63"/><use href={`#cloud-${variant}`} x="309" y="35"/><use href={`#cloud-${variant}`} x="350" y="226"/></g>
+  <path d="M42 303h14v-5h99v5h33v6H42zm181-19h112v7H223zm111-106h65v5h-65" fill="#c3cbb1" opacity=".45"/>
+  <g class="world-island">
+    <path d="M33 173h18v-14h99v10h30v20h-12v33h-16v25h-20v17h-19v15H89v-18H72v-17H57v-25H43v-24H33z" fill="#866b48"/>
+    <path d="M102 190h66v32h-16v25h-20v17h-19v15H98v-40h13v-24h-9z" fill="#65563e"/>
+    <path d="M33 173h18v-14h99v10h30v20h-15v12h-39v7H66v-9H43v-9H33z" fill="#78945b"/>
+    <path d="M33 173h18v-14h99v10h30v13h-21v10H73v-6H44v-5H33z" fill="#b0c581"/>
+    <path d="M49 194h14v11H49zm20 17h8v15h-8zm69-6h14v9h-14zm-34 39h10v10h-10zm-23-13h8v9h-8z" fill="#a38a5c"/>
+    <path d="M75 172h15v-8h40v7h23v10h-40v-3H75z" fill="#e5d6a2"/>
+    <path d="M161 183h45v-8h24v-8h15" stroke="#7c6749" stroke-width="13"/>
+    <path d="M161 180h45v-8h24v-8h15" stroke="#d1b683" stroke-width="8"/>
+    {[170,182,194,211,225,239].map((x,i)=><path d={`M${x} ${i<3?173:i<5?165:158}v15`} stroke="#6c6746" stroke-width="2"/>)}
+    <path d="M205 158h19v-16h80v7h35v15h17v19h-12v24h-18v23h-19v20h-22v20h-24v-13h-20v-20h-13v-27h-13v-26h-10z" fill="#937249"/>
+    <path d="M287 170h69v13h-12v24h-18v23h-19v20h-22v20h-13v-47h15z" fill="#66553e"/>
+    <path d="M205 158h19v-16h80v7h35v15h17v19h-20v8h-52v8h-36v-9h-31v-14h-12z" fill="#608450"/>
+    <path d="M205 158h19v-16h80v7h35v15h17v10h-27v9h-83v-7h-30v-8h-11z" fill="#aac17b"/>
+    <path d="M240 160h37v-7h15v9h31v10h-51v7h-35z" fill="#e6d8a6"/>
+    <path d="M235 202h10v15h-10zm18 33h9v10h-9zm50-37h11v10h-11zm-10 31h8v12h-8z" fill="#b19566"/>
+    <path d="M315 118h13v-12h53v8h22v17h-12v19h-14v15h-18v12h-15v-20h-14v-18h-15z" fill="#806747"/>
+    <path d="M360 127h43v4h-12v19h-14v15h-17z" fill="#5c543d"/>
+    <path d="M315 118h13v-12h53v8h22v13h-20v8h-48v-7h-20z" fill="#779255"/>
+    <path d="M315 118h13v-12h53v8h22v7h-22v7h-42v-6h-24z" fill="#b0c681"/>
+    {trees.map(([x,y,s])=><use href={`#tree-${variant}`} transform={`translate(${x} ${y}) scale(${s})`} />)}
+    <path d="M343 87h3v32h-3z" fill="#6b5438"/><path d="M346 88h27v15h-27z" fill="#cf683d"/><path d="M365 91h8v12h-27v-4h19z" fill="#a9482d"/>
+    <g transform="translate(233 103)"><path d="M0 0h41v34H0z" fill="#2b4936"/><path d="M3 3h15v26H3zm20 0h15v26H23z" fill="#fff4cd"/><path d="M18 3h5v29h-5z" fill="#c4ad75"/><path d="M6 9h9v2H6zm0 5h9v2H6zm20-5h9v2h-9zm0 5h9v2h-9zm0 5h7v2h-7z" fill="#85916b"/></g>
+    <g transform="translate(108 135)"><path d="M4 0h12v4h4v13h-4v4H4v-4H0V4h4z" fill="#dfaa65"/><path d="M3 0h14v5H3zM0 5h5v5H0" fill="#314e37"/><path d="M5 9h2v3H5zm9 0h2v3h-2z" fill="#344132"/><path d="M3 21h15v16H3z" fill="#cf673d"/><path d="M-1 23h4v12h-4zm19 0h4v12h-4z" fill="#dfaa65"/><path d="M4 37h5v7H2v-4h2zm9 0h5v7h-7v-4h2z" fill="#314638"/><path d="M6 22h8v5H6z" fill="#e8bd76"/></g>
+    <g fill="#f0d69b"><path d="M67 177h3v3h-3zm78 6h3v3h-3zm107-31h3v3h-3zm66 20h3v3h-3zm57-51h3v3h-3z"/></g>
+    <g fill="#425d38"><path d="M55 175v-7h3v7h3v-4h3v7H55zm89-12v-6h3v6h3v-4h3v7h-9zm176 6v-7h3v7h3v-3h3v6h-9z"/></g>
+  </g>
+  <g fill="#c27a48"><path d="M178 61h4v8h8v4h-8v8h-4v-8h-8v-4h8zM388 191h3v5h5v3h-5v5h-3v-5h-5v-3h5zM44 253h3v5h5v3h-5v5h-3v-5h-5v-3h5z"/></g>
+  <g font-family="monospace" font-size="20" fill="#526d46"><text x="249" y="66">Σ</text><text x="26" y="127">x²</text><text x="178" y="275">π</text><text x="379" y="82">∞</text></g>
+</svg>

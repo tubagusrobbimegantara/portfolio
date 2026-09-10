@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import PixelIcon from './PixelIcon.astro';
 
 interface Props {
 	materi: CollectionEntry<"materi">;
@@ -8,12 +9,17 @@ interface Props {
 
 const { materi, adaVideo = false } = Astro.props;
 const d = materi.data;
+const nomor = String(d.urutan).padStart(2, '0');
+const simbol = materi.id.includes('economic') ? 'Q*' : materi.id.includes('vehicle') ? 'A → B' : 'Σ';
+const menit = Math.max(1, Math.ceil((materi.body ?? '').split(/\s+/).length / 180));
 ---
 
-<article class="mcard rev" data-kategori={d.kategori}>
+<article class="mcard" data-kategori={d.kategori} data-search={`${d.judul} ${d.deskripsi} ${d.kategori} ${d.tag.join(' ')}`}>
+	<div class="material-art" aria-hidden="true"><span class="material-number">CATATAN {nomor}</span><span class="material-formula">{simbol}</span><PixelIcon name="spark" size={24}/><span class="material-gridline"></span></div>
+	<div class="material-body">
 	<div class="mmeta">
 		<span class="tagpill">{d.kategori}</span>
-		<span class="tagpill gold">{d.jenjang}</span>
+		<span class="read-time">{menit} menit baca</span>
 	</div>
 	<h3><a href={`/materi/${materi.id}`}>{d.judul}</a></h3>
 	<p>{d.deskripsi}</p>
@@ -34,5 +40,6 @@ const d = materi.data;
 				</span>
 			)
 		}
+	</div>
 	</div>
 </article>

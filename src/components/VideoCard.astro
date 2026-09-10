@@ -2,6 +2,7 @@
 import { getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { thumbnailVideo, platformVideo, tautanUtama } from "../lib/video";
+import PixelWorld from './PixelWorld.astro';
 
 interface Props {
 	video: CollectionEntry<"video">;
@@ -34,6 +35,7 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 	data-platform={platform.map((p) => p.kode).join(" ")}
 	data-topik={d.topik}
 	data-status={adaTautan ? "terbit" : "segera"}
+	data-search={`${d.judul} ${d.caption} ${d.topik}`}
 >
 	{
 		adaTautan ? (
@@ -41,10 +43,7 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 				{thumb ? (
 					<img src={thumb} alt="" loading="lazy" width="480" height="270" />
 				) : (
-					<span class="vthumb-fallback">
-						<img src="/brand/mark-terang.png" alt="" width="54" height="50" loading="lazy" />
-						<span>Mathantara</span>
-					</span>
+					<PixelWorld compact variant={video.id} />
 				)}
 				<span class="vbadge">{platform[0].nama}</span>
 				{d.durasi && <span class="vdur">{d.durasi}</span>}
@@ -59,13 +58,9 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 				{thumb ? (
 					<img src={thumb} alt="" loading="lazy" width="480" height="270" />
 				) : (
-					<span class="vthumb-fallback">
-						<img src="/brand/mark-terang.png" alt="" width="54" height="50" loading="lazy" />
-						<span>Mathantara</span>
-					</span>
+					<PixelWorld compact variant={video.id} />
 				)}
 				<span class="vbadge soon">Segera hadir</span>
-				{d.durasi && <span class="vdur">{d.durasi}</span>}
 			</div>
 		)
 	}

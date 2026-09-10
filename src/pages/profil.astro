@@ -161,10 +161,10 @@ const tglPerbarui = new Date(publikasiDiperbarui).toLocaleDateString("id-ID", {
 			</div>
 
 			<div class="filter-bar" id="filterPub">
-				<button class="chip on" data-filter="semua">Semua ({publikasi.length})</button>
+				<button class="chip on" data-filter="semua" aria-pressed="true">Semua ({publikasi.length})</button>
 				{
 					temaTerpakai.map((t) => (
-						<button class="chip" data-filter={t.id}>
+						<button class="chip" data-filter={t.id} aria-pressed="false">
 							{t.nama}
 						</button>
 					))
@@ -244,7 +244,7 @@ const tglPerbarui = new Date(publikasiDiperbarui).toLocaleDateString("id-ID", {
 
 	<section class="tight">
 		<div class="wrap">
-			<div class="cta rev">
+			<div class="cta cta-stack">
 				<h2>Mari <em>berkolaborasi</em></h2>
 				<p>
 					Punya persoalan nyata yang terasa perlu dimodelkan, atau ingin mengusulkan
@@ -269,6 +269,7 @@ const tglPerbarui = new Date(publikasiDiperbarui).toLocaleDateString("id-ID", {
 			var pilih = btn.dataset.filter;
 			bar.querySelectorAll(".chip").forEach(function (c) {
 				c.classList.toggle("on", c === btn);
+				c.setAttribute("aria-pressed", String(c === btn));
 			});
 			document.querySelectorAll("#daftarPub .pub").forEach(function (kartu) {
 				var cocok = pilih === "semua" || kartu.dataset.tema === pilih;

@@ -185,9 +185,9 @@ Yang kosong otomatis disembunyikan dari kaki halaman dan halaman Video.
 
 | Alamat | Isi |
 | :-- | :-- |
-| `/` | Beranda — sorotan, tiga pintu masuk, video & materi terbaru, filosofi logo |
+| `/` | Beranda — dunia pixel art, tiga jalur eksplorasi, materi & video, pengantar penyusun |
 | `/video` | Video Animasi — kartu berisi thumbnail, tautan platform, caption, dan tautan materi |
-| `/materi` | Materi Matematika — daftar materi, bisa disaring per kategori |
+| `/materi` | Materi Matematika — pencarian judul, deskripsi, dan tag; filter kategori; estimasi waktu baca |
 | `/materi/<slug>` | Isi materi lengkap dengan LaTeX, daftar isi, dan tautan videonya |
 | `/profil` | Profil Tubagus Robbi Megantara — pendidikan, penelitian, publikasi, tautan |
 
@@ -197,31 +197,39 @@ Yang kosong otomatis disembunyikan dari kaki halaman dan halaman Video.
 scripts/
   perbarui-publikasi.mjs   penarik data publikasi harian
 src/
-  components/      BaseHead, Header, Footer, VideoCard, MateriCard
+  components/      BaseHead, Header, Footer, VideoCard, MateriCard, PixelIcon, PixelWorld
   content/         video/ dan materi/  ← tempat menulis konten
   content.config.ts  aturan kolom untuk kedua koleksi
   data/            profil.ts, publikasi-manual.ts, publikasi-otomatis.json
   layouts/         Layout.astro
   lib/video.ts     pembantu thumbnail & tautan platform
   pages/           index, video/, materi/, profil, 404
-  styles/global.css
+  styles/global.css   sistem visual pixel art dan tata letak responsif
+  styles/reading.css  tipografi artikel, rumus, tabel, dan profil
 public/
   brand/           logo, lambang, avatar, gambar pratinjau
   gambar/          ilustrasi SVG untuk materi
   thumbnail/       gambar thumbnail video
-  math-bg.js       animasi lambang matematika di latar
-  site.js          menu layar kecil, animasi muncul, daftar isi
+  favicon.svg      identitas pixel art
+  site.js          menu layar kecil, pencarian & filter, daftar isi
 ```
 
 ## Warna dan huruf
 
 | Peran | Nilai |
 | :-- | :-- |
-| Maroon | `#5D2021` |
-| Emas | `#A88454` |
-| Krem | `#FDFAF3` |
-| Judul | Playfair Display |
-| Teks | Inter |
+| Hijau hutan | `#284E39` |
+| Jingga tanah | `#BC5932` |
+| Krem | `#F7F6ED` |
+| Judul | Space Grotesk |
+| Teks | DM Sans |
+| Aksen pixel | Pixelify Sans |
+
+Ilustrasi pixel art dan ikon dibuat sebagai SVG di komponen Astro. Teks panjang
+dan rumus tetap menggunakan tipografi baca, dengan tabel dan rumus lebar yang
+bisa digeser. Animasi menghormati `prefers-reduced-motion`. Seluruh konten tetap
+terlihat tanpa JavaScript; pencarian dan filter bekerja lokal tanpa layanan eksternal.
+Menu ponsel mendukung Escape, klik di luar menu, dan navigasi keyboard.
 
 ## Perintah
 

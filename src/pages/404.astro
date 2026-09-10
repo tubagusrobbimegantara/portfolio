@@ -1,20 +1,13 @@
+﻿---
+import Layout from '../layouts/Layout.astro';
+import PixelIcon from '../components/PixelIcon.astro';
 ---
-import Layout from "../layouts/Layout.astro";
----
-
-<Layout title="Halaman tidak ditemukan — Mathantara" description="Halaman yang dicari tidak ada di Mathantara.">
-	<section class="banner">
-		<div class="wrap" style="text-align:center;padding:60px 0">
-			<span class="eyebrow plain" style="justify-content:center">Galat 404</span>
-			<h1 class="display lg" style="margin:16px 0">Halamannya <em>tidak ketemu</em></h1>
-			<p class="lede" style="margin:0 auto 30px">
-				Alamat yang dituju tidak ada — mungkin salah ketik, atau halamannya sudah
-				dipindahkan.
-			</p>
-			<div class="hero-cta" style="justify-content:center">
-				<a class="btn btn-solid" href="/">Kembali ke beranda</a>
-				<a class="btn btn-ghost" href="/materi">Lihat materi</a>
-			</div>
-		</div>
-	</section>
+<Layout title="Halaman tidak ditemukan — Mathantara" description="Halaman yang dicari tidak ada di Mathantara. Kembali ke beranda atau jelajahi materi matematika.">
+  <section class="not-found"><div class="wrap">
+    <span class="eyebrow plain">SEPERTINYA KITA SALAH JALAN</span>
+    <div class="error-pixel" aria-hidden="true">404</div>
+    <h1 class="display md">Petualangannya belum berakhir.</h1>
+    <p class="lede">Halaman ini tidak ditemukan. Kembali ke titik awal atau temukan wawasan baru di kumpulan materi.</p>
+    <div class="hero-cta"><a class="btn btn-solid" href="/">Kembali ke beranda <PixelIcon name="arrow" size={15}/></a><a class="btn btn-ghost" href="/materi">Jelajahi materi</a></div>
+  </div></section>
 </Layout>

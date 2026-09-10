@@ -1,0 +1,560 @@
+﻿/* ── Halaman materi (isi LaTeX) ───────────────── */
+
+.materi-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 232px;
+	gap: 54px;
+	align-items: start;
+}
+
+.prose {
+	max-width: 74ch;
+	font-size: 1.02rem;
+	line-height: 1.82;
+	color: var(--ink);
+}
+.prose > * + * {
+	margin-top: 1.15em;
+}
+.prose h2 {
+	font-size: 1.66rem;
+	margin-top: 2.4em;
+	margin-bottom: 0.1em;
+	padding-bottom: 0.35em;
+	border-bottom: 1px solid var(--line-soft);
+	scroll-margin-top: 90px;
+}
+.prose h3 {
+	font-size: 1.24rem;
+	margin-top: 1.9em;
+	margin-bottom: 0.1em;
+	color: var(--maroon-l);
+	scroll-margin-top: 90px;
+}
+.prose h4 {
+	font-size: 1.05rem;
+	margin-top: 1.5em;
+	color: var(--ink);
+}
+.prose p {
+	color: var(--ink);
+}
+.prose a {
+	color: var(--maroon);
+	text-decoration: underline;
+	text-decoration-color: var(--gold-l);
+	text-underline-offset: 3px;
+	text-decoration-thickness: 1px;
+}
+.prose a:hover {
+	color: var(--gold);
+}
+.prose ul,
+.prose ol {
+	padding-left: 1.35em;
+}
+.prose li {
+	margin-top: 0.5em;
+}
+.prose li::marker {
+	color: var(--gold);
+}
+.prose blockquote {
+	border-left: 3px solid var(--gold);
+	background: var(--bg-2);
+	padding: 18px 24px;
+	border-radius: 0 var(--r-sm) var(--r-sm) 0;
+	margin: 1.6em 0;
+}
+.prose blockquote > * + * {
+	margin-top: 0.8em;
+}
+.prose blockquote p {
+	color: var(--ink);
+}
+.prose blockquote strong:first-child {
+	color: var(--maroon);
+}
+.prose hr {
+	border: none;
+	height: 1px;
+	background: var(--line);
+	margin: 2.4em 0;
+}
+.prose code {
+	font-family: var(--mono);
+	font-size: 0.86em;
+	background: var(--bg-2);
+	padding: 2px 6px;
+	border-radius: 5px;
+	color: var(--maroon);
+}
+.prose pre {
+	background: var(--bg-2);
+	border: 1px solid var(--line-soft);
+	border-radius: var(--r-sm);
+	padding: 16px 18px;
+	overflow-x: auto;
+	font-size: 0.86rem;
+}
+.prose pre code {
+	background: none;
+	padding: 0;
+	color: inherit;
+}
+.prose img {
+	max-width: 100%;
+	height: auto;
+	border-radius: var(--r-sm);
+}
+
+/* Tabel di dalam materi */
+.prose .tabel-bungkus {
+	overflow-x: auto;
+	margin: 1.6em 0;
+	border: 1px solid var(--line-soft);
+	border-radius: var(--r-sm);
+	background: var(--surface);
+}
+.prose table {
+	border-collapse: collapse;
+	width: 100%;
+	font-size: 0.92rem;
+	min-width: 380px;
+}
+.prose thead {
+	background: var(--bg-2);
+}
+.prose th,
+.prose td {
+	padding: 10px 14px;
+	border-bottom: 1px solid var(--line-soft);
+	text-align: left;
+}
+.prose th {
+	font-family: var(--sans);
+	font-weight: 600;
+	color: var(--maroon);
+	font-size: 0.84rem;
+	letter-spacing: 0.02em;
+	white-space: nowrap;
+}
+.prose tbody tr:last-child td {
+	border-bottom: none;
+}
+.prose tbody tr:hover {
+	background: rgba(168, 132, 84, 0.05);
+}
+
+/* KaTeX */
+.prose .katex {
+	font-size: 1.04em;
+}
+.prose .katex-display {
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding: 0.6em 0;
+	margin: 1.5em 0;
+}
+.prose .katex-display > .katex {
+	white-space: nowrap;
+}
+
+/* Daftar isi */
+.toc {
+	position: sticky;
+	top: calc(var(--nav-h) + 26px);
+	font-size: 0.84rem;
+	border-left: 1px solid var(--line-soft);
+	padding-left: 20px;
+}
+.toc-title {
+	font-size: 0.66rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--ink-3);
+	font-weight: 600;
+	margin-bottom: 14px;
+}
+.toc ol {
+	list-style: none;
+}
+.toc li + li {
+	margin-top: 9px;
+}
+.toc a {
+	color: var(--ink-2);
+	line-height: 1.42;
+	display: block;
+}
+.toc a:hover,
+.toc a.on {
+	color: var(--maroon);
+}
+
+.materi-head {
+	padding: clamp(38px, 5vw, 60px) 0 26px;
+}
+.materi-head h1 {
+	font-size: clamp(1.9rem, 4vw, 2.9rem);
+	margin: 14px 0 14px;
+	line-height: 1.12;
+}
+.crumbs {
+	font-size: 0.78rem;
+	color: var(--ink-3);
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+.crumbs a {
+	color: var(--ink-2);
+}
+.crumbs a:hover {
+	color: var(--gold);
+}
+
+.video-ref {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	padding: 18px 22px;
+	border: 1px solid var(--line);
+	border-radius: var(--r);
+	background: var(--surface);
+	margin: 30px 0 0;
+	flex-wrap: wrap;
+}
+.video-ref .vr-icon {
+	width: 42px;
+	height: 42px;
+	border-radius: 50%;
+	background: var(--maroon);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+.video-ref .vr-icon svg {
+	width: 16px;
+	height: 16px;
+	fill: #fdfaf3;
+	margin-left: 2px;
+}
+.video-ref .vr-text {
+	flex: 1;
+	min-width: 200px;
+}
+.video-ref .vr-text b {
+	display: block;
+	font-family: var(--serif);
+	color: var(--maroon);
+	font-size: 1.02rem;
+	font-weight: 600;
+	line-height: 1.3;
+}
+.video-ref .vr-text span {
+	font-size: 0.8rem;
+	color: var(--ink-3);
+}
+
+.next-prev {
+	display: flex;
+	justify-content: space-between;
+	gap: 16px;
+	flex-wrap: wrap;
+	margin-top: 44px;
+	padding-top: 26px;
+	border-top: 1px solid var(--line-soft);
+	font-size: 0.86rem;
+}
+
+/* ── Profil ───────────────────────────────────── */
+
+.profil-grid {
+	display: grid;
+	grid-template-columns: 1fr 320px;
+	gap: 48px;
+	align-items: start;
+}
+.profil-card {
+	background: var(--surface);
+	border: 1px solid var(--line-soft);
+	border-radius: var(--r);
+	padding: 28px 26px;
+	box-shadow: var(--shadow);
+}
+.profil-card img.avatar {
+	width: 92px;
+	height: 92px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-bottom: 18px;
+	border: 2px solid var(--gold-w);
+}
+.kv + .kv {
+	margin-top: 16px;
+	padding-top: 16px;
+	border-top: 1px solid var(--line-soft);
+}
+.kv .k {
+	font-size: 0.64rem;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--ink-3);
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+.kv .v {
+	font-size: 0.92rem;
+	color: var(--ink);
+	font-weight: 500;
+	line-height: 1.45;
+}
+.kv .s {
+	font-size: 0.8rem;
+	color: var(--ink-3);
+}
+
+.timeline {
+	position: relative;
+	padding-left: 30px;
+}
+.timeline::before {
+	content: "";
+	position: absolute;
+	left: 6px;
+	top: 8px;
+	bottom: 8px;
+	width: 1px;
+	background: var(--line);
+}
+.tl-item {
+	position: relative;
+}
+.tl-item + .tl-item {
+	margin-top: 32px;
+}
+.tl-item::before {
+	content: "";
+	position: absolute;
+	left: -30px;
+	top: 7px;
+	width: 13px;
+	height: 13px;
+	border-radius: 50%;
+	background: var(--bg);
+	border: 2px solid var(--line);
+}
+.tl-item.now::before {
+	border-color: var(--gold);
+	background: var(--gold);
+	box-shadow: 0 0 0 4px var(--gold-w);
+}
+.tl-year {
+	font-family: var(--mono);
+	font-size: 0.72rem;
+	color: var(--gold);
+	letter-spacing: 0.06em;
+	margin-bottom: 5px;
+}
+.tl-item h3 {
+	font-size: 1.12rem;
+	margin-bottom: 3px;
+}
+.tl-place {
+	font-size: 0.85rem;
+	color: var(--ink-2);
+	margin-bottom: 8px;
+}
+.tl-note {
+	font-size: 0.86rem;
+	color: var(--ink-3);
+	line-height: 1.62;
+}
+
+.area-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 20px;
+}
+.area {
+	background: var(--surface);
+	border: 1px solid var(--line-soft);
+	border-radius: var(--r);
+	padding: 24px 22px;
+}
+.area .num {
+	font-family: var(--mono);
+	font-size: 0.68rem;
+	color: var(--gold);
+	letter-spacing: 0.14em;
+	margin-bottom: 12px;
+}
+.area h3 {
+	font-size: 1.1rem;
+	margin-bottom: 8px;
+}
+.area p {
+	font-size: 0.86rem;
+	line-height: 1.62;
+}
+.tagrow {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+	margin-top: 14px;
+}
+.tagrow span {
+	font-size: 0.68rem;
+	padding: 3px 9px;
+	border-radius: 5px;
+	background: var(--bg-2);
+	color: var(--ink-2);
+	font-family: var(--mono);
+}
+
+.pub {
+	display: grid;
+	grid-template-columns: 62px 1fr;
+	gap: 20px;
+	padding: 22px 0;
+	border-bottom: 1px solid var(--line-soft);
+}
+.pub.hide {
+	display: none;
+}
+.pub-year {
+	font-family: var(--mono);
+	font-size: 0.85rem;
+	color: var(--gold);
+	padding-top: 2px;
+}
+.pub h3 {
+	font-family: var(--sans);
+	font-size: 0.98rem;
+	font-weight: 600;
+	line-height: 1.45;
+	color: var(--maroon);
+	margin-bottom: 7px;
+}
+.pub-jurnal {
+	font-size: 0.86rem;
+	color: var(--ink-2);
+	margin-bottom: 5px;
+}
+.pub-jurnal em {
+	color: var(--ink);
+	font-style: italic;
+}
+.pub-penulis {
+	font-size: 0.82rem;
+	color: var(--ink-3);
+	margin-bottom: 9px;
+}
+.pub-penulis b {
+	color: var(--ink);
+}
+.pub-row {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.pub-badge {
+	font-size: 0.66rem;
+	font-weight: 600;
+	padding: 3px 9px;
+	border-radius: 5px;
+	background: var(--gold-w);
+	color: #8a6a3e;
+	letter-spacing: 0.02em;
+}
+.pub-doi {
+	font-family: var(--mono);
+	font-size: 0.72rem;
+	color: var(--ink-2);
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+.pub-doi:hover {
+	color: var(--gold);
+}
+
+.link-list {
+	display: grid;
+	gap: 1px;
+	background: var(--line-soft);
+	border: 1px solid var(--line-soft);
+	border-radius: var(--r);
+	overflow: hidden;
+}
+.link-row {
+	background: var(--surface);
+	padding: 16px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+	transition: background 0.18s ease;
+}
+.link-row:hover {
+	background: var(--bg-2);
+}
+.link-row .n {
+	font-size: 0.88rem;
+	font-weight: 600;
+	color: var(--maroon);
+}
+.link-row .v {
+	font-size: 0.82rem;
+	color: var(--ink-3);
+	font-family: var(--mono);
+	overflow-wrap: anywhere;
+	text-align: right;
+}
+
+/* ── Gambar penjelas di dalam materi ──────────── */
+
+.prose .gambar {
+	margin: 1.9em 0;
+	padding: 18px 16px 12px;
+	background: var(--surface);
+	border: 1px solid var(--line-soft);
+	border-radius: var(--r);
+}
+.prose .gambar img {
+	width: 100%;
+	height: auto;
+	display: block;
+	border-radius: 0;
+}
+.prose .gambar figcaption {
+	margin-top: 10px;
+	font-size: 0.82rem;
+	line-height: 1.55;
+	color: var(--ink-3);
+	text-align: center;
+}
+.prose .gambar figcaption b {
+	color: var(--maroon);
+	font-weight: 600;
+}
+
+/* Kotak langkah bernomor */
+.prose .langkah {
+	margin: 1.6em 0;
+	padding: 18px 22px;
+	background: var(--bg-2);
+	border-left: 3px solid var(--maroon);
+	border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+.prose .langkah > *:first-child {
+	margin-top: 0;
+}
+.prose .langkah > * + * {
+	margin-top: 0.8em;
+}
+
