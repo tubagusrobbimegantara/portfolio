@@ -248,7 +248,7 @@
 }
 .video-ref .vr-text b {
 	display: block;
-	font-family: var(--serif);
+	font-family: var(--heading);
 	color: var(--maroon);
 	font-size: 1.02rem;
 	font-weight: 600;

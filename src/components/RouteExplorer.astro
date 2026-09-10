@@ -1,0 +1,51 @@
+---
+const places = [
+  { name: 'Gudang', x: 80, y: 184 },
+  { name: 'Toko 1', x: 160, y: 64 },
+  { name: 'Toko 2', x: 320, y: 104 },
+  { name: 'Toko 3', x: 280, y: 224 },
+];
+const plans = [[0, 2, 1, 3, 0], [0, 1, 2, 3, 0], [0, 1, 3, 2, 0]].map((order, i) => ({
+  label: `Rute ${i + 1}`,
+  description: order.map(n => places[n].name).join(' → '),
+  distance: order.slice(1).reduce((sum, n, index) => {
+    const previous = places[order[index]];
+    return sum + (Math.abs(places[n].x - previous.x) + Math.abs(places[n].y - previous.y)) / 40;
+  }, 0),
+  path: `M${places[order[0]].x} ${places[order[0]].y} ` + order.slice(1).map(n => `H${places[n].x}V${places[n].y}`).join(' '),
+}));
+---
+<div class="route-explorer" data-route-demo data-routes={JSON.stringify(plans)}>
+  <div class="route-heading"><span class="route-kicker">COBA SATU PERSOALAN</span><span class="route-stamp">01</span></div>
+  <h2>Satu kurir.<br />Tiga tujuan.</h2>
+  <p class="route-question">Urutan berbeda, jaraknya sama?</p>
+  <svg class="route-map" viewBox="0 0 400 280" role="img" aria-labelledby="route-map-title route-map-desc">
+    <title id="route-map-title">Peta pengiriman dari gudang ke tiga toko</title>
+    <desc id="route-map-desc">Contoh ilustratif. Setiap ruas jalan sepanjang satu kilometer. Rute dimulai dan berakhir di gudang.</desc>
+    <rect x="8" y="8" width="384" height="264" rx="3" fill="#eee5d6" />
+    {[40,80,120,160,200,240,280,320,360].map(x => <path d={`M${x} 24V264`} stroke="#fffdf8" stroke-width="12" />)}
+    {[24,64,104,144,184,224,264].map(y => <path d={`M24 ${y}H376`} stroke="#fffdf8" stroke-width="12" />)}
+    <g fill="#d4bea0" shape-rendering="crispEdges">
+      <path d="M49 33h22v22H49zm40 80h22v22H89zm120 40h22v22h-22zm120 80h22v22h-22zm-280 0h22v22H49zm280-200h22v22h-22z" />
+    </g>
+    <g fill="#b1aa8e" shape-rendering="crispEdges">
+      {[ [47,115],[245,41],[347,162],[130,232],[208,72] ].map(([x,y]) => <g transform={`translate(${x} ${y})`}><path d="M6 0h8v4h4v12h-4v4H4v-4H0V4h6z"/><path d="M8 15h3v10H8z" fill="#8c7056"/></g>)}
+    </g>
+    <path data-route-path d={plans[0].path} fill="none" stroke="#7d3436" stroke-width="4" stroke-linejoin="round" stroke-dasharray="7 5" />
+    <g shape-rendering="crispEdges">
+      <g transform="translate(44 149) scale(.52)"><path d="M0 12h8V4h48v8h8v35H0z" fill="#5d2021"/><path d="M8 4h48v8H8z" fill="#954d48"/><path d="M21 24h24v23H21z" fill="#b88f59"/><path d="M25 29h16v3H25zm0 7h16v3H25z" fill="#f1ddb4"/><path d="M8 21h7v8H8z" fill="#f1ddb4"/></g>
+      <g transform="translate(126 33) scale(.56)"><path d="M0 11h50v32H0z" fill="#c8a677"/><path d="M-4 7h58v12H-4z" fill="#a88454"/><path d="M3 7h8v12H3zm16 0h8v12h-8zm16 0h8v12h-8z" fill="#fff4da"/><path d="M7 25h13v13H7zm25-1h12v19H32z" fill="#714936"/></g>
+      <g transform="translate(286 71) scale(.67)"><path d="M0 7h42v35H0z" fill="#b6a491"/><path d="M-4 3h50v9H-4z" fill="#6f5954"/><path d="M7 18h10v10H7zm18 0h10v10H25z" fill="#fff0cb"/><path d="M16 32h10v10H16z" fill="#6f5954"/></g>
+      <g transform="translate(246 195) scale(.52)"><path d="M0 15h58v30H0z" fill="#b39166"/><path d="M-4 7h66v12H-4z" fill="#7d3436"/><path d="M1 7h8v12H1zm16 0h8v12h-8zm16 0h8v12h-8zm16 0h8v12h-8z" fill="#f6e4c7"/><path d="M8 25h21v13H8zm33-2h10v22H41z" fill="#725140"/></g>
+      <g transform="translate(69 177)"><path d="M0 0h18v4h9v12H0z" fill="#a88454"/><path d="M19 5h5v5h-5z" fill="#fffdf9"/><path d="M3 13h6v6H3zm16 0h6v6h-6z" fill="#382c29"/></g>
+    </g>
+    <g font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#5d2021">
+      <text x="43" y="207">GUDANG</text><text x="174" y="59">TOKO 1</text><text x="332" y="99">TOKO 2</text><text x="294" y="241">TOKO 3</text>
+    </g>
+  </svg>
+  <div class="route-result" role="status" aria-live="polite" aria-atomic="true">
+    <div><span data-route-label>{plans[0].label}</span><strong><span data-route-distance>{plans[0].distance}</span> <small>km</small></strong></div>
+    <p data-route-description>{plans[0].description}</p>
+  </div>
+  <div class="route-controls"><button class="btn btn-solid btn-sm" type="button" data-route-next hidden>Coba rute lain <span aria-hidden="true">↻</span></button><span>Ilustrasi · 1 ruas = 1 km</span></div>
+</div>

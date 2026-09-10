@@ -185,7 +185,7 @@ Yang kosong otomatis disembunyikan dari kaki halaman dan halaman Video.
 
 | Alamat | Isi |
 | :-- | :-- |
-| `/` | Beranda — pengantar singkat, ilustrasi pixel art, dan satu sorotan persoalan dari materi |
+| `/` | Beranda — pengantar, perbandingan rute pengiriman interaktif, dan satu sorotan persoalan |
 | `/video` | Video Animasi — kartu berisi thumbnail, tautan platform, caption, dan tautan materi |
 | `/materi` | Materi Matematika — pencarian judul, deskripsi, dan tag; filter kategori; estimasi waktu baca |
 | `/materi/<slug>` | Isi materi lengkap dengan LaTeX, daftar isi, dan tautan videonya |
@@ -197,7 +197,7 @@ Yang kosong otomatis disembunyikan dari kaki halaman dan halaman Video.
 scripts/
   perbarui-publikasi.mjs   penarik data publikasi harian
 src/
-  components/      BaseHead, BrandLogo, Header, Footer, VideoCard, MateriCard, PixelIcon, PixelWorld
+  components/      BaseHead, BrandLogo, Header, Footer, VideoCard, MateriCard, PixelIcon, RouteExplorer, TopicArt
   content/         video/ dan materi/  ← tempat menulis konten
   content.config.ts  aturan kolom untuk kedua koleksi
   data/            profil.ts, publikasi-manual.ts, publikasi-otomatis.json
@@ -211,6 +211,7 @@ public/
   gambar/          ilustrasi SVG untuk materi
   thumbnail/       gambar thumbnail video
   favicon-*.png    ikon asli Mathantara
+  fonts/           Fredoka Bold (Latin), WOFF2 dan lisensi OFL
   site.js          menu layar kecil, pencarian & filter, daftar isi
 ```
 
@@ -222,9 +223,9 @@ public/
 | Emas logo (aksen) | `#A88454` |
 | Emas gelap (teks) | `#80613A` |
 | Krem | `#FDFAF3` |
-| Judul | Space Grotesk |
+| Judul & tombol | Fredoka Bold (700), disajikan lokal |
 | Teks | DM Sans |
-| Aksen pixel | Pixelify Sans |
+| Label pendek | Space Grotesk |
 
 Logo asli di `public/brand/wordmark.png` digunakan bersama oleh header dan footer
 melalui `BrandLogo.astro`; warna, bentuk, dan proporsinya dipertahankan.
@@ -236,6 +237,12 @@ Menu ponsel mendukung Escape, klik di luar menu, dan navigasi keyboard.
 Tanpa JavaScript, navigasi tetap terlihat dan kontrol pencarian yang tidak aktif
 disembunyikan. Daftar isi mendahului artikel dalam urutan baca dan dapat dilipat;
 di ponsel, daftar isi dilipat saat halaman dibuka. Label jenjang tidak ditampilkan.
+
+Peta beranda adalah contoh ilustratif dengan panjang satu ruas = 1 km.
+Tiga urutan kunjungan menghasilkan 26, 20, dan 24 km; setiap rute kembali ke gudang.
+Jarak dihitung dari ruas horizontal dan vertikal saat build. Tanpa JavaScript,
+rute pertama tetap terlihat. Ilustrasi kartu mengikuti topik persediaan,
+transportasi, atau rute kendaraan.
 
 ## Perintah
 

@@ -1,4 +1,19 @@
 ﻿(function () {
+  document.querySelectorAll('[data-route-demo]').forEach((demo) => {
+    const plans = JSON.parse(demo.dataset.routes);
+    const button = demo.querySelector('[data-route-next]');
+    let index = 0;
+    button.hidden = false;
+    button.addEventListener('click', () => {
+      index = (index + 1) % plans.length;
+      const plan = plans[index];
+      demo.querySelector('[data-route-path]').setAttribute('d', plan.path);
+      demo.querySelector('[data-route-label]').textContent = plan.label;
+      demo.querySelector('[data-route-distance]').textContent = plan.distance;
+      demo.querySelector('[data-route-description]').textContent = plan.description;
+    });
+  });
+
   const hb = document.getElementById('hbg');
   const links = document.getElementById('navLinks');
   if (hb && links) {

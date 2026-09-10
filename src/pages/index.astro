@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import PixelIcon from '../components/PixelIcon.astro';
-import PixelWorld from '../components/PixelWorld.astro';
+import RouteExplorer from '../components/RouteExplorer.astro';
 import { SITE_DESCRIPTION } from '../consts';
 
 const materi = (await getCollection('materi')).sort((a, b) => a.data.urutan - b.data.urutan);
@@ -13,21 +13,16 @@ const sorotan = materi[0];
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <span class="hero-tag"><span class="status-pixel"></span> RUANG EKSPLORASI MATEMATIKA</span>
-        <h1>Dari masalah,<br />menuju <span class="pixel-heading">wawasan<span class="pixel-period">.</span></span></h1>
-        <p class="lede">Di balik persoalan sehari-hari, ada pola yang bisa dipahami. Mathantara menghubungkan cerita, penalaran, dan matematika — satu langkah pada satu waktu.</p>
+        <span class="hero-tag">MATEMATIKA, DEKAT DENGAN KESEHARIAN.</span>
+        <h1>Dari masalah,<br />menuju <span class="hero-emphasis">wawasan.</span></h1>
+        <p class="lede">Mengapa urutan pengiriman bisa mengubah ongkos? Kapan toko perlu memesan barang lagi? Di sini, pertanyaan sehari-hari menjadi pintu masuk untuk memahami matematika.</p>
         {sorotan && (
           <div class="hero-cta">
             <a class="btn btn-solid" href="#sorotan">Temukan satu persoalan <PixelIcon name="arrow" size={16} /></a>
           </div>
         )}
       </div>
-      <div class="world-panel">
-        <div class="world-top"><span><i></i> DUNIA MATHANTARA</span><span>01 / ∞</span></div>
-        <PixelWorld />
-        <div class="world-label label-goal"><PixelIcon name="spark" size={13} /> Dari ide menjadi wawasan</div>
-        <div class="world-bottom"><span>MASALAH <span aria-hidden="true">·····</span> IDE <span aria-hidden="true">·····</span> WAWASAN</span></div>
-      </div>
+      <RouteExplorer />
     </div>
   </section>
 
