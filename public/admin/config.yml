@@ -11,12 +11,12 @@ backend:
   repo: tubagusrobbimegantara/portfolio
   branch: main
   # Relai OAuth ada di situs ini sendiri: src/pages/oauth/
-  base_url: https://mathantara.com
+  base_url: https://portfolio.tubagusrobbimegantara.workers.dev
   auth_endpoint: oauth
 
-site_url: https://mathantara.com
-display_url: https://mathantara.com
-logo_url: https://mathantara.com/brand/mark.png
+site_url: https://portfolio.tubagusrobbimegantara.workers.dev
+display_url: https://portfolio.tubagusrobbimegantara.workers.dev
+logo_url: https://portfolio.tubagusrobbimegantara.workers.dev/brand/mark.png
 
 # Simpan langsung ke cabang main, tanpa alur draf.
 publish_mode: simple

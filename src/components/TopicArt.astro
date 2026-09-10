@@ -1,15 +1,24 @@
 ---
-/* Ilustrasi diagram per topik: garis tegas, satu warna aksen, tanpa teks. */
+/* Ilustrasi diagram per topik: blok warna pekat, garis tegas, tanpa teks.
+   Tiap topik punya warnanya sendiri supaya mudah dikenali di mana pun
+   kartunya muncul — beranda, pustaka, maupun tautan video. */
 interface Props { topic: string; }
 const { topic } = Astro.props;
 const kind = /economic|eoq/.test(topic) ? 'inventory' : /vehicle|vrp/.test(topic) ? 'routing' : 'transport';
 
-const bg = '#f8e8c9';
-const faint = '#ded7ca';
-const mid = '#bcb1a0';
+const palet = {
+	inventory: '#ffc400',
+	routing: '#22b4f0',
+	transport: '#23d18b',
+} as const;
+
+const bg = palet[kind];
+const faint = 'rgba(42, 22, 20, 0.28)';
+const mid = 'rgba(42, 22, 20, 0.55)';
 const accent = '#5d2021';
+const terang = '#fffdf8';
 ---
-<svg class={`topic-art topic-${kind}`} viewBox="0 0 480 240" aria-hidden="true" fill="none">
+<svg class={`topic-art topic-${kind}`} viewBox="0 0 480 240" shape-rendering="crispEdges" aria-hidden="true" fill="none">
   <rect width="480" height="240" fill={bg} />
 
   {kind === 'inventory' ? (
@@ -22,24 +31,24 @@ const accent = '#5d2021';
       <path
         d="M64 68 136 176 136 68 208 176 208 68 280 176 280 68 352 176 352 68 424 176"
         stroke={accent}
-        stroke-width="2.5"
-        stroke-linejoin="round"
-        stroke-linecap="round"
+        stroke-width="3.5"
+        stroke-linejoin="miter"
+        stroke-linecap="square"
       />
       {[136, 208, 280, 352].map((x) => <circle cx={x} cy="68" r="3.5" fill={accent} />)}
     </g>
   ) : kind === 'routing' ? (
     <g>
       {/* Ruas jalan */}
-      <g stroke="#ffffff" stroke-width="14" stroke-linecap="square">
+      <g stroke={terang} stroke-width="14" stroke-linecap="square">
         <path d="M0 72H480M0 168H480M112 0V240M256 0V240M392 0V240" />
       </g>
       {/* Rute panjang yang dihindari */}
       <path d="M112 168V72H392V168H112" stroke={mid} stroke-width="2" stroke-dasharray="7 6" />
       {/* Rute terpilih */}
-      <path d="M112 168H256V72H392V168" stroke={accent} stroke-width="3" stroke-linejoin="round" />
+      <path d="M112 168H256V72H392V168" stroke={accent} stroke-width="4" stroke-linejoin="miter" />
       {[[112, 168], [256, 72], [392, 72], [392, 168]].map(([x, y], i) => (
-        <rect x={x - 7} y={y - 7} width="14" height="14" rx="2" fill={i === 0 ? accent : '#ffffff'} stroke={accent} stroke-width="2" />
+        <rect x={x - 7} y={y - 7} width="14" height="14" fill={i === 0 ? accent : terang} stroke={accent} stroke-width="2" />
       ))}
     </g>
   ) : (
@@ -49,14 +58,14 @@ const accent = '#5d2021';
         <path d="M132 80H196L348 52M132 80H196L348 120M132 80H196L348 188M132 168H196L348 52M132 168H196L348 120M132 168H196L348 188" />
       </g>
       {/* Pasangan dengan ongkos terendah */}
-      <path d="M132 80H196L348 52M132 168H196L348 120" stroke={accent} stroke-width="2.5" stroke-linejoin="round" />
+      <path d="M132 80H196L348 52M132 168H196L348 120" stroke={accent} stroke-width="3.5" stroke-linejoin="miter" />
       {/* Gudang asal */}
       {[80, 168].map((y) => (
-        <rect x="96" y={y - 16} width="36" height="32" rx="2" fill="#ffffff" stroke={accent} stroke-width="2.5" />
+        <rect x="96" y={y - 16} width="36" height="32" fill={terang} stroke={accent} stroke-width="2.5" />
       ))}
       {/* Tujuan */}
       {[52, 120, 188].map((y) => (
-        <rect x="348" y={y - 13} width="30" height="26" rx="2" fill="#ffffff" stroke={mid} stroke-width="2" />
+        <rect x="348" y={y - 13} width="30" height="26" fill={terang} stroke={mid} stroke-width="2" />
       ))}
     </g>
   )}
