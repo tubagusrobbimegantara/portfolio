@@ -8,10 +8,69 @@ Bahasa situs: **Indonesia**.
 
 ---
 
-## Menambah konten
+## Mengelola lewat CMS
 
-Seluruh isi situs berupa berkas. Tambah konten = tambah satu berkas Markdown,
-lalu simpan. Tidak perlu menyentuh kode.
+Ada penyunting berbasis web di **<https://mathantara.com/admin>**. Masuk dengan
+akun GitHub, lalu tambah atau ubah video dan materi lewat formulir — tanpa
+membuka editor kode. Setiap kali disimpan, CMS membuat satu commit ke
+repositori ini dan situs dibangun ulang seperti biasa.
+
+Formulir materi sudah membawa kerangka isi (persoalan → model → contoh →
+latihan) sebagai isian awal, jadi tidak perlu menyalin `_template.md` lagi.
+Kerangka itu hanya titik mulai; isinya bebas ditimpa.
+
+Kolom di CMS mengikuti skema di `src/content.config.ts`. Kalau ada kolom baru
+di sana, tambahkan juga di `public/admin/config.yml` agar keduanya sejalan.
+
+### Menyiapkan CMS (sekali saja)
+
+Tombol "Sign in with GitHub" perlu satu OAuth App milik sendiri. Relainya sudah
+ada di dalam situs ini (`src/pages/oauth/`), jadi tidak perlu layanan lain.
+
+1. Buka GitHub → **Settings** → **Developer settings** → **OAuth Apps** →
+   **New OAuth App**, lalu isi:
+
+   | Kolom | Nilai |
+   | :-- | :-- |
+   | Application name | `Mathantara CMS` |
+   | Homepage URL | `https://mathantara.com` |
+   | Authorization callback URL | `https://mathantara.com/oauth/callback` |
+
+2. Salin **Client ID**, lalu tekan **Generate a new client secret** dan salin
+   nilainya. Simpan keduanya sebagai rahasia Worker:
+
+   ```sh
+   npx wrangler secret put GITHUB_CLIENT_ID
+   npx wrangler secret put GITHUB_CLIENT_SECRET
+   ```
+
+3. Terbitkan ulang dengan `npm run deploy`, lalu buka `/admin`.
+
+Rahasianya hanya tersimpan di Cloudflare — tidak pernah masuk ke repositori.
+Relai hanya melayani permintaan dari host situs ini sendiri; untuk mengizinkan
+host lain (mis. alamat `*.workers.dev`), tambahkan rahasia opsional
+`ALLOWED_DOMAINS` berisi daftar host dipisah koma.
+
+Untuk mencoba di komputer sendiri, salin `.dev.vars.example` menjadi `.dev.vars`
+dan isi kedua nilai tadi. Bila alamat situs berubah dari `mathantara.com`,
+sesuaikan `base_url` di `public/admin/config.yml` dan *callback URL* di GitHub.
+
+Berkas CMS-nya dikunci ke satu versi dan diperiksa dengan `integrity`. Saat
+menaikkan versinya di `public/admin/index.html`, perbarui juga nilai
+`integrity`-nya:
+
+```sh
+curl -sL https://unpkg.com/@sveltia/cms@<versi>/dist/sveltia-cms.js \
+  | openssl dgst -sha256 -binary | openssl base64 -A
+```
+
+---
+
+## Menambah konten lewat berkas
+
+Cara ini tetap berlaku dan setara dengan CMS — keduanya menulis berkas yang
+sama. Seluruh isi situs berupa berkas. Tambah konten = tambah satu berkas
+Markdown, lalu simpan. Tidak perlu menyentuh kode.
 
 ```
 src/content/
@@ -203,33 +262,50 @@ src/
   data/            profil.ts, publikasi-manual.ts, publikasi-otomatis.json
   layouts/         Layout.astro
   lib/video.ts     pembantu thumbnail & tautan platform
+  lib/oauth.ts     relai OAuth GitHub untuk CMS
   pages/           index, video/, materi/, profil, 404
-  styles/global.css   sistem visual pixel art dan tata letak responsif
+  pages/oauth/     titik masuk & callback OAuth (dijalankan di server)
+  styles/global.css   token warna, tipografi, dan tata letak responsif
   styles/reading.css  tipografi artikel, rumus, tabel, dan profil
 public/
+  admin/           CMS: index.html dan config.yml
   brand/           logo, lambang, avatar, gambar pratinjau
   gambar/          ilustrasi SVG untuk materi
   thumbnail/       gambar thumbnail video
   favicon-*.png    ikon asli Mathantara
-  fonts/           Fredoka Bold (Latin), WOFF2 dan lisensi OFL
+  fonts/           Fredoka (Latin, 300-700), WOFF2 dan lisensi OFL
   site.js          menu layar kecil, pencarian & filter, daftar isi
 ```
 
 ## Warna dan huruf
 
-| Peran | Nilai |
-| :-- | :-- |
-| Maroon logo | `#5D2021` |
-| Emas logo (aksen) | `#A88454` |
-| Emas gelap (teks) | `#80613A` |
-| Krem | `#FDFAF3` |
-| Judul & tombol | Fredoka Bold (700), disajikan lokal |
-| Teks | DM Sans |
-| Label pendek | Space Grotesk |
+Tata letaknya minimalis: satu warna aksen, garis rambut setebal 1 px, dan ruang
+kosong sebagai pemisah — tanpa bayangan, bingkai ganda, atau latar bermotif.
+Seluruh nilai di bawah tersimpan sebagai token CSS di `src/styles/global.css`,
+jadi cukup diubah di satu tempat.
+
+| Peran | Token | Nilai |
+| :-- | :-- | :-- |
+| Aksen (maroon logo) | `--accent` | `#5D2021` |
+| Aksen gelap | `--accent-d` | `#421517` |
+| Latar halaman | `--bg` | `#FCFBF8` |
+| Latar lembut | `--bg-soft` | `#F4F1EA` |
+| Teks utama | `--ink` | `#221E1C` |
+| Teks sekunder | `--ink-2` | `#605953` |
+| Teks tersier & label | `--ink-3` | `#8B837B` |
+| Garis | `--line` | `#E8E3DA` |
+| Emas (aksen ilustrasi) | `--gold` | `#A88454` |
+
+Semua teks memakai **Fredoka** (300–700) yang disajikan lokal dari satu berkas
+variabel, tanpa permintaan ke layanan font pihak ketiga. Judul memakai bobot 600
+agar tegas tanpa berteriak; kode dan nomor DOI memakai huruf monospace bawaan
+sistem.
 
 Logo asli di `public/brand/wordmark.png` digunakan bersama oleh header dan footer
 melalui `BrandLogo.astro`; warna, bentuk, dan proporsinya dipertahankan.
-Ilustrasi pixel art dan ikon antarmuka dibuat sebagai SVG di komponen Astro. Teks panjang
+Ilustrasi kartu dan ikon antarmuka dibuat sebagai SVG di komponen Astro —
+diagram bergaris tanpa teks, karena judul dan ringkasannya sudah ada tepat di
+bawahnya. Teks panjang
 dan rumus tetap menggunakan tipografi baca, dengan tabel dan rumus lebar yang
 bisa digeser. Animasi menghormati `prefers-reduced-motion`. Seluruh konten tetap
 terlihat tanpa JavaScript; pencarian dan filter bekerja lokal tanpa layanan eksternal.
@@ -266,3 +342,9 @@ transportasi, atau rute kendaraan.
   `https://mathantara.com`.
 - Berkas logo beresolusi penuh disimpan di luar repositori (folder
   `mathantara/`); versi siap pakainya ada di `public/brand/`.
+- Halaman `/admin` dan dua rute `/oauth` ikut terbit bersama situs. Rute OAuth
+  berjalan di sisi server (`prerender = false`), sedangkan sisa halaman tetap
+  dibangun sebagai HTML statis seperti sebelumnya.
+- Selama `GITHUB_CLIENT_ID` dan `GITHUB_CLIENT_SECRET` belum diisi, `/admin`
+  tetap terbuka tetapi proses masuknya berhenti dengan pesan bahwa server
+  belum diatur — tidak ada akses tulis yang bocor.

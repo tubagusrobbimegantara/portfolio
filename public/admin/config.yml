@@ -1,0 +1,237 @@
+# ────────────────────────────────────────────────────────────────
+# Pengaturan Mathantara CMS (Sveltia CMS).
+#
+# Setiap simpanan di /admin jadi satu commit ke repositori GitHub.
+# Kolom di bawah harus cocok dengan skema di src/content.config.ts —
+# kalau ada kolom baru di sana, tambahkan juga di sini.
+# ────────────────────────────────────────────────────────────────
+
+backend:
+  name: github
+  repo: tubagusrobbimegantara/portfolio
+  branch: main
+  # Relai OAuth ada di situs ini sendiri: src/pages/oauth/
+  base_url: https://mathantara.com
+  auth_endpoint: oauth
+
+site_url: https://mathantara.com
+display_url: https://mathantara.com
+logo_url: https://mathantara.com/brand/mark.png
+
+# Simpan langsung ke cabang main, tanpa alur draf.
+publish_mode: simple
+
+# Gambar penjelas di dalam materi.
+media_folder: public/gambar
+public_folder: /gambar
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+
+collections:
+  # ── Materi matematika ─────────────────────────────────────────
+  - name: materi
+    label: Materi
+    label_singular: Materi
+    description: >-
+      Satu berkas = satu halaman materi di /materi. Nama berkas dipakai
+      sebagai alamat halaman sekaligus penanda untuk kolom "Materi terkait"
+      di video.
+    folder: src/content/materi
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    slug: '{{slug}}'
+    identifier_field: judul
+    summary: '{{judul}}'
+    sortable_fields: [urutan, tanggal, judul]
+    fields:
+      - name: judul
+        label: Judul
+        widget: string
+
+      - name: deskripsi
+        label: Deskripsi
+        widget: text
+        hint: Ringkasan satu kalimat untuk kartu dan hasil pencarian.
+
+      - name: tanggal
+        label: Tanggal
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        date_format: 'DD MMMM YYYY'
+        time_format: false
+        picker_utc: true
+
+      - name: kategori
+        label: Kategori
+        widget: string
+        hint: Dipakai sebagai tombol filter di halaman Materi, mis. "Optimisasi".
+
+      - name: jenjang
+        label: Jenjang
+        widget: select
+        options: [SMA, Kuliah, Umum]
+        default: Umum
+
+      - name: tag
+        label: Tag
+        widget: list
+        required: false
+        default: []
+        hint: Kata kunci tambahan untuk pencarian.
+
+      - name: video
+        label: Video terkait
+        widget: relation
+        collection: video
+        search_fields: [judul]
+        display_fields: [judul]
+        value_field: '{{slug}}'
+        required: false
+        hint: Kosongkan bila belum ada videonya. Tautannya muncul dua arah.
+
+      - name: urutan
+        label: Urutan
+        widget: number
+        value_type: int
+        default: 0
+        hint: Angka kecil tampil lebih dulu.
+
+      - name: body
+        label: Isi materi
+        widget: markdown
+        hint: >-
+          Judul "##" otomatis masuk daftar isi. Rumus sebaris ditulis $a^2+b^2=c^2$,
+          rumus satu baris penuh diapit $$ ... $$.
+        default: |
+          ## Persoalannya
+
+          Mulai dari cerita atau situasi nyata yang bikin penasaran.
+
+          ## Menyusun model
+
+          Terjemahkan ceritanya jadi lambang. Rumus sebaris ditulis seperti
+          $a^2 + b^2 = c^2$, sedangkan rumus satu baris penuh diapit dua dolar:
+
+          $$
+          \int_0^1 x^2 \,dx = \frac{1}{3}
+          $$
+
+          > Pakai kutipan untuk menandai definisi atau catatan penting.
+
+          ## Contoh
+
+          ### Contoh 1 — Judul singkat
+
+          Tulis soalnya di sini.
+
+          **Penyelesaian.** Uraikan langkahnya satu per satu.
+
+          ## Latihan
+
+          1. Soal pertama.
+          2. Soal kedua.
+
+  # ── Video animasi ─────────────────────────────────────────────
+  - name: video
+    label: Video
+    label_singular: Video
+    description: >-
+      Satu berkas = satu kartu di halaman Video. Selama ketiga tautan
+      platform masih kosong, kartunya otomatis bertanda "Sedang disiapkan".
+    folder: src/content/video
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    slug: '{{slug}}'
+    identifier_field: judul
+    summary: '{{judul}}'
+    sortable_fields: [tanggal, judul]
+    fields:
+      - name: judul
+        label: Judul
+        widget: string
+
+      - name: caption
+        label: Caption
+        widget: text
+        hint: Satu sampai dua kalimat yang tampil di bawah thumbnail.
+
+      - name: tanggal
+        label: Tanggal
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        date_format: 'DD MMMM YYYY'
+        time_format: false
+        picker_utc: true
+
+      - name: youtube
+        label: Tautan YouTube
+        widget: string
+        required: false
+        default: ''
+        pattern: ['^$|^https?://', 'Isi dengan tautan lengkap (diawali https://) atau biarkan kosong.']
+        hint: mis. https://youtu.be/XXXXXXXXXXX
+
+      - name: tiktok
+        label: Tautan TikTok
+        widget: string
+        required: false
+        default: ''
+        pattern: ['^$|^https?://', 'Isi dengan tautan lengkap (diawali https://) atau biarkan kosong.']
+
+      - name: instagram
+        label: Tautan Instagram
+        widget: string
+        required: false
+        default: ''
+        pattern: ['^$|^https?://', 'Isi dengan tautan lengkap (diawali https://) atau biarkan kosong.']
+
+      - name: thumbnail
+        label: Thumbnail
+        widget: image
+        required: false
+        default: ''
+        media_folder: '/public/thumbnail'
+        public_folder: '/thumbnail'
+        hint: >-
+          Kosongkan bila sudah ada tautan YouTube — gambarnya diambil otomatis.
+          Perlu diisi hanya untuk video TikTok/Instagram.
+
+      - name: materi
+        label: Materi terkait
+        widget: relation
+        collection: materi
+        search_fields: [judul]
+        display_fields: [judul]
+        value_field: '{{slug}}'
+        required: false
+        hint: Tautan "Baca materi" muncul otomatis di kartunya.
+
+      - name: durasi
+        label: Durasi
+        widget: string
+        required: false
+        default: ''
+        hint: mis. 1:47
+
+      - name: topik
+        label: Topik
+        widget: string
+        required: false
+        default: ''
+        hint: Dipakai sebagai tombol filter di halaman Video.
+
+      - name: unggulan
+        label: Jadikan video sorotan
+        widget: boolean
+        default: false
+
+      - name: body
+        label: Keterangan tambahan
+        widget: markdown
+        required: false
+        hint: Opsional. Kalau diisi, muncul sebagai keterangan tambahan.

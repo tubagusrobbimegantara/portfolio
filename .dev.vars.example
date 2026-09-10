@@ -1,0 +1,12 @@
+# Salin berkas ini jadi `.dev.vars` untuk menjalankan CMS di komputer sendiri.
+# Saat tayang, nilainya diatur lewat `wrangler secret put <NAMA>` — bukan di sini.
+# Berkas `.dev.vars` sudah diabaikan Git, jadi rahasianya tidak ikut ter-commit.
+
+# Dari GitHub OAuth App (Settings → Developer settings → OAuth Apps).
+GITHUB_CLIENT_ID=""
+GITHUB_CLIENT_SECRET=""
+
+# Opsional. Daftar host yang boleh memakai relai OAuth, dipisah koma,
+# boleh memakai tanda bintang. Kalau dikosongkan, hanya host situs ini
+# sendiri yang diizinkan.
+# ALLOWED_DOMAINS="mathantara.com,*.mathantara.workers.dev"
