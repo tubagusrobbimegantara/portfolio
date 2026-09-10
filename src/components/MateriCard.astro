@@ -19,7 +19,7 @@ const menit = Math.max(1, Math.ceil((materi.body ?? '').split(/\s+/).length / 18
 	<div class="material-body">
 	<div class="mmeta">
 		<span class="tagpill">{d.kategori}</span>
-		<span class="read-time">{menit} menit baca</span>
+		<span class="read-time">± {menit} menit baca</span>
 	</div>
 	<h3><a href={`/materi/${materi.id}`}>{d.judul}</a></h3>
 	<p>{d.deskripsi}</p>

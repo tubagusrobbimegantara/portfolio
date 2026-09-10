@@ -55,6 +55,9 @@
     update();
   });
 
+  const tocDetails = document.querySelector('[data-mobile-toc]');
+  if (tocDetails && matchMedia('(max-width: 800px)').matches) tocDetails.open = false;
+
   const tocLinks = [...document.querySelectorAll('.toc a')];
   const headings = tocLinks.map((link) => ({ link, heading: document.getElementById(decodeURIComponent(link.hash.slice(1))) })).filter((item) => item.heading);
   if (headings.length) {

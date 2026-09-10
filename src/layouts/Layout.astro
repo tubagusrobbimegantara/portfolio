@@ -17,6 +17,7 @@ const { title, description, image, tipe } = Astro.props;
 <html lang="id">
 	<head>
 		<BaseHead title={title} description={description} image={image} tipe={tipe} />
+		<noscript><link rel="stylesheet" href="/no-script.css" /></noscript>
 	</head>
 	<body>
 		<a class="skip-link" href="#konten">Langsung ke konten</a>

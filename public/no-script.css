@@ -1,0 +1,20 @@
+/* Keep navigation available when JavaScript is disabled. */
+.search-tools, .filter-bar, .hamburger { display: none; }
+@media (max-width: 600px) {
+  #nav { position: static; }
+  .page { padding-top: 0; }
+  .nav-in { height: auto; flex-wrap: wrap; padding-block: 18px; }
+  .nav-r { display: none; }
+  .nav-links {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+  .nav-links li + li { border: 0; }
+}

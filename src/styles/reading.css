@@ -1,4 +1,4 @@
-﻿/* ── Halaman materi (isi LaTeX) ───────────────── */
+/* ── Halaman materi (isi LaTeX) ───────────────── */
 
 .materi-layout {
 	display: grid;
@@ -47,7 +47,7 @@
 	text-decoration-thickness: 1px;
 }
 .prose a:hover {
-	color: var(--gold);
+	color: var(--gold-ink);
 }
 .prose ul,
 .prose ol {
@@ -57,7 +57,7 @@
 	margin-top: 0.5em;
 }
 .prose li::marker {
-	color: var(--gold);
+	color: var(--gold-ink);
 }
 .prose blockquote {
 	border-left: 3px solid var(--gold);
@@ -169,7 +169,7 @@
 	padding-left: 20px;
 }
 .toc-title {
-	font-size: 0.66rem;
+	font-size: .75rem;
 	letter-spacing: 0.18em;
 	text-transform: uppercase;
 	color: var(--ink-3);
@@ -212,7 +212,7 @@
 	color: var(--ink-2);
 }
 .crumbs a:hover {
-	color: var(--gold);
+	color: var(--gold-ink);
 }
 
 .video-ref {
@@ -299,7 +299,7 @@
 	border-top: 1px solid var(--line-soft);
 }
 .kv .k {
-	font-size: 0.64rem;
+	font-size: .75rem;
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	color: var(--ink-3);
@@ -354,8 +354,8 @@
 }
 .tl-year {
 	font-family: var(--mono);
-	font-size: 0.72rem;
-	color: var(--gold);
+	font-size: .75rem;
+	color: var(--gold-ink);
 	letter-spacing: 0.06em;
 	margin-bottom: 5px;
 }
@@ -387,8 +387,8 @@
 }
 .area .num {
 	font-family: var(--mono);
-	font-size: 0.68rem;
-	color: var(--gold);
+	font-size: .75rem;
+	color: var(--gold-ink);
 	letter-spacing: 0.14em;
 	margin-bottom: 12px;
 }
@@ -407,7 +407,7 @@
 	margin-top: 14px;
 }
 .tagrow span {
-	font-size: 0.68rem;
+	font-size: .75rem;
 	padding: 3px 9px;
 	border-radius: 5px;
 	background: var(--bg-2);
@@ -428,7 +428,7 @@
 .pub-year {
 	font-family: var(--mono);
 	font-size: 0.85rem;
-	color: var(--gold);
+	color: var(--gold-ink);
 	padding-top: 2px;
 }
 .pub h3 {
@@ -463,24 +463,24 @@
 	flex-wrap: wrap;
 }
 .pub-badge {
-	font-size: 0.66rem;
+	font-size: .75rem;
 	font-weight: 600;
 	padding: 3px 9px;
 	border-radius: 5px;
 	background: var(--gold-w);
-	color: #8a6a3e;
+	color: var(--gold-ink);
 	letter-spacing: 0.02em;
 }
 .pub-doi {
 	font-family: var(--mono);
-	font-size: 0.72rem;
+	font-size: .75rem;
 	color: var(--ink-2);
 	display: inline-flex;
 	align-items: center;
 	gap: 5px;
 }
 .pub-doi:hover {
-	color: var(--gold);
+	color: var(--gold-ink);
 }
 
 .link-list {

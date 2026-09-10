@@ -1,59 +1,51 @@
 ﻿---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import VideoCard from '../components/VideoCard.astro';
-import MateriCard from '../components/MateriCard.astro';
 import PixelIcon from '../components/PixelIcon.astro';
 import PixelWorld from '../components/PixelWorld.astro';
 import { SITE_DESCRIPTION } from '../consts';
-import { tautanUtama } from '../lib/video';
-const video = (await getCollection('video')).sort((a,b)=>b.data.tanggal.valueOf()-a.data.tanggal.valueOf());
-const materi = (await getCollection('materi')).sort((a,b)=>a.data.urutan-b.data.urutan);
-const slugBervideo = new Set(video.filter(v=>tautanUtama(v.data)).map(v=>v.data.materi));
-const menu = [
-  { num:'01', icon:'play', title:'Tonton & bayangkan', text:'Lihat bagaimana matematika bekerja lewat cerita dan animasi visual.', href:'/video', cta:'Jelajahi video', color:'peach', label:'VIDEO ANIMASI' },
-  { num:'02', icon:'book', title:'Baca & pahami', text:'Telusuri ide, rumus, dan contoh soal. Pelan-pelan, sampai masuk akal.', href:'/materi', cta:'Buka materi', color:'sage', label:'MATERI MATEMATIKA' },
-  { num:'03', icon:'person', title:'Kenali di balik layar', text:'Temui penyusunnya, jelajahi penelitian, dan buka ruang kolaborasi.', href:'/profil', cta:'Kenali penyusun', color:'lilac', label:'PROFIL & PENELITIAN' },
-];
+
+const materi = (await getCollection('materi')).sort((a, b) => a.data.urutan - b.data.urutan);
+const sorotan = materi[0];
 ---
+
 <Layout title="Mathantara — Dari Masalah Menuju Wawasan" description={SITE_DESCRIPTION}>
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <span class="hero-tag"><span class="status-pixel"></span> RUANG EKSPLORASI MATEMATIKA</span>
-        <h1>Dari masalah,<br/>menuju <span class="pixel-heading">wawasan<span class="pixel-period">.</span></span></h1>
-        <p class="lede">Matematika bukan sekadar rumus. Temukan cerita di baliknya, pahami polanya, dan pecahkan persoalan nyata. Satu langkah kecil setiap hari.</p>
-        <div class="hero-cta">
-          <a class="btn btn-solid" href="/materi">Mulai menjelajah <PixelIcon name="arrow" size={16}/></a>
-          <a class="btn btn-ghost" href="/video"><PixelIcon name="play" size={14}/> Tonton animasi</a>
-        </div>
-        <div class="hero-note"><span class="mini-pixels" aria-hidden="true"><i></i><i></i><i></i></span> Untuk rasa ingin tahu yang tidak pernah habis.</div>
+        <h1>Dari masalah,<br />menuju <span class="pixel-heading">wawasan<span class="pixel-period">.</span></span></h1>
+        <p class="lede">Di balik persoalan sehari-hari, ada pola yang bisa dipahami. Mathantara menghubungkan cerita, penalaran, dan matematika — satu langkah pada satu waktu.</p>
+        {sorotan && (
+          <div class="hero-cta">
+            <a class="btn btn-solid" href="#sorotan">Temukan satu persoalan <PixelIcon name="arrow" size={16} /></a>
+          </div>
+        )}
       </div>
       <div class="world-panel">
         <div class="world-top"><span><i></i> DUNIA MATHANTARA</span><span>01 / ∞</span></div>
         <PixelWorld />
-        <div class="world-label label-start"><PixelIcon name="flag" size={13}/> Mulai dari rasa ingin tahu</div>
-        <div class="world-label label-goal"><PixelIcon name="spark" size={13}/> +1 wawasan baru</div>
-        <div class="world-bottom"><span>MASALAH <span aria-hidden="true">·····</span> IDE <span aria-hidden="true">·····</span> WAWASAN</span><span class="world-hearts" aria-hidden="true">♥ ♥ ♥</span></div>
+        <div class="world-label label-goal"><PixelIcon name="spark" size={13} /> Dari ide menjadi wawasan</div>
+        <div class="world-bottom"><span>MASALAH <span aria-hidden="true">·····</span> IDE <span aria-hidden="true">·····</span> WAWASAN</span></div>
       </div>
     </div>
-    <div class="wrap hero-bottom"><span>RASA INGIN TAHU ADALAH TITIK MULAI.</span><a href="#jelajahi">Gulir untuk menjelajah <span aria-hidden="true">↓</span></a></div>
   </section>
-  <div class="feature-strip"><div class="wrap"><span><PixelIcon name="spark" size={16}/> Berangkat dari masalah nyata</span><span><PixelIcon name="play" size={14}/> Belajar secara visual</span><span><PixelIcon name="book" size={16}/> Rumus, contoh, dan latihan</span><span><PixelIcon name="heart" size={16}/> Terbuka untuk siapa saja</span></div></div>
-  <section id="jelajahi" class="explore-section">
-    <div class="wrap">
-      <div class="sec-head"><div><span class="eyebrow">PILIH JALANMU</span><h2>Banyak cara untuk <em>mengerti.</em></h2></div><p>Mulai dari yang membuatmu penasaran.<br/>Tidak harus berurutan.</p></div>
-      <div class="menu-grid">{menu.map(m=><a class={`menu-card ${m.color}`} href={m.href}><div class="menu-card-top"><span class="icon-tile"><PixelIcon name={m.icon} size={28}/></span><span class="num">JALUR {m.num}</span></div><span class="card-kicker">{m.label}</span><h3>{m.title}</h3><p>{m.text}</p><span class="go">{m.cta}<PixelIcon name="arrow" size={16}/></span></a>)}</div>
-    </div>
-  </section>
-  <section class="material-section"><div class="wrap">
-    <div class="sec-head"><div><span class="eyebrow">BEKAL PENJELAJAHAN</span><h2>Ide besar, <em>langkah kecil.</em></h2><p>Dari persoalan sehari-hari ke model matematika yang bisa dipahami.</p></div><a class="text-link" href="/materi">Semua materi <PixelIcon name="arrow" size={15}/></a></div>
-    {materi.length ? <div class="materi-grid">{materi.slice(0,3).map(m=><MateriCard materi={m} adaVideo={slugBervideo.has(m.id)}/>)}</div> : <div class="kosong">Materi baru sedang disiapkan. Kembali lagi segera.</div>}
-  </div></section>
-  <section><div class="wrap">
-    <div class="sec-head"><div><span class="eyebrow">MATEMATIKA DALAM GERAK</span><h2>Lihat ceritanya. <em>Temukan polanya.</em></h2><p>Animasi singkat untuk membuka sudut pandang baru.</p></div><a class="text-link" href="/video">Semua video <PixelIcon name="arrow" size={15}/></a></div>
-    {video.length ? <div class="video-grid">{video.slice(0,3).map(v=><VideoCard video={v}/>)}</div> : <div class="kosong">Petualangan visual sedang disiapkan. Nantikan video pertama kami.</div>}
-  </div></section>
-  <section class="about-section"><div class="wrap"><div class="about-box"><div class="about-symbol"><PixelIcon name="book" size={70}/><span>TERUS BERTANYA.<br/>TERUS BERTUMBUH.</span></div><div><span class="eyebrow">DI BALIK MATHANTARA</span><h2>Belajar adalah perjalanan.<br/>Mari berjalan bersama.</h2><p>Saya Tubagus Robbi Megantara. Di Mathantara, saya menghubungkan penelitian, persoalan nyata, dan pembelajaran matematika — agar ide yang rumit terasa lebih dekat.</p><a class="text-link" href="/profil">Kenali saya lebih jauh <PixelIcon name="arrow" size={15}/></a></div></div></div></section>
-  <section class="closing-section"><div class="wrap"><div class="cta"><div><span class="eyebrow">PETUALANGANMU DIMULAI DI SINI</span><h2>Satu pertanyaan bisa<br/>membuka dunia baru.</h2><p>Siapkan rasa ingin tahumu. Mari temukan wawasan berikutnya.</p><a class="btn btn-light" href="/materi">Pilih materi pertamamu <PixelIcon name="arrow" size={16}/></a></div><div class="cta-art" aria-hidden="true"><PixelIcon name="flag" size={100}/><div class="pixel-steps"><i></i><i></i><i></i></div><span>LET'S EXPLORE!</span></div></div></div></section>
+
+  {sorotan && (
+    <section class="home-feature" id="sorotan" aria-labelledby="sorotan-title">
+      <div class="wrap home-feature-grid">
+        <div class="home-feature-intro">
+          <span class="eyebrow">SATU PERSOALAN UNTUK DIPIKIRKAN</span>
+          <h2>Bagaimana matematika<br />membantu kita memilih?</h2>
+          <p>Mulai dari situasinya. Kenali yang bisa dihitung, lalu temukan alasan di balik sebuah keputusan.</p>
+        </div>
+        <article class="spotlight">
+          <div class="spotlight-label"><PixelIcon name="book" size={18} /> {sorotan.data.kategori}</div>
+          <h3 id="sorotan-title"><a href={`/materi/${sorotan.id}`}>{sorotan.data.judul}</a></h3>
+          <p>{sorotan.data.deskripsi}</p>
+          <a class="text-link" href={`/materi/${sorotan.id}`}>Telusuri persoalannya <PixelIcon name="arrow" size={15} /></a>
+        </article>
+      </div>
+    </section>
+  )}
 </Layout>

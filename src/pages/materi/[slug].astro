@@ -54,7 +54,6 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 			<p class="lede">{d.deskripsi}</p>
 			<div class="mmeta" style="margin-top:18px">
 				<span class="tagpill">{d.kategori}</span>
-				<span class="tagpill gold">{d.jenjang}</span>
 				{d.tag.map((t) => <span class="tagpill" style="background:var(--bg-2);color:var(--ink-2)">{t}</span>)}
 			</div>
 		</div>
@@ -65,6 +64,22 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 	<section class="tight">
 		<div class="wrap">
 			<div class="materi-layout">
+				<aside class="toc" aria-label="Daftar isi materi">
+					<details data-mobile-toc open>
+					<summary class="toc-title">Isi halaman</summary>
+					<ol>
+						{
+							daftarIsi.map((h) => (
+								<li>
+									<a href={`#${h.slug}`}>{h.text}</a>
+								</li>
+							))
+						}
+					</ol>
+					<div class="toc-title" style="margin-top:26px">Diperbarui</div>
+					<p style="font-size:0.8rem;color:var(--ink-3)">{tanggal}</p>
+					</details>
+				</aside>
 				<div>
 					<article class="prose">
 						<Content />
@@ -99,7 +114,7 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 						)
 					}
 
-					<nav class="next-prev">
+					<nav class="next-prev" aria-label="Materi sebelum dan sesudah">
 						{
 							sebelum ? (
 								<a href={`/materi/${sebelum.id}`}>← {sebelum.data.judul}</a>
@@ -117,20 +132,7 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 					</nav>
 				</div>
 
-				<aside class="toc">
-					<div class="toc-title">Isi halaman</div>
-					<ol>
-						{
-							daftarIsi.map((h) => (
-								<li>
-									<a href={`#${h.slug}`}>{h.text}</a>
-								</li>
-							))
-						}
-					</ol>
-					<div class="toc-title" style="margin-top:26px">Diperbarui</div>
-					<p style="font-size:0.8rem;color:var(--ink-3)">{tanggal}</p>
-				</aside>
+
 			</div>
 		</div>
 	</section>

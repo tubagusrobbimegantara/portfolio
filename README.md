@@ -185,7 +185,7 @@ Yang kosong otomatis disembunyikan dari kaki halaman dan halaman Video.
 
 | Alamat | Isi |
 | :-- | :-- |
-| `/` | Beranda — dunia pixel art, tiga jalur eksplorasi, materi & video, pengantar penyusun |
+| `/` | Beranda — pengantar singkat, ilustrasi pixel art, dan satu sorotan persoalan dari materi |
 | `/video` | Video Animasi — kartu berisi thumbnail, tautan platform, caption, dan tautan materi |
 | `/materi` | Materi Matematika — pencarian judul, deskripsi, dan tag; filter kategori; estimasi waktu baca |
 | `/materi/<slug>` | Isi materi lengkap dengan LaTeX, daftar isi, dan tautan videonya |
@@ -218,9 +218,10 @@ public/
 
 | Peran | Nilai |
 | :-- | :-- |
-| Hijau hutan | `#284E39` |
-| Jingga tanah | `#BC5932` |
-| Krem | `#F7F6ED` |
+| Maroon logo | `#5D2021` |
+| Emas logo (aksen) | `#A88454` |
+| Emas gelap (teks) | `#80613A` |
+| Krem | `#FDFAF3` |
 | Judul | Space Grotesk |
 | Teks | DM Sans |
 | Aksen pixel | Pixelify Sans |
@@ -232,6 +233,9 @@ dan rumus tetap menggunakan tipografi baca, dengan tabel dan rumus lebar yang
 bisa digeser. Animasi menghormati `prefers-reduced-motion`. Seluruh konten tetap
 terlihat tanpa JavaScript; pencarian dan filter bekerja lokal tanpa layanan eksternal.
 Menu ponsel mendukung Escape, klik di luar menu, dan navigasi keyboard.
+Tanpa JavaScript, navigasi tetap terlihat dan kontrol pencarian yang tidak aktif
+disembunyikan. Daftar isi mendahului artikel dalam urutan baca dan dapat dilipat;
+di ponsel, daftar isi dilipat saat halaman dibuka. Label jenjang tidak ditampilkan.
 
 ## Perintah
 
