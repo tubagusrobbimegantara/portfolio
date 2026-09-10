@@ -4,7 +4,7 @@ interface Props { topic: string; }
 const { topic } = Astro.props;
 const kind = /economic|eoq/.test(topic) ? 'inventory' : /vehicle|vrp/.test(topic) ? 'routing' : 'transport';
 
-const bg = '#f4f1ea';
+const bg = '#f8e8c9';
 const faint = '#ded7ca';
 const mid = '#bcb1a0';
 const accent = '#5d2021';

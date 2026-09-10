@@ -16,20 +16,20 @@
 <rect x="96" y="118" width="108" height="62" fill="#fffdf9" stroke="rgba(93,32,33,0.18)"/>
 <rect x="204" y="118" width="108" height="62" fill="#f7f1e6" stroke="rgba(93,32,33,0.18)"/>
 <text x="258.0" y="155.0" text-anchor="middle" font-size="15" font-weight="600" fill="#5d2021">20</text>
-<circle cx="292" cy="137" r="12" fill="#a88454"/>
+<circle cx="292" cy="137" r="12" fill="#d69b3c"/>
 <text x="292" y="142" text-anchor="middle" font-size="15" font-weight="700" fill="#fffdf9">−</text>
 <rect x="312" y="118" width="108" height="62" fill="#f7f1e6" stroke="rgba(93,32,33,0.18)"/>
 <text x="366.0" y="155.0" text-anchor="middle" font-size="15" font-weight="600" fill="#5d2021">20</text>
-<circle cx="400" cy="137" r="12" fill="#a88454"/>
+<circle cx="400" cy="137" r="12" fill="#d69b3c"/>
 <text x="400" y="142" text-anchor="middle" font-size="15" font-weight="700" fill="#fffdf9">+</text>
 <rect x="420" y="118" width="108" height="62" fill="#fffdf9" stroke="rgba(93,32,33,0.18)"/>
 <rect x="96" y="180" width="108" height="62" fill="#fffdf9" stroke="rgba(93,32,33,0.18)"/>
 <rect x="204" y="180" width="108" height="62" fill="#f7f1e6" stroke="rgba(93,32,33,0.18)"/>
-<circle cx="292" cy="199" r="12" fill="#a88454"/>
+<circle cx="292" cy="199" r="12" fill="#d69b3c"/>
 <text x="292" y="204" text-anchor="middle" font-size="15" font-weight="700" fill="#fffdf9">+</text>
 <rect x="312" y="180" width="108" height="62" fill="#f7f1e6" stroke="rgba(93,32,33,0.18)"/>
 <text x="366.0" y="217.0" text-anchor="middle" font-size="15" font-weight="600" fill="#5d2021">5</text>
-<circle cx="400" cy="199" r="12" fill="#a88454"/>
+<circle cx="400" cy="199" r="12" fill="#d69b3c"/>
 <text x="400" y="204" text-anchor="middle" font-size="15" font-weight="700" fill="#fffdf9">−</text>
 <rect x="420" y="180" width="108" height="62" fill="#fffdf9" stroke="rgba(93,32,33,0.18)"/>
 <text x="474.0" y="217.0" text-anchor="middle" font-size="15" font-weight="600" fill="#5d2021">25</text>
