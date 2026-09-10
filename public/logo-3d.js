@@ -1,10 +1,10 @@
 /*  Logo Mathantara sebagai voxel.
 
-    Berkas PNG logo dibaca piksel demi piksel, tiap piksel berisi diekstrusi
-    jadi balok, lalu balok-balok bersebelahan digabung supaya jumlah bidang
-    yang digambar tinggal puluhan — bukan ribuan. Perendernya ditulis sendiri
-    di canvas 2D: proyeksi, urutan kedalaman, dan pencahayaan datar per sisi.
-    Tanpa pustaka 3D, jadi tidak ada tambahan berat yang perlu diunduh.  */
+    Berkas PNG logo dibaca piksel demi piksel, tiap piksel berisi jadi satu
+    kubus yang berdiri sendiri dengan renggang di sekelilingnya. Kisinya
+    dibuat kasar supaya jumlah kubus tetap wajar untuk digambar tiap bingkai.
+    Perendernya ditulis sendiri di canvas 2D: proyeksi, urutan kedalaman, dan
+    pencahayaan datar per sisi — tanpa pustaka 3D.  */
 
 (() => {
 	const panggung = document.querySelector('[data-logo-3d]');
@@ -15,8 +15,11 @@
 	if (!ctx) return; // Tanpa canvas, gambar cadangan di HTML yang dipakai.
 
 	const SUMBER = panggung.dataset.logo3d || '/brand/mark.png';
-	const LEBAR_KISI = 44; // Jumlah voxel arah mendatar.
-	const TEBAL = 5; // Ketebalan ekstrusi, dalam satuan voxel.
+	// Kisi sengaja dibuat kasar: tiap voxel kini satu kubus tersendiri,
+	// jadi jumlahnya langsung menentukan berat gambar tiap bingkai.
+	const LEBAR_KISI = 30;
+	const TEBAL = 3; // Ketebalan kubus, dalam satuan voxel.
+	const RENGGANG = 0.2; // Sela antarkubus, sebagian dari satu voxel.
 
 	// Batas ayunan mendatar. Logo ini pipih, jadi kalau diputar melewati
 	// seperempat putaran kita melihat punggungnya dan huruf M terbaca
@@ -25,8 +28,6 @@
 
 	const MAROON = [93, 32, 33];
 	const EMAS = [214, 155, 60];
-	const TINTA = 'rgba(42, 22, 20, 0.92)';
-
 	const kurangGerak = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 	let balok = [];
@@ -82,47 +83,23 @@
 		return (r - c[0]) ** 2 + (g - c[1]) ** 2 + (b - c[2]) ** 2;
 	}
 
-	/* ── 2. Gabung voxel sewarna jadi balok ────────────────── */
+	/* ── 2. Tiap voxel jadi satu kubus ────────────────────── */
 
 	function susunBalok({ kisi, w, h }) {
-		const sudah = kisi.map((baris) => baris.map(() => false));
 		const hasil = [];
+		const sela = RENGGANG / 2;
 
 		for (let y = 0; y < h; y++) {
 			for (let x = 0; x < w; x++) {
 				const warna = kisi[y][x];
-				if (!warna || sudah[y][x]) continue;
-
-				// Rentangkan ke kanan selama warnanya sama.
-				let x2 = x;
-				while (x2 + 1 < w && kisi[y][x2 + 1] === warna && !sudah[y][x2 + 1]) x2++;
-
-				// Lalu ke bawah, selama satu baris penuh cocok.
-				let y2 = y;
-				for (;;) {
-					const berikut = y2 + 1;
-					if (berikut >= h) break;
-					let cocok = true;
-					for (let i = x; i <= x2; i++) {
-						if (kisi[berikut][i] !== warna || sudah[berikut][i]) {
-							cocok = false;
-							break;
-						}
-					}
-					if (!cocok) break;
-					y2 = berikut;
-				}
-
-				for (let j = y; j <= y2; j++) {
-					for (let i = x; i <= x2; i++) sudah[j][i] = true;
-				}
+				if (!warna) continue;
 
 				hasil.push({
-					x0: x - w / 2,
-					x1: x2 + 1 - w / 2,
+					x0: x - w / 2 + sela,
+					x1: x + 1 - w / 2 - sela,
 					// Baris gambar bertambah ke bawah, sumbu Y ruang ke atas.
-					y0: h / 2 - (y2 + 1),
-					y1: h / 2 - y,
+					y0: h / 2 - (y + 1) + sela,
+					y1: h / 2 - y - sela,
 					warna: warna === 2 ? EMAS : MAROON,
 				});
 			}
@@ -175,7 +152,7 @@
 		const cx = Math.cos(pitch);
 		const sx = Math.sin(pitch);
 
-		const skala = Math.min(lebar, tinggi) / (LEBAR_KISI * 1.5);
+		const skala = Math.min(lebar, tinggi) / (LEBAR_KISI * 1.3);
 		const ox = lebar / 2;
 		const oy = tinggi / 2;
 
@@ -211,10 +188,7 @@
 
 		antre.sort((a, b) => a.z - b.z); // Jauh dulu, dekat belakangan.
 
-		ctx.lineJoin = 'round';
-		ctx.lineWidth = Math.max(0.6, skala * 0.06);
-		ctx.strokeStyle = TINTA;
-
+		// Tanpa garis tepi — sela antarkubus yang memisahkan bentuknya.
 		for (const f of antre) {
 			ctx.beginPath();
 			ctx.moveTo(f.titik[0][0], f.titik[0][1]);
@@ -222,7 +196,6 @@
 			ctx.closePath();
 			ctx.fillStyle = `rgb(${Math.round(f.warna[0] * f.terang)},${Math.round(f.warna[1] * f.terang)},${Math.round(f.warna[2] * f.terang)})`;
 			ctx.fill();
-			ctx.stroke();
 		}
 	}
 

@@ -16,7 +16,7 @@ const kanal = [{ nama:'YouTube', url:KANAL.youtube },{ nama:'TikTok',url:KANAL.t
   <section class="banner"><div class="wrap">
     <span class="eyebrow">Video animasi</span>
     <h1 class="display lg">{belumTayang ? <>Ceritanya sedang<br/><em>kami siapkan.</em></> : <>Lihat ceritanya.<br/><em>Temukan polanya.</em></>}</h1>
-    <p class="lede">{belumTayang ? 'Video animasi belum tayang. Materi tertulisnya sudah bisa dibaca sambil menunggu.' : 'Jelajahi cerita matematika, lalu lanjutkan ke materi tertulis untuk memahami perhitungannya.'}</p>
+    <p class="lede">{belumTayang ? 'Video animasi belum tayang. Materi tertulisnya sudah bisa dibaca sambil menunggu.' : 'Lihat ceritanya, lalu lanjutkan ke materi tertulisnya.'}</p>
     {(belumTayang || kanal.length > 0) && <div class="hero-cta">
       {belumTayang && <a class="btn btn-solid" href="/materi">Baca materi <PixelIcon name="arrow" size={16}/></a>}
       {kanal.map(k=><a class="btn btn-ghost btn-sm" href={k.url} target="_blank" rel="noopener">{k.nama} ↗</a>)}

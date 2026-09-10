@@ -1,7 +1,10 @@
 ﻿---
 import Layout from '../layouts/Layout.astro';
 import PixelIcon from '../components/PixelIcon.astro';
+import { identitas } from '../data/profil';
 import { SITE_DESCRIPTION } from '../consts';
+
+const ajakan = `mailto:${identitas.email}?subject=${encodeURIComponent('Kolaborasi dengan Mathantara')}`;
 ---
 
 <Layout title="Mathantara — Dari Masalah Menuju Wawasan" description={SITE_DESCRIPTION} polos>
@@ -39,10 +42,16 @@ import { SITE_DESCRIPTION } from '../consts';
       Seret logonya
     </p>
 
-    <a class="btn btn-solid" href="/materi">
-      Mulai belajar
-      <PixelIcon name="arrow" size={16} />
-    </a>
+    <div class="panggung-aksi">
+      <a class="btn btn-solid" href="/materi">
+        Mulai belajar
+        <PixelIcon name="arrow" size={16} />
+      </a>
+      <a class="btn btn-ghost" href={ajakan}>
+        Mari berkolaborasi
+        <PixelIcon name="heart" size={15} />
+      </a>
+    </div>
   </section>
 
   <script src="/logo-3d.js" is:inline></script>
