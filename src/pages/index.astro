@@ -1,134 +1,49 @@
 ﻿---
-import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import MateriCard from '../components/MateriCard.astro';
-import VideoCard from '../components/VideoCard.astro';
 import PixelIcon from '../components/PixelIcon.astro';
-import RouteExplorer from '../components/RouteExplorer.astro';
-import TopicArt from '../components/TopicArt.astro';
-import { tautanUtama } from '../lib/video';
 import { SITE_DESCRIPTION } from '../consts';
-
-const materi = (await getCollection('materi')).sort((a, b) => a.data.urutan - b.data.urutan);
-const video = (await getCollection('video')).sort((a, b) => b.data.tanggal.valueOf() - a.data.tanggal.valueOf());
-
-const sorotan = materi[0];
-const lainnya = materi.filter((m) => m.id !== sorotan?.id);
-
-const slugBervideo = new Set(video.filter((v) => tautanUtama(v.data)).map((v) => v.data.materi));
-const adaVideoTayang = slugBervideo.size > 0;
 ---
 
-<Layout title="Mathantara — Dari Masalah Menuju Wawasan" description={SITE_DESCRIPTION}>
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <span class="hero-tag">Ruang belajar matematika</span>
-        <h1>Dari masalah,<br />menuju <span class="hero-emphasis">wawasan.</span></h1>
-        <p class="lede">Matematika ada dalam keputusan sehari-hari. Jelajahi persoalannya lewat cerita, gambar, dan perhitungan—mulai dari perjalanan seorang kurir.</p>
-        <div class="hero-cta">
-          {sorotan && <a class="btn btn-solid" href="#sorotan">Mulai dari satu cerita <PixelIcon name="arrow" size={16} /></a>}
-          <a class="btn btn-ghost" href="/materi">Lihat semua materi</a>
-        </div>
+<Layout title="Mathantara — Dari Masalah Menuju Wawasan" description={SITE_DESCRIPTION} polos>
+  <section class="panggung" data-logo-3d="/brand/mark.png">
+    <div class="panggung-panel">
+      <div class="panggung-objek">
+        <canvas
+          width="640"
+          height="640"
+          tabindex="0"
+          role="img"
+          aria-label="Logo Mathantara dalam bentuk balok tiga dimensi. Putar dengan menyeret, atau dengan tombol panah."
+        ></canvas>
+        <img class="panggung-cadangan" src="/brand/mark.png" alt="Logo Mathantara" width="348" height="316" />
       </div>
-      <RouteExplorer />
-    </div>
-  </section>
 
-  {sorotan && (
-    <section class="home-feature" id="sorotan" aria-labelledby="sorotan-title">
-      <div class="wrap">
-        <article class="spotlight">
-          <div class="spotlight-art"><TopicArt topic={sorotan.id} /></div>
-          <div class="spotlight-copy">
-            <span class="eyebrow">Bacaan pilihan</span>
-            <h2 id="sorotan-title">{sorotan.data.judul}</h2>
-            <p>{sorotan.data.deskripsi}</p>
-            <a class="text-link" href={`/materi/${sorotan.id}`}>Telusuri persoalannya <PixelIcon name="arrow" size={18} /></a>
-          </div>
-        </article>
-      </div>
-    </section>
-  )}
-
-  {lainnya.length > 0 && (
-    <section aria-labelledby="topik-title">
-      <div class="wrap">
-        <div class="sec-head">
-          <div>
-            <span class="eyebrow">Topik</span>
-            <h2 id="topik-title">Persoalan lain yang sudah dibedah</h2>
-            <p>Setiap materi berangkat dari satu situasi nyata, lalu dituntun sampai angkanya selesai dihitung.</p>
-          </div>
-          <a class="text-link" href="/materi">Semua materi <PixelIcon name="arrow" size={18} /></a>
-        </div>
-        <div class="materi-grid">
-          {lainnya.map((m) => <MateriCard materi={m} adaVideo={slugBervideo.has(m.id)} />)}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <section class="band band-mint" aria-labelledby="cara-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <span class="eyebrow">Cara belajarnya</span>
-          <h2 id="cara-title">Tiga langkah yang sama, setiap kali</h2>
-          <p>Urutan ini dipakai di seluruh materi—jadi begitu terbiasa dengan satu topik, topik berikutnya terasa jauh lebih mudah diikuti.</p>
-        </div>
-      </div>
-      <div class="cara-grid">
-        <article class="cara">
-          <h3>Mulai dari ceritanya</h3>
-          <p>Kurir yang harus memilih rute, toko yang menentukan jumlah pesanan, gudang yang mengatur pengiriman. Persoalannya dulu, rumusnya belakangan.</p>
-        </article>
-        <article class="cara">
-          <h3>Susun modelnya</h3>
-          <p>Cerita itu diterjemahkan pelan-pelan menjadi tabel, gambar, dan notasi—tanpa lompatan yang membuat kehilangan arah di tengah jalan.</p>
-        </article>
-        <article class="cara">
-          <h3>Telusuri perhitungannya</h3>
-          <p>Angkanya dihitung sampai tuntas, lengkap dengan alasan tiap langkah dan cara memeriksa apakah hasilnya benar-benar sudah paling baik.</p>
-          <a class="text-link" href="/materi">Coba satu materi <PixelIcon name="arrow" size={18} /></a>
-        </article>
+      <div class="panggung-tautan">
+        <a class="pelampung pelampung-1" href="/video">
+          <PixelIcon name="play" size={15} />
+          Video
+        </a>
+        <a class="pelampung pelampung-2" href="/materi">
+          <PixelIcon name="book" size={15} />
+          Materi
+        </a>
+        <a class="pelampung pelampung-3" href="/profil">
+          <PixelIcon name="person" size={15} />
+          Tentang
+        </a>
       </div>
     </div>
+
+    <p class="panggung-petunjuk">
+      <PixelIcon name="spark" size={14} />
+      Seret logonya
+    </p>
+
+    <a class="btn btn-solid" href="/materi">
+      Mulai belajar
+      <PixelIcon name="arrow" size={16} />
+    </a>
   </section>
 
-  {video.length > 0 && (
-    <section aria-labelledby="video-title">
-      <div class="wrap">
-        <div class="sec-head">
-          <div>
-            <span class="eyebrow">Video animasi</span>
-            <h2 id="video-title">{adaVideoTayang ? 'Lihat ceritanya bergerak' : 'Ceritanya sedang dianimasikan'}</h2>
-            <p>{adaVideoTayang
-              ? 'Versi animasi dari materi yang sama—enak ditonton lebih dulu sebelum masuk ke perhitungannya.'
-              : 'Video animasinya belum tayang. Sambil menunggu, materi tertulisnya sudah bisa dibaca sampai tuntas.'}</p>
-          </div>
-          <a class="text-link" href="/video">Semua video <PixelIcon name="arrow" size={18} /></a>
-        </div>
-        <div class="video-grid">
-          {video.map((v) => <VideoCard video={v} />)}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <section class="tight">
-    <div class="wrap">
-      <div class="cta">
-        <div>
-          <span class="eyebrow">Tentang Mathantara</span>
-          <h2>Ditulis oleh orang yang<br />memakainya untuk meneliti</h2>
-          <p>Mathantara lahir dari kebiasaan yang sama yang dipakai dalam penelitian: mengambil persoalan nyata, menyusunnya jadi model, lalu menjelaskannya sampai masuk akal.</p>
-          <div class="hero-cta">
-            <a class="btn btn-solid" href="/profil">Kenali penulisnya <PixelIcon name="arrow" size={16} /></a>
-            <a class="btn btn-ghost" href="/materi">Mulai baca</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <script src="/logo-3d.js" is:inline></script>
 </Layout>

@@ -8,9 +8,11 @@ interface Props {
 	description?: string;
 	image?: string;
 	tipe?: "website" | "article";
+	/** Sembunyikan kaki halaman — dipakai beranda yang hanya satu layar. */
+	polos?: boolean;
 }
 
-const { title, description, image, tipe } = Astro.props;
+const { title, description, image, tipe, polos = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -25,7 +27,7 @@ const { title, description, image, tipe } = Astro.props;
 		<main class="page" id="konten" tabindex="-1">
 			<slot />
 		</main>
-		<Footer />
+		{!polos && <Footer />}
 		<script src="/site.js" is:inline></script>
 	</body>
 </html>

@@ -21,9 +21,8 @@
 .materi-head h1 {
 	max-width: 24ch;
 	margin: 14px 0 16px;
-	font-size: clamp(1.9rem, 4vw, 2.7rem);
-	line-height: 1.12;
-	letter-spacing: -0.03em;
+	font-size: clamp(1.8rem, 3.6vw, 2.5rem);
+	line-height: 1.22;
 }
 
 .crumbs {
@@ -285,7 +284,7 @@
 	font-family: var(--pixel);
 	font-size: 0.78rem;
 	font-weight: 600;
-	letter-spacing: 0.1em;
+	letter-spacing: 0.04em;
 	text-transform: uppercase;
 	color: var(--ink-2);
 }
@@ -488,8 +487,8 @@
 
 .tl-year {
 	margin-bottom: 6px;
-	font-family: var(--mono);
-	font-size: 0.75rem;
+	font-family: var(--pixel);
+	font-size: 0.8rem;
 	color: var(--ink-3);
 }
 
@@ -518,8 +517,8 @@
 
 .area .num {
 	margin-bottom: 12px;
-	font-family: var(--mono);
-	font-size: 0.75rem;
+	font-family: var(--pixel);
+	font-size: 0.8rem;
 	color: var(--ink-3);
 }
 
