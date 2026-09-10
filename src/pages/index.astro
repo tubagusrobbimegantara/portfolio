@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import PixelIcon from '../components/PixelIcon.astro';
 import RouteExplorer from '../components/RouteExplorer.astro';
+import TopicArt from '../components/TopicArt.astro';
 import { SITE_DESCRIPTION } from '../consts';
 
 const materi = (await getCollection('materi')).sort((a, b) => a.data.urutan - b.data.urutan);
@@ -13,12 +14,12 @@ const sorotan = materi[0];
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <span class="hero-tag">MATEMATIKA, DEKAT DENGAN KESEHARIAN.</span>
+        <span class="hero-tag">Ruang belajar matematika</span>
         <h1>Dari masalah,<br />menuju <span class="hero-emphasis">wawasan.</span></h1>
-        <p class="lede">Mengapa urutan pengiriman bisa mengubah ongkos? Kapan toko perlu memesan barang lagi? Di sini, pertanyaan sehari-hari menjadi pintu masuk untuk memahami matematika.</p>
+        <p class="lede">Matematika ada dalam keputusan sehari-hari. Jelajahi persoalannya lewat cerita, gambar, dan perhitungan—mulai dari perjalanan seorang kurir.</p>
         {sorotan && (
           <div class="hero-cta">
-            <a class="btn btn-solid" href="#sorotan">Temukan satu persoalan <PixelIcon name="arrow" size={16} /></a>
+            <a class="btn btn-solid" href="#sorotan">Mulai dari satu cerita <PixelIcon name="arrow" size={16} /></a>
           </div>
         )}
       </div>
@@ -28,17 +29,15 @@ const sorotan = materi[0];
 
   {sorotan && (
     <section class="home-feature" id="sorotan" aria-labelledby="sorotan-title">
-      <div class="wrap home-feature-grid">
-        <div class="home-feature-intro">
-          <span class="eyebrow">SATU PERSOALAN UNTUK DIPIKIRKAN</span>
-          <h2>Bagaimana matematika<br />membantu kita memilih?</h2>
-          <p>Mulai dari situasinya. Kenali yang bisa dihitung, lalu temukan alasan di balik sebuah keputusan.</p>
-        </div>
+      <div class="wrap">
         <article class="spotlight">
-          <div class="spotlight-label"><PixelIcon name="book" size={18} /> {sorotan.data.kategori}</div>
-          <h3 id="sorotan-title"><a href={`/materi/${sorotan.id}`}>{sorotan.data.judul}</a></h3>
-          <p>{sorotan.data.deskripsi}</p>
-          <a class="text-link" href={`/materi/${sorotan.id}`}>Telusuri persoalannya <PixelIcon name="arrow" size={15} /></a>
+          <div class="spotlight-art"><TopicArt topic={sorotan.id} /></div>
+          <div class="spotlight-copy">
+            <span class="eyebrow">Bacaan pilihan</span>
+            <h2 id="sorotan-title">{sorotan.data.judul}</h2>
+            <p>{sorotan.data.deskripsi}</p>
+            <a class="text-link" href={`/materi/${sorotan.id}`}>Telusuri persoalannya <PixelIcon name="arrow" size={18} /></a>
+          </div>
         </article>
       </div>
     </section>

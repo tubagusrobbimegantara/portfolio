@@ -16,36 +16,37 @@ const plans = [[0, 2, 1, 3, 0], [0, 1, 2, 3, 0], [0, 1, 3, 2, 0]].map((order, i)
 }));
 ---
 <div class="route-explorer" data-route-demo data-routes={JSON.stringify(plans)}>
-  <div class="route-heading"><span class="route-kicker">COBA SATU PERSOALAN</span><span class="route-stamp">01</span></div>
-  <h2>Satu kurir.<br />Tiga tujuan.</h2>
+  <div class="route-heading"><span class="route-kicker">Coba & temukan</span></div>
+  <h2>Satu kurir. Tiga tujuan.</h2>
   <p class="route-question">Urutan berbeda, jaraknya sama?</p>
-  <svg class="route-map" viewBox="0 0 400 280" role="img" aria-labelledby="route-map-title route-map-desc">
-    <title id="route-map-title">Peta pengiriman dari gudang ke tiga toko</title>
-    <desc id="route-map-desc">Contoh ilustratif. Setiap ruas jalan sepanjang satu kilometer. Rute dimulai dan berakhir di gudang.</desc>
-    <rect x="8" y="8" width="384" height="264" rx="3" fill="#eee5d6" />
-    {[40,80,120,160,200,240,280,320,360].map(x => <path d={`M${x} 24V264`} stroke="#fffdf8" stroke-width="12" />)}
-    {[24,64,104,144,184,224,264].map(y => <path d={`M24 ${y}H376`} stroke="#fffdf8" stroke-width="12" />)}
-    <g fill="#d4bea0" shape-rendering="crispEdges">
-      <path d="M49 33h22v22H49zm40 80h22v22H89zm120 40h22v22h-22zm120 80h22v22h-22zm-280 0h22v22H49zm280-200h22v22h-22z" />
-    </g>
-    <g fill="#b1aa8e" shape-rendering="crispEdges">
-      {[ [47,115],[245,41],[347,162],[130,232],[208,72] ].map(([x,y]) => <g transform={`translate(${x} ${y})`}><path d="M6 0h8v4h4v12h-4v4H4v-4H0V4h6z"/><path d="M8 15h3v10H8z" fill="#8c7056"/></g>)}
-    </g>
-    <path data-route-path d={plans[0].path} fill="none" stroke="#7d3436" stroke-width="4" stroke-linejoin="round" stroke-dasharray="7 5" />
-    <g shape-rendering="crispEdges">
-      <g transform="translate(44 149) scale(.52)"><path d="M0 12h8V4h48v8h8v35H0z" fill="#5d2021"/><path d="M8 4h48v8H8z" fill="#954d48"/><path d="M21 24h24v23H21z" fill="#b88f59"/><path d="M25 29h16v3H25zm0 7h16v3H25z" fill="#f1ddb4"/><path d="M8 21h7v8H8z" fill="#f1ddb4"/></g>
-      <g transform="translate(126 33) scale(.56)"><path d="M0 11h50v32H0z" fill="#c8a677"/><path d="M-4 7h58v12H-4z" fill="#a88454"/><path d="M3 7h8v12H3zm16 0h8v12h-8zm16 0h8v12h-8z" fill="#fff4da"/><path d="M7 25h13v13H7zm25-1h12v19H32z" fill="#714936"/></g>
-      <g transform="translate(286 71) scale(.67)"><path d="M0 7h42v35H0z" fill="#b6a491"/><path d="M-4 3h50v9H-4z" fill="#6f5954"/><path d="M7 18h10v10H7zm18 0h10v10H25z" fill="#fff0cb"/><path d="M16 32h10v10H16z" fill="#6f5954"/></g>
-      <g transform="translate(246 195) scale(.52)"><path d="M0 15h58v30H0z" fill="#b39166"/><path d="M-4 7h66v12H-4z" fill="#7d3436"/><path d="M1 7h8v12H1zm16 0h8v12h-8zm16 0h8v12h-8zm16 0h8v12h-8z" fill="#f6e4c7"/><path d="M8 25h21v13H8zm33-2h10v22H41z" fill="#725140"/></g>
-      <g transform="translate(69 177)"><path d="M0 0h18v4h9v12H0z" fill="#a88454"/><path d="M19 5h5v5h-5z" fill="#fffdf9"/><path d="M3 13h6v6H3zm16 0h6v6h-6z" fill="#382c29"/></g>
-    </g>
-    <g font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#5d2021">
-      <text x="43" y="207">GUDANG</text><text x="174" y="59">TOKO 1</text><text x="332" y="99">TOKO 2</text><text x="294" y="241">TOKO 3</text>
-    </g>
-  </svg>
+  <div class="route-stage">
+    <svg class="route-map" viewBox="0 0 400 280" role="img" aria-labelledby="route-map-title route-map-desc">
+      <title id="route-map-title">Peta pengiriman dari gudang ke tiga toko</title>
+      <desc id="route-map-desc">G adalah gudang, angka 1 sampai 3 adalah toko. Setiap ruas jalan sepanjang satu kilometer. Rute dimulai dan berakhir di gudang.</desc>
+      <image href="/art/route-town.svg" width="400" height="280" />
+      <path data-route-path d={plans[0].path} fill="none" stroke="#7d3436" stroke-width="4" stroke-linejoin="round" stroke-dasharray="7 5" />
+      {places.map(place => <rect x={place.x - 4} y={place.y - 4} width="8" height="8" fill="#fffdf9" stroke="#5d2021" stroke-width="2" />)}
+      <g font-family="Fredoka, sans-serif" font-size="18" font-weight="700" fill="#5d2021" text-anchor="middle">
+        {[{label:'G',x:52,y:200},{label:'1',x:172,y:58},{label:'2',x:335,y:98},{label:'3',x:295,y:241}].map(({label,x,y}) => <g><rect x={x-9} y={y-16} width="22" height="22" rx="2" fill="#fffdf9" /><text x={x+2} y={y+1}>{label}</text></g>)}
+      </g>
+      <g transform="translate(80 184)" shape-rendering="crispEdges">
+        <path d="M-13-8H5V-4h9V8h-27z" fill="#a88454" stroke="#fffdf9" stroke-width="1.5" />
+        <path d="M6-3h5v5H6z" fill="#fffdf9" />
+        <path d="M-10 5h6v6h-6zm16 0h6v6H6z" fill="#382c29" />
+      </g>
+    </svg>
+    <video class="route-video" data-route-video hidden muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+  </div>
+  <p class="route-legend">G = gudang &middot; 1&ndash;3 = toko &middot; 1 ruas = 1 km</p>
   <div class="route-result" role="status" aria-live="polite" aria-atomic="true">
     <div><span data-route-label>{plans[0].label}</span><strong><span data-route-distance>{plans[0].distance}</span> <small>km</small></strong></div>
     <p data-route-description>{plans[0].description}</p>
+    <p data-route-insight>Ini rute acuan. Coba urutan lain dan bandingkan jaraknya.</p>
   </div>
-  <div class="route-controls"><button class="btn btn-solid btn-sm" type="button" data-route-next hidden>Coba rute lain <span aria-hidden="true">↻</span></button><span>Ilustrasi · 1 ruas = 1 km</span></div>
+  <div class="route-controls">
+    <button class="btn btn-solid btn-sm" type="button" data-route-next hidden>Coba rute lain <span aria-hidden="true">&#8635;</span></button>
+    <button class="btn btn-ghost btn-sm" type="button" data-route-play hidden>Putar perjalanan</button>
+  </div>
+  <p class="route-playback-status" data-route-playback-status role="status" hidden></p>
+  <a class="text-link" href="/materi/vehicle-routing-problem">Mengapa urutan berpengaruh? <span aria-hidden="true">&#8599;</span></a>
 </div>

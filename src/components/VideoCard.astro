@@ -31,7 +31,7 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 ---
 
 <article
-	class="vcard rev"
+	class="vcard"
 	data-platform={platform.map((p) => p.kode).join(" ")}
 	data-topik={d.topik}
 	data-status={adaTautan ? "terbit" : "segera"}
@@ -60,18 +60,18 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 				) : (
 					<TopicArt topic={d.materi || video.id} />
 				)}
-				<span class="vbadge soon">Segera hadir</span>
+				<span class="vbadge soon">Sedang disiapkan</span>
 			</div>
 		)
 	}
 
 	<div class="vbody">
-		{d.topik && <div class="vtopik">{d.topik} · {tanggal}</div>}
+		{(d.topik || adaTautan) && <div class="vtopik">{d.topik}{adaTautan && <>{d.topik && ' · '}<time datetime={d.tanggal.toISOString().slice(0, 10)}>{tanggal}</time></>}</div>}
 		<h3>{d.judul}</h3>
 		<p class="vcap">{d.caption}</p>
 
 		{
-			adaTautan ? (
+			adaTautan && (
 				<div class="vlinks">
 					{platform.map((p) => (
 						<a class={`plat ${p.kode}`} href={p.url} target="_blank" rel="noopener">
@@ -80,19 +80,17 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 						</a>
 					))}
 				</div>
-			) : (
-				<p class="vsoon-note">Tautan video akan dipasang begitu tayang.</p>
 			)
 		}
 
 		{
 			materi && (
-				<a class="vmateri" href={`/materi/${materi.id}`}>
+				<a class="vmateri" href={`/materi/${materi.id}`} aria-label={`Baca materi: ${materi.data.judul}`}>
 					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
 						<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
 						<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
 					</svg>
-					<span>Materi: {materi.data.judul}</span>
+					<span>Baca materi</span>
 				</a>
 			)
 		}

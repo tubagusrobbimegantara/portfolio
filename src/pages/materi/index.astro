@@ -10,7 +10,7 @@ const slugBervideo = new Set(video.filter(v=>tautanUtama(v.data)).map(v=>v.data.
 const kategori = [...new Set(materi.map(m=>m.data.kategori))].sort();
 ---
 <Layout title="Materi Matematika — Mathantara" description="Jelajahi materi matematika, contoh soal, rumus, dan latihan. Cari topik yang ingin kamu pahami, lalu pelajari langkah demi langkah.">
-  <section class="banner"><div class="wrap"><span class="eyebrow">02 — BEKAL PENJELAJAHAN</span><h1 class="display lg">Ide besar.<br/><em>Mulai dari satu langkah.</em></h1><p class="lede">Pilih persoalan yang membuatmu penasaran. Kita mulai dari ceritanya, susun modelnya, lalu telusuri perhitungannya — lengkap dengan contoh dan latihan.</p></div></section>
+  <section class="banner"><div class="wrap"><span class="eyebrow">Materi</span><h1 class="display lg">Ide besar.<br/><em>Mulai dari satu langkah.</em></h1><p class="lede">Pilih persoalan yang membuatmu penasaran. Kita mulai dari ceritanya, susun modelnya, lalu telusuri perhitungannya — lengkap dengan contoh dan latihan.</p></div></section>
   <section><div class="wrap" data-library="materi">
     <div class="search-tools"><label class="search-field"><PixelIcon name="search" size={18}/><input type="search" placeholder="Cari materi, topik, atau kata kunci…" aria-label="Cari materi" autocomplete="off" /></label><p class="result-count" data-count role="status" aria-live="polite">{materi.length} materi tersedia</p></div>
     {kategori.length > 1 && <div class="filter-bar" aria-label="Filter kategori"><button class="chip on" data-filter="semua" aria-pressed="true">Semua materi</button>{kategori.map(k=><button class="chip" data-filter={k} aria-pressed="false">{k}</button>)}</div>}

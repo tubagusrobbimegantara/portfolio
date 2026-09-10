@@ -52,14 +52,12 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 			</div>
 			<h1>{d.judul}</h1>
 			<p class="lede">{d.deskripsi}</p>
-			<div class="mmeta" style="margin-top:18px">
+			<div class="materi-tags">
 				<span class="tagpill">{d.kategori}</span>
-				{d.tag.map((t) => <span class="tagpill" style="background:var(--bg-2);color:var(--ink-2)">{t}</span>)}
+				{d.tag.map((t) => <span class="tagpill">{t}</span>)}
 			</div>
 		</div>
 	</section>
-
-	<hr class="rule" />
 
 	<section class="tight">
 		<div class="wrap">
@@ -76,8 +74,10 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 							))
 						}
 					</ol>
-					<div class="toc-title" style="margin-top:26px">Diperbarui</div>
-					<p style="font-size:0.8rem;color:var(--ink-3)">{tanggal}</p>
+					<div class="toc-meta">
+						<div class="toc-title">Diperbarui</div>
+						<p>{tanggal}</p>
+					</div>
 					</details>
 				</aside>
 				<div>
@@ -86,7 +86,7 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 					</article>
 
 					{
-						video && (
+						video && tautanVideo && (
 							<div class="video-ref">
 								<span class="vr-icon">
 									<svg viewBox="0 0 24 24" aria-hidden="true">
@@ -95,21 +95,11 @@ const tanggal = d.tanggal.toLocaleDateString("id-ID", {
 								</span>
 								<span class="vr-text">
 									<b>{video.data.judul}</b>
-									<span>
-										{tautanVideo
-											? "Video animasi untuk materi ini"
-											: "Video animasi untuk materi ini — segera hadir"}
-									</span>
+									<span>Video animasi untuk materi ini</span>
 								</span>
-								{tautanVideo ? (
-									<a class="btn btn-solid btn-sm" href={tautanVideo} target="_blank" rel="noopener">
-										Tonton di {platform[0].nama}
-									</a>
-								) : (
-									<a class="btn btn-ghost btn-sm" href="/video">
-										Lihat daftar video
-									</a>
-								)}
+								<a class="btn btn-solid btn-sm" href={tautanVideo} target="_blank" rel="noopener">
+									Tonton di {platform[0].nama}
+								</a>
 							</div>
 						)
 					}

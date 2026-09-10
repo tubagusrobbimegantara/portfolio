@@ -2,16 +2,75 @@
   document.querySelectorAll('[data-route-demo]').forEach((demo) => {
     const plans = JSON.parse(demo.dataset.routes);
     const button = demo.querySelector('[data-route-next]');
+    const play = demo.querySelector('[data-route-play]');
+    const video = demo.querySelector('[data-route-video]');
+    const playbackStatus = demo.querySelector('[data-route-playback-status]');
     let index = 0;
+    let playbackRequest = 0;
+    const resetPlayback = () => {
+      playbackRequest++;
+      video.pause();
+      video.hidden = true;
+      video.removeAttribute('src');
+      video.load();
+      play.disabled = false;
+      play.textContent = 'Putar perjalanan';
+      playbackStatus.hidden = true;
+    };
     button.hidden = false;
+    play.hidden = false;
     button.addEventListener('click', () => {
+      resetPlayback();
       index = (index + 1) % plans.length;
       const plan = plans[index];
       demo.querySelector('[data-route-path]').setAttribute('d', plan.path);
       demo.querySelector('[data-route-label]').textContent = plan.label;
       demo.querySelector('[data-route-distance]').textContent = plan.distance;
       demo.querySelector('[data-route-description]').textContent = plan.description;
+      const saved = plans[0].distance - plan.distance;
+      demo.querySelector('[data-route-insight]').textContent = index === 0
+        ? 'Ini rute acuan. Coba urutan lain dan bandingkan jaraknya.'
+        : `${Math.abs(saved)} km ${saved >= 0 ? 'lebih pendek' : 'lebih jauh'} dari rute pertama. Tujuannya tetap sama.`;
     });
+    play.addEventListener('click', async () => {
+      if (!video.paused) {
+        video.pause();
+        return;
+      }
+      const request = ++playbackRequest;
+      playbackStatus.hidden = true;
+      if (!video.getAttribute('src')) video.src = `/motion/route-${index + 1}.mp4`;
+      if (video.error) video.load();
+      if (video.ended) video.currentTime = 0;
+      play.disabled = true;
+      play.textContent = 'Memuat…';
+      try {
+        await video.play();
+        if (request !== playbackRequest) return;
+        video.hidden = false;
+        play.textContent = 'Jeda perjalanan';
+      } catch {
+        if (request !== playbackRequest) return;
+        video.hidden = true;
+        play.textContent = 'Coba putar lagi';
+        playbackStatus.textContent = 'Animasi belum bisa diputar. Peta dan perbandingan rute tetap bisa digunakan.';
+        playbackStatus.hidden = false;
+      } finally {
+        if (request === playbackRequest) play.disabled = false;
+      }
+    });
+    video.addEventListener('pause', () => { if (!video.hidden) play.textContent = 'Lanjutkan perjalanan'; });
+    video.addEventListener('ended', () => { video.hidden = true; play.textContent = 'Putar lagi'; });
+    video.addEventListener('error', () => {
+      if (!video.getAttribute('src')) return;
+      video.hidden = true;
+      play.disabled = false;
+      play.textContent = 'Coba putar lagi';
+      playbackStatus.textContent = 'Animasi belum bisa dimuat. Coba putar lagi saat koneksi tersedia.';
+      playbackStatus.hidden = false;
+    });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) video.pause(); });
+    matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', resetPlayback);
   });
 
   const hb = document.getElementById('hbg');
@@ -48,7 +107,7 @@
         card.hidden = !matches;
         if (matches) visible++;
       });
-      if (count) count.textContent = visible + ' dari ' + cards.length + ' ' + library.dataset.library;
+      if (count) count.textContent = visible + ' dari ' + cards.length + ' ' + (library.dataset.countLabel || library.dataset.library);
       if (empty) empty.hidden = visible > 0;
     };
     chips.forEach((chip) => {

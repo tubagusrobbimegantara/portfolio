@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280">
+  <rect x="8" y="8" width="384" height="264" rx="3" fill="#eee5d6"/>
+  <path d="M40 24V264M80 24V264M120 24V264M160 24V264M200 24V264M240 24V264M280 24V264M320 24V264M360 24V264M24 24H376M24 64H376M24 104H376M24 144H376M24 184H376M24 224H376M24 264H376" stroke="#fffdf8" stroke-width="12"/>
+  <g fill="#d4bea0" shape-rendering="crispEdges"><path d="M49 33h22v22H49zm40 80h22v22H89zm120 40h22v22h-22zm120 80h22v22h-22zm-280 0h22v22H49zm280-200h22v22h-22z"/></g>
+  <g fill="#b1aa8e" shape-rendering="crispEdges">
+    <g transform="translate(47 115)"><path d="M6 0h8v4h4v12h-4v4H4v-4H0V4h6z"/><path d="M8 15h3v10H8z" fill="#8c7056"/></g>
+    <g transform="translate(245 41)"><path d="M6 0h8v4h4v12h-4v4H4v-4H0V4h6z"/><path d="M8 15h3v10H8z" fill="#8c7056"/></g>
+    <g transform="translate(347 162)"><path d="M6 0h8v4h4v12h-4v4H4v-4H0V4h6z"/><path d="M8 15h3v10H8z" fill="#8c7056"/></g>
+    <g transform="translate(130 232)"><path d="M6 0h8v4h4v12h-4v4H4v-4H0V4h6z"/><path d="M8 15h3v10H8z" fill="#8c7056"/></g>
+    <g transform="translate(208 72)"><path d="M6 0h8v4h4v12h-4v4H4v-4H0V4h6z"/><path d="M8 15h3v10H8z" fill="#8c7056"/></g>
+  </g>
+  <g shape-rendering="crispEdges">
+    <g transform="translate(44 149) scale(.52)"><path d="M0 12h8V4h48v8h8v35H0z" fill="#5d2021"/><path d="M8 4h48v8H8z" fill="#954d48"/><path d="M21 24h24v23H21z" fill="#b88f59"/><path d="M25 29h16v3H25zm0 7h16v3H25z" fill="#f1ddb4"/><path d="M8 21h7v8H8z" fill="#f1ddb4"/></g>
+    <g transform="translate(126 33) scale(.56)"><path d="M0 11h50v32H0z" fill="#c8a677"/><path d="M-4 7h58v12H-4z" fill="#a88454"/><path d="M3 7h8v12H3zm16 0h8v12h-8zm16 0h8v12h-8z" fill="#fff4da"/><path d="M7 25h13v13H7zm25-1h12v19H32z" fill="#714936"/></g>
+    <g transform="translate(286 71) scale(.67)"><path d="M0 7h42v35H0z" fill="#b6a491"/><path d="M-4 3h50v9H-4z" fill="#6f5954"/><path d="M7 18h10v10H7zm18 0h10v10H25z" fill="#fff0cb"/><path d="M16 32h10v10H16z" fill="#6f5954"/></g>
+    <g transform="translate(246 195) scale(.52)"><path d="M0 15h58v30H0z" fill="#b39166"/><path d="M-4 7h66v12H-4z" fill="#7d3436"/><path d="M1 7h8v12H1zm16 0h8v12h-8zm16 0h8v12h-8zm16 0h8v12h-8z" fill="#f6e4c7"/><path d="M8 25h21v13H8zm33-2h10v22H41z" fill="#725140"/></g>
+  </g>
+</svg>

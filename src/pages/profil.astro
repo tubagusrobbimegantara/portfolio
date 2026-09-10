@@ -27,21 +27,19 @@ const tglPerbarui = new Date(publikasiDiperbarui).toLocaleDateString("id-ID", {
 >
 	<section class="banner">
 		<div class="wrap">
-			<span class="eyebrow">03 — Profil</span>
+			<span class="eyebrow">Profil</span>
 			<h1 class="display lg">Tubagus Robbi <em>Megantara</em></h1>
 			<p class="lede">{identitas.ringkas}</p>
 		</div>
 	</section>
 
-	<hr class="rule" />
-
 	<section class="tight">
 		<div class="wrap">
 			<div class="profil-grid">
-				<div class="rev">
-					{identitas.bio.map((p) => <p style="margin-bottom:1.1em">{p}</p>)}
+				<div class="bio">
+					{identitas.bio.map((p) => <p>{p}</p>)}
 
-					<div class="stats" style="margin-top:30px">
+					<div class="stats">
 						{
 							statistik.map((s) => (
 								<div class="stat">
@@ -53,7 +51,7 @@ const tglPerbarui = new Date(publikasiDiperbarui).toLocaleDateString("id-ID", {
 					</div>
 				</div>
 
-				<aside class="profil-card rev">
+				<aside class="profil-card">
 					<img class="avatar" src="/brand/avatar.png" alt="Mathantara" width="92" height="92" loading="lazy" />
 					<div class="kv">
 						<div class="k">Nama</div>
@@ -88,16 +86,16 @@ const tglPerbarui = new Date(publikasiDiperbarui).toLocaleDateString("id-ID", {
 
 	<section>
 		<div class="wrap">
-			<div class="sec-head rev">
+			<div class="sec-head">
 				<div>
 					<span class="eyebrow">Perjalanan akademik</span>
-					<h2 class="display lg" style="margin-top:12px">Pendidikan</h2>
+					<h2>Pendidikan</h2>
 				</div>
 			</div>
 			<div class="timeline">
 				{
 					pendidikan.map((e) => (
-						<div class:list={["tl-item", "rev", { now: e.berjalan }]}>
+						<div class:list={["tl-item", { now: e.berjalan }]}>
 							{e.tahun && <div class="tl-year">{e.tahun}</div>}
 							<h3>{e.gelar}</h3>
 							<div class="tl-place">{e.tempat}</div>
@@ -113,17 +111,17 @@ const tglPerbarui = new Date(publikasiDiperbarui).toLocaleDateString("id-ID", {
 
 	<section>
 		<div class="wrap">
-			<div class="sec-head rev">
+			<div class="sec-head">
 				<div>
 					<span class="eyebrow">Penelitian</span>
-					<h2 class="display lg" style="margin-top:12px">Bidang yang digeluti</h2>
+					<h2>Bidang yang digeluti</h2>
 					<p>Empat tema yang saling bertaut, semuanya berpangkal pada optimisasi.</p>
 				</div>
 			</div>
 			<div class="area-grid">
 				{
 					bidangPenelitian.map((b) => (
-						<div class="area rev">
+						<div class="area">
 							<div class="num">{b.nomor}</div>
 							<h3>{b.judul}</h3>
 							<p>{b.isi}</p>
@@ -143,10 +141,10 @@ const tglPerbarui = new Date(publikasiDiperbarui).toLocaleDateString("id-ID", {
 
 	<section>
 		<div class="wrap">
-			<div class="sec-head rev">
+			<div class="sec-head">
 				<div>
 					<span class="eyebrow">Publikasi</span>
-					<h2 class="display lg" style="margin-top:12px">
+					<h2>
 						{publikasi.length} <em>karya terpublikasi</em>
 					</h2>
 					<p>
@@ -174,7 +172,7 @@ const tglPerbarui = new Date(publikasiDiperbarui).toLocaleDateString("id-ID", {
 			<div id="daftarPub">
 				{
 					publikasi.map((p) => (
-						<article class="pub rev" data-tema={p.tema}>
+						<article class="pub" data-tema={p.tema}>
 							<div class="pub-year">{p.tahun}</div>
 							<div>
 								<h3>
@@ -222,14 +220,14 @@ const tglPerbarui = new Date(publikasiDiperbarui).toLocaleDateString("id-ID", {
 
 	<section>
 		<div class="wrap">
-			<div class="sec-head rev">
+			<div class="sec-head">
 				<div>
 					<span class="eyebrow">Tautan</span>
-					<h2 class="display lg" style="margin-top:12px">Terhubung</h2>
+					<h2>Terhubung</h2>
 					<p>Terbuka untuk kolaborasi penelitian, pembimbingan, dan kerja sama pendidikan.</p>
 				</div>
 			</div>
-			<div class="link-list rev">
+			<div class="link-list">
 				{
 					tautan.map((t) => (
 						<a class="link-row" href={t.url} target={t.url.startsWith("mailto:") ? undefined : "_blank"} rel="noopener">
