@@ -1,6 +1,6 @@
 {
 	"_catatan": "Berkas ini dibangkitkan otomatis oleh scripts/perbarui-publikasi.mjs. Jangan disunting tangan — pakai src/data/publikasi-manual.ts untuk koreksi.",
-	"diperbarui": "2026-09-09T23:19:10.418Z",
+	"diperbarui": "2026-09-25T23:57:42.571Z",
 	"orcid": "0000-0002-8888-5565",
 	"sumber": "OpenAlex (api.openalex.org), diperiksa silang dengan ORCID",
 	"ringkasan": {
@@ -28,7 +28,7 @@
 				"Ida Widiawati",
 				"Wiwin Widayani",
 				"Desi Hidayati",
-				"Anita Megawati Fajrin"
+				"ANita megawati FAjrin"
 			],
 			"sitasi": 0,
 			"aksesTerbuka": true,
