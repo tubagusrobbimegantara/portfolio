@@ -1,10 +1,10 @@
 {
 	"_catatan": "Berkas ini dibangkitkan otomatis oleh scripts/perbarui-publikasi.mjs. Jangan disunting tangan — pakai src/data/publikasi-manual.ts untuk koreksi.",
-	"diperbarui": "2026-10-02T00:52:01.056Z",
+	"diperbarui": "2026-10-03T23:47:58.582Z",
 	"orcid": "0000-0002-8888-5565",
 	"sumber": "OpenAlex (api.openalex.org), diperiksa silang dengan ORCID",
 	"ringkasan": {
-		"jumlahKarya": 18,
+		"jumlahKarya": 19,
 		"totalSitasi": 28,
 		"tahunTerawal": "2022",
 		"hanyaAdaDiOrcid": []
@@ -99,6 +99,24 @@
 			"aksesTerbuka": true,
 			"jenis": "article",
 			"tema": "ml",
+			"label": [
+				"Akses Terbuka"
+			]
+		},
+		{
+			"doi": "10.47194/ijgor.v7i1.445",
+			"judul": "Simheuristic Optimization for the Shortest Path Problem: A Numerical Experiment on Emergency Food Relief Distribution",
+			"jurnal": "International Journal of Global Operations Research",
+			"detail": "Vol. 7, No. 1, hlm. 36–45",
+			"tahun": "2026",
+			"penulis": [
+				"Tubagus Robbi Megantara",
+				"Rizki Apriva Hidayana"
+			],
+			"sitasi": 0,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "optimisasi",
 			"label": [
 				"Akses Terbuka"
 			]
