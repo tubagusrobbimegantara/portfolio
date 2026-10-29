@@ -1,11 +1,11 @@
 {
 	"_catatan": "Berkas ini dibangkitkan otomatis oleh scripts/perbarui-publikasi.mjs. Jangan disunting tangan — pakai src/data/publikasi-manual.ts untuk koreksi.",
-	"diperbarui": "2026-10-23T00:00:10.926Z",
+	"diperbarui": "2026-10-29T01:02:03.121Z",
 	"orcid": "0000-0002-8888-5565",
 	"sumber": "OpenAlex (api.openalex.org), diperiksa silang dengan ORCID",
 	"ringkasan": {
 		"jumlahKarya": 19,
-		"totalSitasi": 30,
+		"totalSitasi": 31,
 		"tahunTerawal": "2022",
 		"hanyaAdaDiOrcid": []
 	},
@@ -251,6 +251,27 @@
 			]
 		},
 		{
+			"doi": "10.3390/math12142290",
+			"judul": "The Application of the Piecewise Linear Method for Non-Linear Programming Problems in Ride-Hailing Assignment Based on Service Level, Driver Workload, and Fuel Consumption",
+			"jurnal": "Mathematics",
+			"detail": "Vol. 12, No. 14, art. no. 2290",
+			"tahun": "2024",
+			"penulis": [
+				"Tubagus Robbi Megantara",
+				"Sudradjat Supian",
+				"Diah Chaerani",
+				"Abdul Talib Bon"
+			],
+			"sitasi": 4,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "optimisasi",
+			"label": [
+				"Akses Terbuka",
+				"4 sitasi"
+			]
+		},
+		{
 			"doi": "10.3390/math12091355",
 			"judul": "Ride-Hailing Matching with Uncertain Travel Time: A Novel Interval-Valued Fuzzy Multi-Objective Linear Programming Approach",
 			"jurnal": "Mathematics",
@@ -269,27 +290,6 @@
 			"label": [
 				"Akses Terbuka",
 				"4 sitasi"
-			]
-		},
-		{
-			"doi": "10.3390/math12142290",
-			"judul": "The Application of the Piecewise Linear Method for Non-Linear Programming Problems in Ride-Hailing Assignment Based on Service Level, Driver Workload, and Fuel Consumption",
-			"jurnal": "Mathematics",
-			"detail": "Vol. 12, No. 14, art. no. 2290",
-			"tahun": "2024",
-			"penulis": [
-				"Tubagus Robbi Megantara",
-				"Sudradjat Supian",
-				"Diah Chaerani",
-				"Abdul Talib Bon"
-			],
-			"sitasi": 3,
-			"aksesTerbuka": true,
-			"jenis": "article",
-			"tema": "optimisasi",
-			"label": [
-				"Akses Terbuka",
-				"3 sitasi"
 			]
 		},
 		{
