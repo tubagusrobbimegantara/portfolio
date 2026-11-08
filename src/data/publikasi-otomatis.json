@@ -1,15 +1,37 @@
 {
 	"_catatan": "Berkas ini dibangkitkan otomatis oleh scripts/perbarui-publikasi.mjs. Jangan disunting tangan — pakai src/data/publikasi-manual.ts untuk koreksi.",
-	"diperbarui": "2026-11-05T01:29:29.799Z",
+	"diperbarui": "2026-11-08T00:44:27.126Z",
 	"orcid": "0000-0002-8888-5565",
 	"sumber": "OpenAlex (api.openalex.org), diperiksa silang dengan ORCID",
 	"ringkasan": {
 		"jumlahKarya": 20,
-		"totalSitasi": 41,
+		"totalSitasi": 44,
 		"tahunTerawal": "2022",
 		"hanyaAdaDiOrcid": []
 	},
 	"karya": [
+		{
+			"doi": "10.46336/ijrcs.v7i1.1187",
+			"judul": "Evaluating the Effectiveness of Spreadsheet-Based Instruction on High School Students’ Data Literacy: A Pre-test–Post-test Study",
+			"jurnal": "International Journal of Research in Community Service",
+			"detail": "Vol. 7, No. 1, hlm. 35–41",
+			"tahun": "2026",
+			"penulis": [
+				"Tubagus Robbi Megantara",
+				"Rizki Apriva Hidayana",
+				"Nenden Siti Nurkholipah",
+				"Rika Amelia",
+				"Abdul Gazir Syarifudin"
+			],
+			"sitasi": 1,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "pendidikan",
+			"label": [
+				"Akses Terbuka",
+				"1 sitasi"
+			]
+		},
 		{
 			"doi": "10.46336/ijrcs.v7i1.1165",
 			"judul": "Application of Mathematical Concepts in the Health Sector through Data Analysis Learning Using Microsoft Excel for Senior High School Students at SMA Pasundan Majalaya",
@@ -29,27 +51,6 @@
 				"Wiwin Widayani",
 				"Desi Hidayati",
 				"ANita megawati FAjrin"
-			],
-			"sitasi": 0,
-			"aksesTerbuka": true,
-			"jenis": "article",
-			"tema": "pendidikan",
-			"label": [
-				"Akses Terbuka"
-			]
-		},
-		{
-			"doi": "10.46336/ijrcs.v7i1.1187",
-			"judul": "Evaluating the Effectiveness of Spreadsheet-Based Instruction on High School Students’ Data Literacy: A Pre-test–Post-test Study",
-			"jurnal": "International Journal of Research in Community Service",
-			"detail": "Vol. 7, No. 1, hlm. 35–41",
-			"tahun": "2026",
-			"penulis": [
-				"Tubagus Robbi Megantara",
-				"Rizki Apriva Hidayana",
-				"Nenden Siti Nurkholipah",
-				"Rika Amelia",
-				"Abdul Gazir Syarifudin"
 			],
 			"sitasi": 0,
 			"aksesTerbuka": true,
@@ -273,13 +274,13 @@
 				"Sudradjat Supian",
 				"Diah Chaerani"
 			],
-			"sitasi": 12,
+			"sitasi": 13,
 			"aksesTerbuka": true,
 			"jenis": "article",
 			"tema": "fuzzy",
 			"label": [
 				"Akses Terbuka",
-				"12 sitasi"
+				"13 sitasi"
 			]
 		},
 		{
@@ -294,13 +295,13 @@
 				"Tubagus Robbi Megantara",
 				"Abdul Talib Bon"
 			],
-			"sitasi": 7,
+			"sitasi": 8,
 			"aksesTerbuka": true,
 			"jenis": "article",
 			"tema": "fuzzy",
 			"label": [
 				"Akses Terbuka",
-				"7 sitasi"
+				"8 sitasi"
 			]
 		},
 		{
