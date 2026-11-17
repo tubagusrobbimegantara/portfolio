@@ -1,11 +1,11 @@
 {
 	"_catatan": "Berkas ini dibangkitkan otomatis oleh scripts/perbarui-publikasi.mjs. Jangan disunting tangan — pakai src/data/publikasi-manual.ts untuk koreksi.",
-	"diperbarui": "2026-11-11T01:17:31.663Z",
+	"diperbarui": "2026-11-17T03:58:13.705Z",
 	"orcid": "0000-0002-8888-5565",
 	"sumber": "OpenAlex (api.openalex.org), diperiksa silang dengan ORCID",
 	"ringkasan": {
 		"jumlahKarya": 20,
-		"totalSitasi": 45,
+		"totalSitasi": 50,
 		"tahunTerawal": "2022",
 		"hanyaAdaDiOrcid": []
 	},
@@ -167,13 +167,13 @@
 				"Abdul Talib Bon",
 				"Vasile Preda"
 			],
-			"sitasi": 3,
+			"sitasi": 4,
 			"aksesTerbuka": true,
 			"jenis": "article",
 			"tema": "fuzzy",
 			"label": [
 				"Akses Terbuka",
-				"3 sitasi"
+				"4 sitasi"
 			]
 		},
 		{
@@ -201,6 +201,28 @@
 			]
 		},
 		{
+			"doi": "10.46336/ijrcs.v6i2.931",
+			"judul": "Technology-Based Interactive Mathematics Learning: A Case Study of Community Service Activities at SMA PGRI Cicalengka",
+			"jurnal": "International Journal of Research in Community Service",
+			"detail": "Vol. 6, No. 2, hlm. 97–101",
+			"tahun": "2025",
+			"penulis": [
+				"Abdul Gazir Syarifudin",
+				"Rika Amelia",
+				"Rizki Apriva Hidayana",
+				"Tubagus Robbi Megantara",
+				"Nenden Siti Nurkholipah"
+			],
+			"sitasi": 1,
+			"aksesTerbuka": true,
+			"jenis": "article",
+			"tema": "pendidikan",
+			"label": [
+				"Akses Terbuka",
+				"1 sitasi"
+			]
+		},
+		{
 			"doi": "10.46336/ijmsc.v3i2.202",
 			"judul": "Matching Riders to Drivers Under Uncertain Wait Times in Ride-Hailing Systems: A Robust Optimization Approach with Box Uncertainty",
 			"jurnal": "International Journal of Mathematics Statistics and Computing",
@@ -214,27 +236,6 @@
 			"aksesTerbuka": true,
 			"jenis": "article",
 			"tema": "fuzzy",
-			"label": [
-				"Akses Terbuka"
-			]
-		},
-		{
-			"doi": "10.46336/ijrcs.v6i2.931",
-			"judul": "Technology-Based Interactive Mathematics Learning: A Case Study of Community Service Activities at SMA PGRI Cicalengka",
-			"jurnal": "International Journal of Research in Community Service",
-			"detail": "Vol. 6, No. 2, hlm. 97–101",
-			"tahun": "2025",
-			"penulis": [
-				"Abdul Gazir Syarifudin",
-				"Rika Amelia",
-				"Rizki Apriva Hidayana",
-				"Tubagus Robbi Megantara",
-				"Nenden Siti Nurkholipah"
-			],
-			"sitasi": 0,
-			"aksesTerbuka": true,
-			"jenis": "article",
-			"tema": "pendidikan",
 			"label": [
 				"Akses Terbuka"
 			]
@@ -295,13 +296,13 @@
 				"Tubagus Robbi Megantara",
 				"Abdul Talib Bon"
 			],
-			"sitasi": 9,
+			"sitasi": 11,
 			"aksesTerbuka": true,
 			"jenis": "article",
 			"tema": "fuzzy",
 			"label": [
 				"Akses Terbuka",
-				"9 sitasi"
+				"11 sitasi"
 			]
 		},
 		{
@@ -377,13 +378,13 @@
 				"Tubagus Robbi Megantara",
 				"Abdul Talib Bon"
 			],
-			"sitasi": 3,
+			"sitasi": 4,
 			"aksesTerbuka": true,
 			"jenis": "article",
 			"tema": "fuzzy",
 			"label": [
 				"Akses Terbuka",
-				"3 sitasi"
+				"4 sitasi"
 			]
 		},
 		{
